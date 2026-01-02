@@ -1,0 +1,65 @@
+{
+  "updated": "2025-12-15T17:05:33Z",
+  "divisions": [
+    {
+      "name": "AL East",
+      "teams": [
+        { "name": "Blue Jays", "url": "https://komakode.com/Teams/Blue Jays.ScoreKeep_Players" },
+        { "name": "Orioles", "url": "https://komakode.com/Teams/Orioles.ScoreKeep_Players" },
+        { "name": "Rays", "url": "https://komakode.com/Teams/Rays.ScoreKeep_Players" },
+        { "name": "Red Soxs", "url": "https://komakode.com/Teams/Red Soxs.ScoreKeep_Players" },
+        { "name": "Yankees", "url": "https://komakode.com/Teams/Yankees.ScoreKeep_Players" }
+      ]
+    },
+    {
+      "name": "AL Central",
+      "teams": [
+        { "name": "Guardians", "url": "https://komakode.com/Teams/Guardians.ScoreKeep_Players" },
+        { "name": "Royals", "url": "https://komakode.com/Teams/Royals.ScoreKeep_Players" },
+        { "name": "Tigers", "url": "https://komakode.com/Teams/Tigers.ScoreKeep_Players" },
+        { "name": "Twins", "url": "https://komakode.com/Teams/Twins.ScoreKeep_Players" },
+        { "name": "White Soxs", "url": "https://komakode.com/Teams/White Soxs.ScoreKeep_Players" }
+      ]
+    },
+    {
+      "name": "AL West",
+      "teams": [
+        { "name": "Angels", "url": "https://komakode.com/Teams/Angels.ScoreKeep_Players" },
+        { "name": "Astros", "url": "https://komakode.com/Teams/Astros.ScoreKeep_Players" },
+        { "name": "Athletics", "url": "https://komakode.com/Teams/Athletics.ScoreKeep_Players" },
+        { "name": "Mariners", "url": "https://komakode.com/Teams/Mariners.ScoreKeep_Players" },
+        { "name": "Rangers", "url": "https://komakode.com/Teams/Rangers.ScoreKeep_Players" }
+      ]
+    },
+    {
+      "name": "NL East",
+      "teams": [
+        { "name": "Braves", "url": "https://komakode.com/Teams/Braves.ScoreKeep_Players" },
+        { "name": "Marlins", "url": "https://komakode.com/Teams/Marlins.ScoreKeep_Players" },
+        { "name": "Mets", "url": "https://komakode.com/Teams/Mets.ScoreKeep_Players" },
+        { "name": "Nationals", "url": "https://komakode.com/Teams/Nationals.ScoreKeep_Players" },
+        { "name": "Phillies", "url": "https://komakode.com/Teams/Phillies.ScoreKeep_Players" }
+      ]
+    },
+    {
+      "name": "NL Central",
+      "teams": [
+        { "name": "Brewers", "url": "https://komakode.com/Teams/Brewers.ScoreKeep_Players" },
+        { "name": "Cardinals", "url": "https://komakode.com/Teams/Cardinals.ScoreKeep_Players" },
+        { "name": "Cubs", "url": "https://komakode.com/Teams/Cubs.ScoreKeep_Players" },
+        { "name": "Pirates", "url": "https://komakode.com/Teams/Pirates.ScoreKeep_Players" },
+        { "name": "Reds", "url": "https://komakode.com/Teams/Reds.ScoreKeep_Players" }
+      ]
+    },
+    {
+      "name": "NL West",
+      "teams": [
+        { "name": "Diamondbacks", "url": "https://komakode.com/Teams/Diamondbacks.ScoreKeep_Players" },
+        { "name": "Dodgers", "url": "https://komakode.com/Teams/Dodgers.ScoreKeep_Players" },
+        { "name": "Giants", "url": "https://komakode.com/Teams/Giants.ScoreKeep_Players" },
+        { "name": "Padres", "url": "https://komakode.com/Teams/Padres.ScoreKeep_Players" },
+        { "name": "Rockies", "url": "https://komakode.com/Teams/Rockies.ScoreKeep_Players" }
+      ]
+    }
+  ]
+}

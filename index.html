@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Komakode</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        color: #222;
+        margin: 0;
+        padding: 0;
+      }
+      .center {
+        text-align: center;
+        margin-top: 40px;
+      }
+      .headline {
+        font-size: 2.5em;
+        color: #3366ff;
+        font-style: italic;
+        margin-bottom: 0.2em;
+      }
+      .subtitle {
+        color: #999999;
+        font-size: 1.3em;
+        margin-bottom: 1em;
+      }
+      .app-title {
+        margin: 1.5em 0 0.5em 0;
+        font-size: 1.2em;
+      }
+      img {
+        margin: 1em 0;
+        max-width: 90vw;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .download-header {
+        text-align: center;
+        font-size: 1.4em;
+        margin: 30px 0 10px 0;
+      }
+
+      /* Significantly narrower table */
+      #divisionTable {
+        width: 320px;        /* cut roughly another 1/3 */
+        max-width: 90vw;
+        table-layout: fixed;
+      }
+      #divisionTable td {
+        width: 50%;
+        padding: 4px;
+      }
+
+      /* One team per line, prevent wrapping */
+      .team-list a {
+        display: block;
+        margin: 3px 0;
+        white-space: nowrap;     /* longest team stays on one line */
+        font-size: 0.95em;       /* slight reduction for fit */
+      }
+
+      .error {
+        text-align: center;
+        color: #b00020;
+        margin: 16px auto;
+        max-width: 720px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="center">
+      <div class="headline">Komakode Inc.</div>
+      <div class="subtitle">Creating iOS Mobile Applications</div>
+
+      <div><a href="Privacy%20Policy.html">Privacy Policy</a></div>
+
+      <div class="app-title">
+        Check out our latest app – <b><i>ScoreKeep - Baseball Scoring</i></b>
+      </div>
+
+      <img
+        src="ScoreKeep.png"
+        alt="Screenshot of ScoreKeep Baseball Scoring App"
+        width="533"
+        height="400"
+      />
+
+      <div style="margin: 1em 0">
+        <a href="Manual.pdf">Download the user manual</a>
+      </div>
+    </div>
+
+    <div class="download-header"><b>Download Teams</b></div>
+
+    <!-- AL on left, NL on right -->
+    <table id="divisionTable" cellspacing="2" cellpadding="2" border="0" align="center">
+      <tbody>
+        <tr><td>Loading teams…</td></tr>
+      </tbody>
+    </table>
+
+    <div id="loadError" class="error" style="display: none"></div>
+
+    <br />
+
+    <script>
+      function sortTeamsAlpha(teams) {
+        return (teams || []).slice().sort((a, b) =>
+          (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
+        );
+      }
+
+        function makeDivisionCell(div) {
+          const td = document.createElement("td");
+          td.vAlign = "top";
+
+          const title = document.createElement("div");
+          title.className = "center";
+          title.innerHTML = `<b><u>${div?.name ?? ""}</u></b>`;
+
+          td.appendChild(title);
+
+          if (div && Array.isArray(div.teams)) {
+            div.teams.forEach(team => {
+              const a = document.createElement("a");
+              a.href = team.url;
+              a.textContent = team.name;
+              a.style.display = "block";
+
+              // 🔑 Preserve the original file extension
+              try {
+                const url = new URL(team.url, window.location.href);
+                const filename = decodeURIComponent(
+                  url.pathname.split("/").pop()
+                );
+
+                if (filename && filename.includes(".")) {
+                  a.download = filename; // exact filename from URL
+                } else {
+                  a.download = `${team.name}.ScoreKeep_Players`;
+                }
+              } catch {
+                a.download = `${team.name}.ScoreKeep_Players`;
+              }
+
+              td.appendChild(a);
+            });
+          }
+
+          return td;
+        }
+
+      function showError(msg) {
+        const errDiv = document.getElementById("loadError");
+        errDiv.style.display = "block";
+        errDiv.textContent = msg;
+      }
+
+      fetch("Teams/index.json", { cache: "no-store" })
+        .then(r => {
+          if (!r.ok) throw new Error("Failed to load Teams/index.json");
+          return r.json();
+        })
+        .then(data => {
+          if (!data || !Array.isArray(data.divisions)) {
+            throw new Error("Invalid JSON format: missing 'divisions'");
+          }
+
+          const divByName = {};
+          data.divisions.forEach(d => {
+            if (d && d.name) divByName[d.name] = d;
+          });
+
+          const tbody = document.querySelector("#divisionTable tbody");
+          tbody.innerHTML = "";
+
+          [
+            ["AL East", "NL East"],
+            ["AL Central", "NL Central"],
+            ["AL West", "NL West"]
+          ].forEach(([al, nl]) => {
+            const tr = document.createElement("tr");
+            tr.appendChild(makeDivisionCell(divByName[al]));
+            tr.appendChild(makeDivisionCell(divByName[nl]));
+            tbody.appendChild(tr);
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          document.querySelector("#divisionTable tbody").innerHTML =
+            "<tr><td>Unable to load teams.</td></tr>";
+          showError("Unable to load team list. Please verify Teams/index.json exists and is valid.");
+        });
+    </script>
+  </body>
+</html>
