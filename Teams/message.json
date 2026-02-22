@@ -4,10 +4,10 @@
       "id": "2026-40man",
       "ctaTitle": "View roster files",
       "ctaURL": "scorekeep://share?tab=download",
-      "title": "New: 2026 40‑Man Rosters"
+      "title": "New: 2026 40‑Man Rosters",
       "body": "Download the 2026 40 man rosters for all mlb teams from komakode.com for ScoreKeep.",
       "start": "2026-02-20T00:00:00Z",
-      "end": "2026-04-30T23:59:59Z",
+      "end": "2026-04-30T23:59:59Z"
     }
   ],
   "version": 1
