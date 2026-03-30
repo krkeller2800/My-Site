@@ -1,8 +1,17 @@
 [
     {
         "id": "getting-started",
-        "title": "Getting Started",
-        "subtitle": "Importing Statements",
+        "title": "Importing Statements",
+        "subtitle": "From Other Apps",
+        "urls": {
+          "iphone": "https://media.komakode.com/importCreditcard-iPhone.mp4",
+          "ipad":   "https://media.komakode.com/importStatements.mp4"
+        }
+    }
+    {
+        "id": "getting-started",
+        "title": "Importing Statements",
+        "subtitle": "From Files Folder",
         "urls": {
           "iphone": "https://media.komakode.com/importCreditcard-iPhone.mp4",
           "ipad":   "https://media.komakode.com/importStatements.mp4"
