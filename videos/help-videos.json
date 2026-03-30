@@ -3,6 +3,9 @@
         "id": "getting-started",
         "title": "Getting Started",
         "subtitle": "Importing Statements",
-        "url": "https://media.komakode.com/importStatements.mp4"
+        "urls": {
+          "iphone": "https://media.komakode.com/importStatements.mp4",
+          "ipad":   "https://media.komakode.com/importStatements.mp4"
+        }
     }
 ]
