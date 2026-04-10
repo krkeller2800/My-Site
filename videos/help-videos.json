@@ -20,10 +20,19 @@
     {
         "id": "getting-started",
         "title": "Debt Summary",
-        "subtitle": "Debt  Strategies",
+        "subtitle": "Debt Strategies",
         "urls": {
             "iphone": "https://media.komakode.com/Debt-iPhone.mp4",
             "ipad":   "https://media.komakode.com/Debt-iPad.mp4"
+        }
+    },
+    {
+        "id": "getting-started",
+        "title": "Net Worth",
+        "subtitle": "Where you stand",
+        "urls": {
+            "iphone": "https://media.komakode.com/Net-Worth-iPhone.mp4",
+            "ipad":   "https://media.komakode.com/Net-Worth-iPad.mp4"
         }
     }
 ]
