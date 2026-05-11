@@ -1,0 +1,38 @@
+[
+    {
+        "id": "getting-started",
+        "title": "Importing Statements",
+        "subtitle": "From Other Apps",
+        "urls": {
+            "iphone": "https://media.komakode.com/importCreditcard-iPhone.mp4",
+            "ipad":   "https://media.komakode.com/importStatements.mp4"
+        }
+    },
+    {
+        "id": "getting-started",
+        "title": "Importing Statements",
+        "subtitle": "From Files Folder",
+        "urls": {
+            "iphone": "https://media.komakode.com/importCreditcard-iPhone-file.mp4",
+            "ipad":   "https://media.komakode.com/importStatements-iPad-file.mp4"
+        }
+    },
+    {
+        "id": "getting-started",
+        "title": "Debt Summary",
+        "subtitle": "Debt Strategies",
+        "urls": {
+            "iphone": "https://media.komakode.com/Debt-iPhone.mp4",
+            "ipad":   "https://media.komakode.com/Debt-iPad.mp4"
+        }
+    },
+    {
+        "id": "getting-started",
+        "title": "Net Worth",
+        "subtitle": "Where you stand",
+        "urls": {
+            "iphone": "https://media.komakode.com/Net-Worth-iPhone.mp4",
+            "ipad":   "https://media.komakode.com/Net-Worth-iPad.mp4"
+        }
+    }
+]
