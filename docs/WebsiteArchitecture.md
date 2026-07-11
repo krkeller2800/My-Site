@@ -1,6 +1,6 @@
 # KomoKode Website Architecture
 
-**Status:** Phase 3 Target Architecture
+**Status:** Phase 3 Complete
 
 **Purpose**
 
@@ -17,11 +17,36 @@ decisions.
 
 ---
 
+# Revision History
+
+| Date | Version | Notes |
+|------|---------|-------|
+| 2026-07-11 | 1.0 | Initial Phase 3 architecture |
+| 2026-07-11 | 1.1 | Finalized Phase 3 architecture with accessibility, performance, security, and decision-process guidance |
+
+---
+
+# Related Documents
+
+This architecture document is intended to be read together with related planning
+documents. Each document serves a different purpose:
+
+- `docs/CurrentState.md` - Inventory of the current production website and
+  services.
+- `docs/MigrationPlan.md` - Migration strategy and compatibility requirements.
+- `docs/ImplementationPlan.md` - Step-by-step implementation plan for the
+  redesigned website, planned as a future Phase 4 document.
+
+---
+
 # Core Principles
 
 - Static first.
 - Keep recurring costs near zero.
 - Prefer free or inexpensive services unless paid services provide clear value.
+- Keep the site inexpensive to operate even if product sales are very low.
+- Support future growth without requiring significant recurring costs until
+  those costs are justified.
 - Use Cloudflare Pages for the public website.
 - Use Cloudflare DNS.
 - Continue using current Cloudflare media hosting.
@@ -36,6 +61,17 @@ decisions.
 The site should be inexpensive to run even if DevDoctor sells poorly. Paid
 infrastructure is justified only when it solves a real product, sales, tax,
 support, or operational problem.
+
+---
+
+# Non-Goals
+
+- This document does not implement the redesign.
+- This document does not define migration steps.
+- This document does not select a payment provider.
+- This document does not redesign application APIs.
+- This document does not replace `docs/MigrationPlan.md`.
+- This document intentionally avoids premature technology choices.
 
 ---
 
@@ -188,9 +224,20 @@ pages. Markdown is preferred as the source format for long-form documentation.
 Markdown documentation may later be rendered into public HTML if documentation
 volume justifies it.
 
-Documentation should be structured so the same source material can be reused
-where practical across the website, in-app help, PDF documentation, video
-scripts, and future support workflows.
+Documentation should be structured around reusable source material wherever
+practical. The same source material should be able to support:
+
+- Website documentation
+- In-app help
+- PDF documentation
+- Video scripts
+- FAQ pages
+- Support articles
+- Future AI knowledge sources
+
+The goal is a single source of truth for product and support knowledge, with
+different outputs generated or adapted from shared material instead of duplicated
+documentation.
 
 For the MVP:
 
@@ -421,6 +468,64 @@ public product documentation.
 If the deployment currently exposes `docs/`, decide separately whether that is
 acceptable. Deployment exclusions are an implementation concern and should be
 handled during a later phase if internal docs should not be publicly served.
+
+## Repository Organization
+
+Public website content and internal project documentation serve different
+audiences. Internal planning documents should remain under `docs/`. Public
+documentation should be organized under the website support structure.
+
+Repository organization should clearly separate production assets from planning
+documents.
+
+---
+
+# Architectural Decision Process
+
+Future architectural decisions should follow these guidelines:
+
+- Prefer the simplest solution that satisfies current requirements.
+- Favor static solutions over dynamic ones.
+- Evaluate recurring costs before adopting new services.
+- Introduce new infrastructure only when a demonstrated need exists.
+- Prefer reusable content over duplicated content.
+- Preserve compatibility for released applications.
+- Avoid optimization for hypothetical future scale.
+
+This process is intended to keep the architecture practical, inexpensive, and
+compatible with current products while leaving room for future growth.
+
+---
+
+# Accessibility
+
+Accessibility is part of the public website architecture. The site should strive
+to:
+
+- Use semantic HTML.
+- Support keyboard navigation.
+- Maintain sufficient color contrast.
+- Remain usable without JavaScript where practical.
+
+---
+
+# Performance
+
+Performance is an architectural goal. Public pages should stay lightweight and
+efficient by:
+
+- Preferring small pages.
+- Optimizing images.
+- Keeping JavaScript minimal.
+- Using efficient browser caching where practical.
+
+---
+
+# Security
+
+The architecture should minimize attack surface by preferring static content
+whenever practical. Dynamic services should be introduced only when they provide
+clear value.
 
 ---
 
