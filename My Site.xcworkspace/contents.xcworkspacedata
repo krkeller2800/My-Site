@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:index.html">
+   </FileRef>
+   <FileRef
+      location = "group:Manual.pdf">
+   </FileRef>
+   <FileRef
+      location = "group:DesignDoc.md">
+   </FileRef>
+   <FileRef
+      location = "group:Privacy Policy.html">
+   </FileRef>
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:ScoreKeep.png">
+   </FileRef>
+   <FileRef
+      location = "group:Teams">
+   </FileRef>
+   <FileRef
+      location = "group:videos">
+   </FileRef>
+</Workspace>
