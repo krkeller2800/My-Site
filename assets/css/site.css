@@ -403,6 +403,85 @@ p {
     padding-top: var(--space-6);
 }
 
+.distribution-section {
+    margin-top: var(--space-7);
+}
+
+.downloads-grid,
+.resource-list {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+}
+
+.downloads-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.resource-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.download-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    padding: var(--space-5);
+}
+
+.download-card p {
+    color: var(--color-muted);
+}
+
+.download-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+    margin-top: var(--space-5);
+}
+
+.download-card__actions .button,
+.download-card__actions .text-link {
+    margin-top: 0;
+}
+
+.download-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(14rem, 22rem);
+    gap: var(--space-6);
+    align-items: start;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-panel);
+    padding: var(--space-6);
+}
+
+.availability-note {
+    display: grid;
+    gap: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: #fbfcfe;
+    padding: var(--space-4);
+}
+
+.availability-note span {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.availability-note strong {
+    color: var(--color-text);
+    font-size: 1.15rem;
+}
+
 .product-actions--hero {
     justify-content: flex-end;
     margin-top: 0;
@@ -633,10 +712,17 @@ p {
     }
 
     .feature-grid,
+    .downloads-grid,
+    .resource-list,
     .support-grid,
     .product-summary-grid,
     .division-grid {
         grid-template-columns: 1fr;
+    }
+
+    .download-feature {
+        grid-template-columns: 1fr;
+        padding: var(--space-5);
     }
 }
 
@@ -654,6 +740,7 @@ p {
     .hero__actions .button,
     .product-actions .button,
     .support-actions .button,
+    .download-card__actions .button,
     .resource-actions .button,
     .callout__actions .button {
         width: 100%;
@@ -669,6 +756,7 @@ p {
     .skip-link,
     .button,
     .card-link,
+    .download-card,
     .primary-nav a {
         transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease, transform 160ms ease;
     }

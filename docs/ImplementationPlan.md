@@ -670,7 +670,7 @@ Free.
 
 # Stage 6 - Support Section
 
-**Status:** Implementation Complete — Awaiting Review and Commit
+**Status:** Complete
 
 **Goal**
 
@@ -755,6 +755,9 @@ unchanged.
 
 `Add support section`
 
+**Result:** Reviewed, committed, and pushed to the `site-redesign` branch with
+commit message `Add support section`.
+
 **Rollback approach**
 
 Revert the support section commit. Existing mailto and compatibility endpoints
@@ -768,7 +771,7 @@ Free.
 
 # Stage 7 - Downloads Section
 
-**Status:** Not started
+**Status:** Implementation Complete — Awaiting Review and Commit
 
 **Goal**
 
@@ -782,28 +785,58 @@ direct downloads.
 
 **Tasks**
 
-- [ ] Create downloads landing page.
-- [ ] Create DevDoctor download page or coming-soon section.
-- [ ] Link to ScoreKeep manual access.
-- [ ] Link to ScoreKeep team-download access.
-- [ ] Clearly distinguish App Store products from direct downloads.
+- [x] Create downloads landing page.
+  **Result:** A static Downloads landing page was created using the shared site design.
+
+- [x] Create DevDoctor download page or coming-soon section.
+  **Result:** DevDoctor is represented on the landing page as `In development`; no separate page was needed and no download or purchase action was added.
+
+- [x] Link to ScoreKeep manual access.
+  **Result:** `/Manual.pdf` is linked.
+
+- [x] Link to ScoreKeep team-download access.
+  **Result:** The page links to the existing home-page roster experience without duplicating the interface or exposing the raw manifest.
+
+- [x] Clearly distinguish App Store products from direct downloads.
+  **Result:** DebtScope, ScoreKeep, and PlateWise are identified as App Store products, while DevDoctor is described as a future direct-distribution product.
+
 - [ ] Add DevDoctor current version field.
-- [ ] Add DevDoctor system requirements field.
+  **Result:** Not applicable. DevDoctor has no released version, so no version value was invented.
+
+- [x] Add DevDoctor system requirements field.
+  **Result:** The page states that final requirements will be published before release and no requirements were invented.
+
 - [ ] Add DevDoctor release notes field or link.
-- [ ] Add DevDoctor checksum field if a binary is available.
-- [ ] Add DevDoctor download button or coming-soon state.
-- [ ] Do not implement payment.
-- [ ] Do not implement licensing.
-- [ ] Do not implement login.
-- [ ] Do not implement protected downloads.
-- [ ] Do not implement automatic update feeds.
+  **Result:** Not applicable. No release notes exist yet, so no dead link was created.
+
+- [x] Add DevDoctor checksum field if a binary is available.
+  **Result:** No DevDoctor binary exists, so no checksum was added.
+
+- [x] Add DevDoctor download button or coming-soon state.
+  **Result:** The page uses an `In development` state and deliberately provides no download button.
+
+- [x] Do not implement payment.
+  **Result:** No payment flow, provider, or purchase action was added.
+
+- [x] Do not implement licensing.
+  **Result:** No licensing system or license-key language was added.
+
+- [x] Do not implement login.
+  **Result:** No account, authentication, or login system was added.
+
+- [x] Do not implement protected downloads.
+  **Result:** No protected download access was added.
+
+- [x] Do not implement automatic update feeds.
+  **Result:** No automatic update feed was added.
 
 **Files affected**
 
 - `downloads/index.html`
-- Possible `downloads/devdoctor/index.html`
-- Existing `Manual.pdf` only if Stage 9 later approves a website-only resource migration
 - `assets/css/site.css`
+- `docs/ImplementationPlan.md`
+
+**Result:** No separate DevDoctor download page was created.
 
 **Compatibility concerns**
 
@@ -812,16 +845,27 @@ direct downloads.
 
 **Tests**
 
-- [ ] Verify downloads landing page links resolve.
-- [ ] Verify App Store products are not presented as direct downloads.
-- [ ] Verify DevDoctor download state is accurate.
-- [ ] Verify ScoreKeep manual and team-download links work.
+- [x] Verify downloads landing page links resolve.
+  **Result:** Local static server responses were confirmed for `/downloads/`, all four product pages, and `/Manual.pdf`.
+
+- [x] Verify App Store products are not presented as direct downloads.
+  **Result:** DebtScope, ScoreKeep, and PlateWise are presented as App Store products with verified App Store links and product-page links.
+
+- [x] Verify DevDoctor download state is accurate.
+  **Result:** DevDoctor is marked `In development`, described as not currently available for download or purchase, and has no download, purchase, pricing, payment, license, version, build, checksum, macOS requirement, or release-notes action.
+
+- [x] Verify ScoreKeep manual and team-download links work.
+  **Result:** ScoreKeep links to `/Manual.pdf` and `/` for the existing home-page team-download experience.
 
 **Completion criteria**
 
 - Downloads section exists and accurately separates product distribution modes.
 - No payment, licensing, login, protected download, or update-feed system is
   added.
+
+**Result:** Downloads correctly separates App Store distribution, future DevDoctor direct distribution, and ScoreKeep resources.
+**Result:** No unavailable system was introduced.
+**Result:** Protected resources remained unchanged.
 
 **Suggested commit message**
 

@@ -60,7 +60,7 @@
                 </a>
                 <a class="card-link product-summary-card" href="/products/scorekeep/">
                     <h3>ScoreKeep</h3>
-                    <p>A baseball scorekeeping application with roster and lineup data, documentation, and team downloads.</p>
+                    <p>A baseball scorekeeping application with roster and lineup data, documentation, and MLB team roster downloads.</p>
                 </a>
                 <a class="card-link product-summary-card" href="/products/platewise/">
                     <h3>PlateWise</h3>
@@ -72,22 +72,24 @@
         <section class="resource-section" aria-labelledby="scorekeep-resources-title">
             <div class="section-heading">
                 <p class="eyebrow">ScoreKeep resources</p>
-                <h2 id="scorekeep-resources-title">Manual and team rosters</h2>
-                <p>Download the ScoreKeep manual or importable baseball team roster files.</p>
+                <h2 id="scorekeep-resources-title">Manual and MLB team rosters</h2>
+                <p>Download the ScoreKeep manual or current MLB team roster files for import into ScoreKeep.</p>
             </div>
             <div class="resource-actions">
                 <a class="button button--secondary" href="/Manual.pdf">Open the ScoreKeep manual</a>
             </div>
 
+            <div id="scorekeep-team-downloads" class="anchor-target" aria-hidden="true"></div>
             <div class="roster-downloads" aria-labelledby="team-downloads-title">
                 <div class="roster-downloads__header">
-                    <h3 id="team-downloads-title">Download teams</h3>
+                    <h3 id="team-downloads-title">Download MLB team rosters</h3>
                     <p id="roster-update" class="roster-downloads__meta">Loading roster list...</p>
                 </div>
-                <p id="roster-status" class="status-message" role="status" aria-live="polite">Loading team downloads.</p>
-                <div id="roster-grid" class="division-grid" aria-label="ScoreKeep team roster downloads"></div>
+                <p id="roster-status" class="status-message" role="status" aria-live="polite">Loading MLB team roster downloads.</p>
+                <div id="roster-grid" class="division-grid" aria-label="ScoreKeep MLB team roster downloads"></div>
+                <p class="status-message">MLB and team names are trademarks of their respective owners. ScoreKeep is not affiliated with or endorsed by Major League Baseball.</p>
                 <noscript>
-                    <p class="status-message">Team roster downloads require JavaScript so this page can read the current team manifest.</p>
+                    <p class="status-message">MLB team roster downloads require JavaScript so this page can read the current team manifest.</p>
                 </noscript>
             </div>
         </section>
@@ -174,6 +176,18 @@
             update.textContent = "Roster list unavailable.";
         }
 
+        function scrollRosterAnchorIntoView() {
+            if (window.location.hash !== "#scorekeep-team-downloads") {
+                return;
+            }
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    document.getElementById("scorekeep-team-downloads")?.scrollIntoView();
+                });
+            });
+        }
+
         fetch("/Teams/index.json", { cache: "no-store" })
             .then(response => {
                 if (!response.ok) {
@@ -207,11 +221,13 @@
 
                 const updatedDate = formatUpdatedDate(data.updated);
                 update.textContent = updatedDate ? `Roster manifest updated ${updatedDate}.` : "Roster manifest loaded.";
-                status.textContent = "Team downloads loaded.";
+                status.textContent = "MLB team roster downloads loaded.";
+                scrollRosterAnchorIntoView();
             })
             .catch(error => {
                 console.error(error);
-                showRosterError("Unable to load team downloads. Please verify Teams/index.json is available and valid.");
+                showRosterError("Unable to load MLB team roster downloads. Please verify Teams/index.json is available and valid.");
+                scrollRosterAnchorIntoView();
             });
     </script>
 </body>
