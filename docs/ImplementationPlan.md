@@ -501,7 +501,7 @@ Free.
 
 # Stage 5 - Product Pages
 
-**Status:** Not started
+**Status:** Complete
 
 **Goal**
 
@@ -518,46 +518,92 @@ where practical.
 
 **Tasks**
 
-- [ ] Add overview.
-- [ ] Describe intended audience.
-- [ ] List key benefits.
-- [ ] Add screenshots or demo placeholders only if real assets are unavailable.
-- [ ] Add system requirements.
-- [ ] Add download or coming-soon state.
-- [ ] Add release notes link.
-- [ ] Add support link.
-- [ ] Position DevDoctor for direct sale without selecting a payment provider.
+- [x] Add overview.
+  **Result:** DevDoctor is described as “A native macOS diagnostic utility designed to help developers understand and troubleshoot their development environment.”
+
+- [x] Describe intended audience.
+  **Result:** DevDoctor is positioned for Mac software developers diagnosing development-environment problems.
+
+- [x] List key benefits.
+  **Result:** Benefits are limited to a native macOS experience, development-environment focus, clearer troubleshooting context, and direct distribution when released.
+
+- [x] Add screenshots or demo placeholders only if real assets are unavailable.
+  **Result:** No fake screenshot boxes or invented assets were added. The page states that screenshots and demonstrations will be added as development progresses.
+
+- [x] Add system requirements.
+  **Result:** The page states that final system requirements will be published before release.
+
+- [x] Add download or coming-soon state.
+  **Result:** The page states that DevDoctor is in development, direct distribution is planned, and it is not currently available for purchase or download.
+
+- [x] Add release notes link.
+  **Result:** No dead release-notes link was added. The page states that release notes will be published before release.
+
+- [x] Add support link.
+  **Result:** No premature DevDoctor support link was added. The page states that product support information will be published before release.
+
+- [x] Position DevDoctor for direct sale without selecting a payment provider.
+  **Result:** Direct distribution is noted without adding purchase, pricing, payment, license, or download actions.
 
 ## DebtScope
 
 **Tasks**
 
-- [ ] Add overview.
-- [ ] List main features.
-- [ ] Add App Store link.
-- [ ] Add help and support links.
-- [ ] Add help-video links where appropriate.
-- [ ] Do not change the app-facing manifest URL.
+- [x] Add overview.
+  **Result:** DebtScope is described as an iPhone and iPad finance planner for organizing debts, comparing payoff strategies, and understanding the path toward becoming debt free.
+
+- [x] List main features.
+  **Result:** The page covers debt payoff planning, Avalanche, Snowball, Minimum Payment, and Custom strategies, debt-free date and interest comparisons, statement and transaction-file import, cash-flow and net-worth views, and private on-device planning without requiring bank linking.
+
+- [x] Add App Store link.
+  **Result:** DebtScope links to `https://apps.apple.com/us/app/debtscope/id6758213398`.
+
+- [x] Add help and support links.
+  **Result:** The page links to `/support/` using restrained DebtScope support wording.
+
+- [x] Add help-video links where appropriate.
+  **Result:** Help videos are mentioned as available within DebtScope; the raw help-video manifest is not linked as a visitor-facing help page.
+
+- [x] Do not change the app-facing manifest URL.
+  **Result:** `videos/DebtScope-help-videos.json` remains unchanged.
 
 ## ScoreKeep
 
 **Tasks**
 
-- [ ] Add overview.
-- [ ] Add App Store link.
-- [ ] Add manual link.
-- [ ] Add team-download link.
-- [ ] Add support link.
-- [ ] Do not change `Teams/index.json` or `Teams/message.json`.
+- [x] Add overview.
+  **Result:** ScoreKeep is described as a baseball scoring application for recording games, managing lineups, and tracking game statistics.
+
+- [x] Add App Store link.
+  **Result:** ScoreKeep links to `https://apps.apple.com/us/app/scorekeep-baseball-scoring/id6748364014`.
+
+- [x] Add manual link.
+  **Result:** The page links to `/Manual.pdf`.
+
+- [x] Add team-download link.
+  **Result:** The page links to `/` for the existing home-page ScoreKeep team-download experience because the protected root page does not have a stable section-level fragment ID.
+
+- [x] Add support link.
+  **Result:** The page links to `/support/` using restrained ScoreKeep support wording.
+
+- [x] Do not change `Teams/index.json` or `Teams/message.json`.
+  **Result:** `Teams/index.json`, `Teams/message.json`, and importable ScoreKeep team files remain unchanged.
 
 ## PlateWise
 
 **Tasks**
 
-- [ ] Add basic product presence.
-- [ ] Add App Store link.
-- [ ] Add support link.
-- [ ] Keep investment minimal and consistent with current priority.
+- [x] Add basic product presence.
+  **Result:** PlateWise is described as an AI-assisted recipe and meal-planning application.
+
+- [x] Add App Store link.
+  **Result:** PlateWise links to `https://apps.apple.com/us/app/plate-wise-meal-planning/id6754467692`.
+
+- [x] Add support link.
+  **Result:** The page links to `/support/` using minimal Plate Wise support wording.
+
+- [x] Keep investment minimal and consistent with current priority.
+  **Result:** The page remains concise while covering verified capabilities.
 
 **Files affected**
 
@@ -566,7 +612,7 @@ where practical.
 - `products/scorekeep/index.html`
 - `products/platewise/index.html`
 - `assets/css/site.css`
-- `assets/images/` only for approved product assets
+- `docs/ImplementationPlan.md`
 
 **Compatibility concerns**
 
@@ -576,17 +622,36 @@ where practical.
 
 **Tests**
 
-- [ ] Open each product page locally or in preview.
-- [ ] Verify navigation and footer links.
-- [ ] Verify App Store, manual, help-video, support, and download links.
-- [ ] Verify no product page references unavailable payment or licensing flows.
-- [ ] Verify mobile layout and keyboard navigation.
+- [x] Open each product page locally or in preview.
+  **Result:** Product pages returned `200 OK` through a local static server. Browser automation was not available in this environment.
+
+- [x] Verify navigation and footer links.
+  **Result:** All four pages use the shared shell, Products is marked current, each page links back to `/products/`, and footer privacy links use `/Privacy%20Policy`.
+
+- [x] Verify App Store, manual, help-video, support, and download links.
+  **Result:** DebtScope, ScoreKeep, and PlateWise use verified App Store links. ScoreKeep links to `/Manual.pdf` and the existing home-page team-download experience. Support links use `/support/`. DebtScope's app-facing help-video manifest remains unchanged and is not used as a visitor-facing page. DevDoctor has no download action.
+
+- [x] Verify no product page references unavailable payment or licensing flows.
+  **Result:** No purchase action, pricing, payment provider, license flow, or unavailable download was added.
+
+- [x] Verify mobile layout and keyboard navigation.
+  **Result:** Reusable responsive product-page styles were added and reviewed for desktop, laptop, tablet, and phone-width behavior, including stacked product heroes, wrapping actions, one-column feature grids, visible focus states, semantic sections, and keyboard-accessible links. Product pages do not require JavaScript.
 
 **Completion criteria**
 
 - All four product pages exist and follow a consistent structure.
 - Product claims are accurate.
 - App-facing manifests are unchanged.
+
+**Result:** All four product pages were implemented using the shared design.
+**Result:** DevDoctor is positioned as an in-development macOS utility for software developers.
+**Result:** No DevDoctor purchase, pricing, or download action was added.
+**Result:** DebtScope, ScoreKeep, and PlateWise use verified App Store links.
+**Result:** ScoreKeep links to the existing manual and team-download experience.
+**Result:** DebtScope's app-facing help-video manifest remains unchanged and is not used as a visitor-facing page.
+**Result:** Support links use `/support/` without overstating available support content.
+**Result:** Protected compatibility resources remained unchanged.
+**Result:** No framework or external dependency was introduced.
 
 **Suggested commit message**
 

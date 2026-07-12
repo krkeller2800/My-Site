@@ -268,6 +268,99 @@ p {
     color: var(--color-accent);
 }
 
+.product-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 22rem);
+    gap: var(--space-6);
+    align-items: start;
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-4) var(--space-7);
+}
+
+.product-hero h1 {
+    max-width: 16ch;
+}
+
+.product-status,
+.availability-panel,
+.product-details {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    padding: var(--space-5);
+}
+
+.product-status {
+    display: grid;
+    gap: var(--space-1);
+}
+
+.product-status span {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.product-status strong {
+    color: var(--color-text);
+    font-size: 1.15rem;
+}
+
+.product-layout {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+}
+
+.product-details p:first-child,
+.availability-panel p:first-child {
+    margin-top: 0;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+}
+
+.feature-grid article {
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: #fbfcfe;
+    padding: var(--space-4);
+}
+
+.feature-grid p {
+    color: var(--color-muted);
+}
+
+.feature-list {
+    display: grid;
+    gap: var(--space-3);
+    margin: var(--space-4) 0 0;
+    padding-left: 1.25rem;
+}
+
+.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+    margin-top: var(--space-5);
+}
+
+.product-actions .button,
+.product-actions .text-link {
+    margin-top: 0;
+}
+
+.product-actions--hero {
+    justify-content: flex-end;
+    margin-top: 0;
+}
+
 .hero {
     display: grid;
     min-height: 28rem;
@@ -484,6 +577,15 @@ p {
         padding: var(--space-5);
     }
 
+    .product-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .product-actions--hero {
+        justify-content: flex-start;
+    }
+
+    .feature-grid,
     .product-summary-grid,
     .division-grid {
         grid-template-columns: 1fr;
@@ -502,6 +604,7 @@ p {
     }
 
     .hero__actions .button,
+    .product-actions .button,
     .resource-actions .button,
     .callout__actions .button {
         width: 100%;
