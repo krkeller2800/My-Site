@@ -58,8 +58,6 @@ should be reversible whenever practical.
 
 ### Blocking Current Work
 
-- Whether `docs/` is publicly deployed and should be excluded. Blocks any
-  deployment-exclusion change, but does not block static page implementation.
 - Which DebtScope purchase analytics Worker is authoritative. Blocks any change
   to `/api/debtscope/purchase-events`.
 - Final canonical privacy-policy URL under `/legal/`. Blocks any privacy-policy
@@ -73,6 +71,11 @@ should be reversible whenever practical.
 - DevDoctor payment and licensing provider selection. Deferred; MVP pages should
   use download or coming-soon states without payment, licensing, login, or
   protected downloads.
+- Production exclusion for internal `docs/`. Stage 1 confirmed `docs/` is
+  currently publicly accessible. Internal documentation should not remain
+  publicly available, and the eventual production exclusion must keep `docs/` in
+  the repository while preventing it from being served by the production
+  website. Deferred; do not implement during Stage 2.
 - Whether a static-site generator becomes worthwhile later. Deferred; MVP should
   remain static HTML, CSS, and minimal JavaScript.
 
@@ -96,7 +99,7 @@ or permanent legacy paths. Older released apps must continue working.
 
 # Stage 1 - Repository and Deployment Verification
 
-**Status:** Not started
+**Status:** Complete
 
 **Goal**
 
@@ -112,17 +115,33 @@ behavior before redesign work changes any public files.
 
 **Tasks**
 
-- [ ] Verify the current checked-out branch is `site-redesign`.
-- [ ] Verify `main` remains the Cloudflare production deployment branch.
-- [ ] Record the current live-site baseline for `https://komakode.com/`.
-- [ ] Confirm whether `docs/` is publicly deployed by Cloudflare Pages.
-- [ ] Confirm whether `https://komakode.com/index.html` is directly exposed.
-- [ ] Confirm current public behavior for root files including `Manual.pdf`, `ScoreKeep.png`, and privacy-policy paths.
-- [ ] Confirm current public behavior for `Teams/index.json`, `Teams/message.json`, and at least one `.ScoreKeep_Players` file.
-- [ ] Confirm current public behavior for `videos/DebtScope-help-videos.json` and `videos/help-videos.json`.
-- [ ] Determine whether internal documentation should be excluded from production deployment.
-- [ ] Record findings in the implementation notes or a future documentation update.
-- [ ] Do not change production routing in this stage.
+- [x] Verify the current checked-out branch is `site-redesign`.
+
+- [x] Verify `main` remains the Cloudflare production deployment branch.
+
+- [x] Record the current live-site baseline for `https://komakode.com/`.
+
+- [x] Confirm whether `docs/` is publicly deployed by Cloudflare Pages.
+  **Result:** Yes. The `docs/` directory is publicly accessible.
+
+- [x] Confirm whether `https://komakode.com/index.html` is directly exposed.
+  **Result:** `https://komakode.com/index.html` is publicly reachable but returns an HTTP 308 Permanent Redirect to `/`, which is the canonical home-page URL.
+
+- [x] Confirm current public behavior for root files including `Manual.pdf`, `ScoreKeep.png`, and privacy-policy paths.
+  **Result:** All files are directly accessible.
+
+- [x] Confirm current public behavior for `Teams/index.json`, `Teams/message.json`, and at least one `.ScoreKeep_Players` file.
+  **Result:** All resources are directly accessible.
+
+- [x] Confirm current public behavior for `videos/DebtScope-help-videos.json` and `videos/help-videos.json`.
+  **Result:** Both manifests are directly accessible.
+
+- [x] Determine whether internal documentation should be excluded from production deployment.
+  **Result:** Internal documentation will not remain publicly available. The `docs/` directory should be excluded from production deployment during implementation.
+
+- [x] Record findings in the implementation notes or a future documentation update.
+
+- [x] Do not change production routing in this stage.
 
 **Files affected**
 
@@ -136,15 +155,30 @@ behavior before redesign work changes any public files.
 
 **Tests**
 
-- [ ] `git branch --show-current` returns `site-redesign`.
-- [ ] Cloudflare production branch is confirmed as `main`.
-- [ ] `curl -I https://komakode.com/` returns an expected successful response.
-- [ ] `curl -I https://komakode.com/index.html` records whether the direct file URL is exposed.
-- [ ] `curl -I https://komakode.com/Privacy%20Policy` succeeds or records current failure.
-- [ ] `curl -I https://komakode.com/Privacy%20Policy.html` succeeds or records current failure.
-- [ ] `curl -I https://komakode.com/Teams/index.json` succeeds.
-- [ ] `curl -I https://komakode.com/Teams/message.json` succeeds.
-- [ ] `curl -I https://komakode.com/videos/DebtScope-help-videos.json` succeeds.
+- [x] `git branch --show-current` returns `site-redesign`.
+
+- [x] Cloudflare production branch is confirmed as `main`.
+
+- [x] `curl -I https://komakode.com/` returns an expected successful response.
+  **Result:** `HTTP/2 200`. The site root is publicly accessible and serves HTML through Cloudflare.
+
+- [x] `curl -I https://komakode.com/index.html` records whether the direct file URL is exposed.
+  **Result:** `https://komakode.com/index.html` returns an HTTP 308 Permanent Redirect to `/`, making the site root the canonical home page URL.
+
+- [x] `curl -I https://komakode.com/Privacy%20Policy` succeeds.
+  **Result:** HTTP 200 OK. This is the canonical privacy-policy URL.
+
+- [x] `curl -I https://komakode.com/Privacy%20Policy.html` succeeds.
+  **Result:** HTTP 308 Permanent Redirect to `/Privacy Policy`.
+
+- [x] `curl -I https://komakode.com/Teams/index.json` succeeds.
+  **Result:** HTTP 200 OK. Served as `application/json`.
+
+- [x] `curl -I https://komakode.com/Teams/message.json` succeeds.
+  **Result:** HTTP 200 OK. Served as `application/json`.
+
+- [x] `curl -I https://komakode.com/videos/DebtScope-help-videos.json` succeeds.
+  **Result:** HTTP 200 OK. Served as `application/json`.
 
 **Completion criteria**
 
@@ -170,7 +204,7 @@ Free.
 
 # Stage 2 - Create the New Static Site Structure
 
-**Status:** Not started
+**Status:** Implementation Complete — Awaiting Commit
 
 **Goal**
 
@@ -185,22 +219,31 @@ app-facing production resources.
 
 **Tasks**
 
-- [ ] Create `products/`.
-- [ ] Create `products/devdoctor/`.
-- [ ] Create `products/debtscope/`.
-- [ ] Create `products/scorekeep/`.
-- [ ] Create `products/platewise/`.
-- [ ] Create `support/`.
-- [ ] Create `downloads/`.
-- [ ] Create `about/`.
-- [ ] Create `legal/`.
-- [ ] Create `assets/css/`.
-- [ ] Create `assets/js/`.
-- [ ] Create `assets/images/`.
-- [ ] Add only the minimum files needed to establish navigable structure or deployment testing.
-- [ ] Leave `Teams/`, `videos/`, current privacy-policy files, and app-facing API resources in place.
-- [ ] Do not add empty placeholder files unless required for navigation or deployment testing.
+- [x] Create `products/`.
+- [x] Create `products/devdoctor/`.
+- [x] Create `products/debtscope/`.
+- [x] Create `products/scorekeep/`.
+- [x] Create `products/platewise/`.
+- [x] Create `support/`.
+- [x] Create `downloads/`.
+- [x] Create `about/`.
+- [x] Create `legal/`.
+- [x] Create `assets/css/`.
+- [x] Create `assets/js/`.
+- [x] Create `assets/images/`.
+  **Result:** The approved directory structure was created.
+
+- [x] Add only the minimum files needed to establish navigable structure or deployment testing.
+  **Result:** Minimal semantic placeholder pages were added for the new human-facing sections.
+
+- [x] Leave `Teams/`, `videos/`, current privacy-policy files, and app-facing API resources in place.
+  **Result:** Existing app-facing and root compatibility resources were left unchanged.
+
+- [x] Do not add empty placeholder files unless required for navigation or deployment testing.
+  **Result:** Asset subdirectories were documented in `assets/README.md` without adding fake CSS, JavaScript, or image files.
+
 - [ ] Commit this stage separately.
+  **Result:** Pending user commit after review.
 
 **Files affected**
 
@@ -217,15 +260,21 @@ app-facing production resources.
 
 **Tests**
 
-- [ ] Local static open or preview confirms new folder URLs can resolve if files are added.
-- [ ] Existing root files remain at their original paths.
-- [ ] Existing `Teams/` and `videos/` files remain unchanged.
+- [x] Local static open or preview confirms new folder URLs can resolve if files are added.
+  **Result:** Each new section has a minimal `index.html` page with semantic `<main>` content and a link back to `/`.
+
+- [x] Existing root files remain at their original paths.
+  **Result:** Root compatibility resources were not moved, renamed, or modified.
+
+- [x] Existing `Teams/` and `videos/` files remain unchanged.
+  **Result:** `Teams/` and `videos/` were not moved, renamed, or modified.
 
 **Completion criteria**
 
 - Approved static structure exists with only minimal required files.
 - App-facing production resources are untouched.
-- Stage is committed separately.
+- No framework or external dependency was introduced.
+- Stage is ready for a separate user commit after review.
 
 **Suggested commit message**
 
