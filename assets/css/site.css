@@ -252,8 +252,170 @@ p {
     color: var(--color-surface);
 }
 
+.button--secondary {
+    border-color: var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-accent);
+}
+
+.button--secondary:hover {
+    border-color: #b7cce3;
+    background: #edf4fb;
+    color: var(--color-accent-hover);
+}
+
 .text-link {
     color: var(--color-accent);
+}
+
+.hero {
+    display: grid;
+    min-height: 28rem;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-7);
+}
+
+.hero__content {
+    max-width: 48rem;
+}
+
+.hero__content h1 {
+    max-width: 15ch;
+}
+
+.hero__actions,
+.resource-actions,
+.callout__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+}
+
+.featured-product,
+.callout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: var(--space-6);
+    align-items: start;
+    margin-top: var(--space-7);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-panel);
+    padding: var(--space-6);
+}
+
+.featured-product__body p:first-child {
+    margin-top: 0;
+}
+
+.status-label {
+    display: inline-flex;
+    margin-top: var(--space-4);
+    border: 1px solid #b7cce3;
+    border-radius: var(--radius-sm);
+    background: #edf4fb;
+    color: var(--color-text);
+    padding: var(--space-1) var(--space-3);
+    font-size: 0.9rem;
+    font-weight: 750;
+}
+
+.resource-section {
+    margin-top: var(--space-7);
+}
+
+.section-heading {
+    max-width: 48rem;
+}
+
+.section-heading p:last-child {
+    color: var(--color-muted);
+}
+
+.product-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+}
+
+.product-summary-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.roster-downloads {
+    margin-top: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    padding: var(--space-5);
+}
+
+.roster-downloads__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-4);
+}
+
+.roster-downloads__meta,
+.status-message {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.roster-downloads__meta,
+.status-message {
+    margin: 0;
+}
+
+.status-message {
+    margin-top: var(--space-4);
+}
+
+.status-message--error {
+    color: #9f1239;
+}
+
+.division-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+}
+
+.division-card {
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: #fbfcfe;
+    padding: var(--space-4);
+}
+
+.division-card h4 {
+    margin: 0 0 var(--space-3);
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.team-list {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.team-list a {
+    overflow-wrap: anywhere;
+    font-weight: 650;
 }
 
 .site-footer {
@@ -310,6 +472,22 @@ p {
     .card-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .hero {
+        min-height: auto;
+        padding-block: var(--space-6);
+    }
+
+    .featured-product,
+    .callout {
+        grid-template-columns: 1fr;
+        padding: var(--space-5);
+    }
+
+    .product-summary-grid,
+    .division-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 34rem) {
@@ -321,6 +499,16 @@ p {
 
     .card-grid {
         grid-template-columns: 1fr;
+    }
+
+    .hero__actions .button,
+    .resource-actions .button,
+    .callout__actions .button {
+        width: 100%;
+    }
+
+    .roster-downloads {
+        padding: var(--space-4);
     }
 }
 

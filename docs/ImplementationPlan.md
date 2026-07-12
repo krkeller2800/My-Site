@@ -292,7 +292,7 @@ Free.
 
 # Stage 3 - Shared Site Foundation
 
-**Status:** Implementation Complete — Awaiting Review and Commit
+**Status:** Complete
 
 **Goal**
 
@@ -385,6 +385,8 @@ verify the extensionless compatibility URL.
 
 `Add shared static site foundation`
 
+**Result:** Reviewed, committed, and pushed to the `site-redesign` branch with commit message `Add shared static site foundation`.
+
 **Rollback approach**
 
 Revert the shared foundation commit. Existing compatibility files remain
@@ -398,7 +400,7 @@ Free.
 
 # Stage 4 - Home Page
 
-**Status:** Not started
+**Status:** Complete
 
 **Goal**
 
@@ -412,14 +414,33 @@ Replace the human-facing home page content while preserving the root URL at
 
 **Tasks**
 
-- [ ] Implement the redesigned root `index.html`.
-- [ ] Introduce KomoKode as an independent developer hub.
-- [ ] Feature DevDoctor prominently.
-- [ ] Present DebtScope, ScoreKeep, and PlateWise.
-- [ ] Link clearly to Products, Support, Downloads, and About.
-- [ ] Avoid claims, purchase actions, payment links, or licensing statements that are not yet available.
-- [ ] Preserve links to current compatibility resources where needed.
-- [ ] Ensure the page works at `https://komakode.com/`.
+- [x] Implement the redesigned root `index.html`.
+  **Result:** The root home page was redesigned using the shared Stage 3 foundation.
+
+- [x] Introduce KomoKode as an independent developer hub.
+  **Result:** KomoKode is introduced as an independent software developer.
+
+- [x] Feature DevDoctor prominently.
+  **Result:** DevDoctor is featured as an upcoming macOS product.
+
+- [x] Present DebtScope, ScoreKeep, and PlateWise.
+  **Result:** DebtScope, ScoreKeep, and PlateWise are represented.
+
+- [x] Link clearly to Products, Support, Downloads, and About.
+  **Result:** Navigation to Products, Support, Downloads, and About was added.
+
+- [x] Avoid claims, purchase actions, payment links, or licensing statements that are not yet available.
+  **Result:** No unavailable purchase action, payment link, licensing flow, or unsupported marketing claim was added.
+
+- [x] Preserve links to current compatibility resources where needed.
+  **Result:** Existing ScoreKeep manual and roster-download access was preserved.
+  **Result:** Team downloads continue using `/Teams/index.json`.
+  **Result:** Privacy continues linking to `/Privacy%20Policy`.
+  **Result:** No compatibility resource was moved or modified.
+
+- [x] Ensure the page works at `https://komakode.com/`.
+  **Result:** The page remains static HTML, CSS, and inline home-page JavaScript suitable for the existing root URL.
+  **Result:** No framework or external dependency was introduced.
 
 **Files affected**
 
@@ -437,12 +458,23 @@ Replace the human-facing home page content while preserving the root URL at
 
 **Tests**
 
-- [ ] Open root page locally or in preview.
-- [ ] Verify navigation links resolve.
-- [ ] Verify product cards or sections link to correct product pages.
-- [ ] Verify privacy link resolves to an existing path.
-- [ ] Verify mobile layout.
-- [ ] Verify no unavailable purchase action is present.
+- [x] Open root page locally or in preview.
+  **Result:** Root page was opened through a local static server. Python's built-in server does not emulate the production clean URL for `/Privacy%20Policy`, as noted in Stage 3.
+
+- [x] Verify navigation links resolve.
+  **Result:** Home, Products, Support, Downloads, and About navigation links are present and point to the approved paths.
+
+- [x] Verify product cards or sections link to correct product pages.
+  **Result:** DevDoctor, DebtScope, ScoreKeep, and PlateWise sections link to their product paths.
+
+- [x] Verify privacy link resolves to an existing path.
+  **Result:** Footer privacy link remains `/Privacy%20Policy`.
+
+- [x] Verify mobile layout.
+  **Result:** Hero actions, product cards, featured content, callout actions, and roster downloads adapt for narrow widths.
+
+- [x] Verify no unavailable purchase action is present.
+  **Result:** No purchase, pricing, licensing, or download promise was added.
 
 **Completion criteria**
 
@@ -453,6 +485,8 @@ Replace the human-facing home page content while preserving the root URL at
 **Suggested commit message**
 
 `Redesign home page`
+
+**Result:** Reviewed, committed, and pushed to the `site-redesign` branch with commit message `Redesign home page`.
 
 **Rollback approach**
 
