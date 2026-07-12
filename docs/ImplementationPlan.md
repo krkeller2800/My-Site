@@ -501,7 +501,7 @@ Free.
 
 # Stage 5 - Product Pages
 
-**Status:** Complete
+**Status:** Complete (Committed and Pushed)
 
 **Goal**
 
@@ -670,7 +670,7 @@ Free.
 
 # Stage 6 - Support Section
 
-**Status:** Not started
+**Status:** Implementation Complete — Awaiting Review and Commit
 
 **Goal**
 
@@ -684,25 +684,40 @@ public support content.
 
 **Tasks**
 
-- [ ] Create support landing page.
-- [ ] Add product-specific support entry points.
-- [ ] Add contact links for supported products.
-- [ ] Link to manuals, help videos, FAQs, and downloads.
-- [ ] Reuse documentation source material where practical.
-- [ ] Keep internal `docs/` separate from public support content.
-- [ ] Identify which public support content should be HTML.
-- [ ] Identify which public support content may originate as Markdown.
-- [ ] Do not create a CMS.
-- [ ] Do not duplicate long-form source content unnecessarily.
+- [x] Create support landing page.
+  **Result:** A static Support landing page was created.
+- [x] Add product-specific support entry points.
+  **Result:** Product-specific support entry points were added without creating unnecessary separate support pages.
+- [x] Add contact links for supported products.
+  **Result:** DebtScope links to its existing support mailbox. ScoreKeep links to its existing contact mailbox. PlateWise links to `comment@komakode.com` with the subject `plateWise Feedback`.
+- [x] Link to manuals, help videos, FAQs, and downloads.
+  **Result:** ScoreKeep manual and team downloads are linked. DebtScope's in-app help videos are identified. No FAQ links were added because no public FAQs currently exist. No unsupported general download links were added.
+- [x] Reuse documentation source material where practical.
+  **Result:** Internal `docs/` remained separate from public support content.
+- [x] Keep internal `docs/` separate from public support content.
+  **Result:** No internal repository `docs/` files are linked or exposed as public support content.
+- [x] Identify which public support content should be HTML.
+  **Result:** The Support landing page remains HTML.
+- [x] Identify which public support content may originate as Markdown.
+  **Result:** No public Markdown source was created because no long-form support article currently requires it. Reusable Markdown may be introduced later for actual long-form articles.
+- [x] Do not create a CMS.
+  **Result:** No CMS, JavaScript, framework, or external dependency was introduced.
+- [x] Do not duplicate long-form source content unnecessarily.
+  **Result:** No empty Markdown files or duplicate support articles were created.
+
+**Implementation decision**
+
+The Support landing page remains static HTML. No new public Markdown support
+source is needed during Stage 6 because the current support content is short and
+primarily consists of navigation and contact links. Longer reusable support
+articles may originate as Markdown later when actual article content exists. No
+CMS is needed.
 
 **Files affected**
 
 - `support/index.html`
-- Possible future `support/devdoctor/index.html`
-- Possible future `support/debtscope/index.html`
-- Possible future `support/scorekeep/index.html`
-- Possible future `support/platewise/index.html`
-- Public Markdown source files only if approved for support content
+- `assets/css/site.css`
+- `docs/ImplementationPlan.md`
 
 **Compatibility concerns**
 
@@ -712,10 +727,24 @@ public support content.
 
 **Tests**
 
-- [ ] Verify support landing page links to all product support entry points.
-- [ ] Verify contact links use correct mailboxes.
-- [ ] Verify manual, help-video, FAQ, and download links resolve.
-- [ ] Verify no internal planning document is exposed as public support content unintentionally.
+- [x] Verify support landing page links to all product support entry points.
+  **Result:** DebtScope, ScoreKeep, DevDoctor, and PlateWise product pages are linked from the Support landing page.
+  
+- [x] Verify contact links use correct mailboxes.
+  **Result:** DebtScope uses `mailto:support@komakode.com?subject=Debt%20Scope%20support`; ScoreKeep uses `mailto:comment@KomaKode.com?subject=ScoreKeep%20support`; PlateWise uses `mailto:comment@komakode.com?subject=plateWise%20Feedback`.
+  
+- [x] Verify manual, help-video, FAQ, and download links resolve.
+  **Result:** ScoreKeep links to `/Manual.pdf` and the home-page team-download experience. DebtScope identifies in-app help videos without exposing the raw manifest. No FAQ destination was added because no public FAQ currently exists.
+  
+- [x] Verify no internal planning document is exposed as public support content unintentionally.
+  **Result:** No internal `docs/` path is linked from the Support landing page.
+
+**Result:** DevDoctor is accurately identified as unreleased, with support
+information deferred until release. PlateWise uses its built-in feedback
+workflow as the primary support path; the in-app workflow provides app, version,
+device, OS, and troubleshooting context. No separate PlateWise support page,
+form, or ticket system was created. Protected compatibility resources remained
+unchanged.
 
 **Completion criteria**
 
