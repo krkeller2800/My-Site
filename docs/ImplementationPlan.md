@@ -1,6 +1,6 @@
 # KomoKode Website Implementation Plan
 
-**Status:** Phase 4 Plan Complete — Implementation Not Started
+**Status:** Phase 4 Implementation In Progress
 
 **Branch:** `site-redesign`
 
@@ -204,7 +204,7 @@ Free.
 
 # Stage 2 - Create the New Static Site Structure
 
-**Status:** Implementation Complete — Awaiting Commit
+**Status:** Complete
 
 **Goal**
 
@@ -242,8 +242,8 @@ app-facing production resources.
 - [x] Do not add empty placeholder files unless required for navigation or deployment testing.
   **Result:** Asset subdirectories were documented in `assets/README.md` without adding fake CSS, JavaScript, or image files.
 
-- [ ] Commit this stage separately.
-  **Result:** Pending user commit after review.
+- [x] Commit this stage separately.
+  **Result:** Committed and pushed to the `site-redesign` branch with commit message `Create redesigned site directory structure`.
 
 **Files affected**
 
@@ -292,7 +292,7 @@ Free.
 
 # Stage 3 - Shared Site Foundation
 
-**Status:** Not started
+**Status:** Implementation Complete — Awaiting Review and Commit
 
 **Goal**
 
@@ -305,23 +305,40 @@ Create shared static styling and common page foundation for the redesigned site.
 
 **Tasks**
 
-- [ ] Create shared CSS for typography, colors, layout, spacing, links, buttons, cards, and responsive behavior.
-- [ ] Define common page width and spacing rules.
-- [ ] Define semantic header structure.
-- [ ] Define main navigation: Home, Products, Support, Downloads, About.
-- [ ] Define footer structure with privacy link.
-- [ ] Add accessibility basics including skip link, visible focus states, semantic landmarks, and sufficient contrast.
-- [ ] Keep pages usable without JavaScript where practical.
-- [ ] Add minimal JavaScript only if needed for navigation behavior.
-- [ ] Avoid frontend frameworks.
-- [ ] Avoid external dependencies unless separately approved.
+- [x] Create shared CSS for typography, colors, layout, spacing, links, buttons, cards, and responsive behavior.
+  **Result:** Shared CSS foundation created.
+
+- [x] Define common page width and spacing rules.
+  **Result:** System fonts, accessible color variables, and a reusable content width were added.
+
+- [x] Define semantic header structure.
+  **Result:** Common header, navigation, footer, and responsive page structure applied.
+
+- [x] Define main navigation: Home, Products, Support, Downloads, About.
+  **Result:** Navigation works without JavaScript.
+
+- [x] Define footer structure with privacy link.
+  **Result:** Footer links use the existing `/Privacy%20Policy` compatibility URL.
+
+- [x] Add accessibility basics including skip link, visible focus states, semantic landmarks, and sufficient contrast.
+  **Result:** Skip links, focus states, semantic landmarks, and reduced-motion support added.
+
+- [x] Keep pages usable without JavaScript where practical.
+  **Result:** All Stage 3 navigation and page structure are static HTML and CSS.
+
+- [x] Add minimal JavaScript only if needed for navigation behavior.
+  **Result:** No JavaScript was needed or added.
+
+- [x] Avoid frontend frameworks.
+  **Result:** No framework was introduced.
+
+- [x] Avoid external dependencies unless separately approved.
+  **Result:** No external dependency was introduced.
 
 **Files affected**
 
 - `assets/css/site.css`
-- `assets/js/site.js` only if necessary
-- Root `index.html`
-- Any minimal page files created in Stage 2
+- Stage 2 placeholder pages only
 
 **Compatibility concerns**
 
@@ -331,12 +348,23 @@ Create shared static styling and common page foundation for the redesigned site.
 
 **Tests**
 
-- [ ] Validate pages use semantic HTML landmarks.
-- [ ] Confirm keyboard navigation reaches header, nav links, main content, and footer.
-- [ ] Confirm visible focus states.
-- [ ] Check color contrast for text and interactive elements.
-- [ ] Disable JavaScript and confirm core navigation remains usable.
-- [ ] Test desktop and mobile widths.
+- [x] Validate pages use semantic HTML landmarks.
+  **Result:** All updated pages include skip link, semantic header, nav, main, and footer landmarks.
+
+- [x] Confirm keyboard navigation reaches header, nav links, main content, and footer.
+  **Result:** Static links and skip links remain keyboard accessible.
+
+- [x] Confirm visible focus states.
+  **Result:** CSS includes strong `:focus-visible` styling.
+
+- [x] Check color contrast for text and interactive elements.
+  **Result:** Restrained navy, slate, blue, white, and light gray-blue variables were used for adequate contrast.
+
+- [x] Disable JavaScript and confirm core navigation remains usable.
+  **Result:** No JavaScript file was added; navigation is plain HTML.
+
+- [x] Test desktop and mobile widths.
+  **Result:** Header navigation wraps or stacks at narrower widths, and content uses responsive containers and grids.
 
 **Completion criteria**
 
@@ -344,6 +372,14 @@ Create shared static styling and common page foundation for the redesigned site.
 - No frontend framework, CMS, database, authentication, or payment system is
   introduced.
 - Accessibility basics pass manual review.
+- Root `index.html` and protected compatibility resources remained unchanged.
+
+**Implementation Note:**
+
+Python's built-in HTTP server does not emulate Cloudflare Pages' clean URL
+routing. During local testing, `/Privacy%20Policy` returns 404 even though the
+same URL works correctly in production. Use Cloudflare Preview or production to
+verify the extensionless compatibility URL.
 
 **Suggested commit message**
 
