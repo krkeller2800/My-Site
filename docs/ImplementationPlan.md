@@ -771,7 +771,7 @@ Free.
 
 # Stage 7 - Downloads Section
 
-**Status:** Implementation Complete — Awaiting Review and Commit
+**Status:** Complete
 
 **Goal**
 
@@ -795,18 +795,18 @@ direct downloads.
   **Result:** `/Manual.pdf` is linked.
 
 - [x] Link to ScoreKeep team-download access.
-  **Result:** The page links to the existing home-page roster experience without duplicating the interface or exposing the raw manifest.
+  **Result:** The page links directly to the home-page MLB roster-download panel at `/#scorekeep-team-downloads` without duplicating the roster interface or exposing the raw manifest as the primary user experience.
 
 - [x] Clearly distinguish App Store products from direct downloads.
   **Result:** DebtScope, ScoreKeep, and PlateWise are identified as App Store products, while DevDoctor is described as a future direct-distribution product.
 
-- [ ] Add DevDoctor current version field.
+- [x] Add DevDoctor current version field.
   **Result:** Not applicable. DevDoctor has no released version, so no version value was invented.
 
 - [x] Add DevDoctor system requirements field.
   **Result:** The page states that final requirements will be published before release and no requirements were invented.
 
-- [ ] Add DevDoctor release notes field or link.
+- [x] Add DevDoctor release notes field or link.
   **Result:** Not applicable. No release notes exist yet, so no dead link was created.
 
 - [x] Add DevDoctor checksum field if a binary is available.
@@ -855,7 +855,7 @@ direct downloads.
   **Result:** DevDoctor is marked `In development`, described as not currently available for download or purchase, and has no download, purchase, pricing, payment, license, version, build, checksum, macOS requirement, or release-notes action.
 
 - [x] Verify ScoreKeep manual and team-download links work.
-  **Result:** ScoreKeep links to `/Manual.pdf` and `/` for the existing home-page team-download experience.
+  **Result:** ScoreKeep links to `/Manual.pdf` and `/#scorekeep-team-downloads` for the existing home-page MLB roster-download panel.
 
 **Completion criteria**
 
@@ -864,12 +864,17 @@ direct downloads.
   added.
 
 **Result:** Downloads correctly separates App Store distribution, future DevDoctor direct distribution, and ScoreKeep resources.
+**Result:** ScoreKeep resources are identified as MLB team roster downloads, with a stable `scorekeep-team-downloads` anchor on the home page.
+**Result:** The existing roster loader still uses `/Teams/index.json`; post-render scrolling ensures `/#scorekeep-team-downloads` links land on the visible roster-download panel after the asynchronous roster list loads.
+**Result:** No manifest schema, team URL, or `.ScoreKeep_Players` file changed.
 **Result:** No unavailable system was introduced.
 **Result:** Protected resources remained unchanged.
 
 **Suggested commit message**
 
 `Add downloads section`
+
+**Result:** Reviewed, committed, and pushed to the `site-redesign` branch with commit message `Add downloads section`.
 
 **Rollback approach**
 
