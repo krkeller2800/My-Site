@@ -1091,7 +1091,7 @@ Free.
 
 # Stage 10 - App-Facing Compatibility Work
 
-**Status:** Not started
+**Status:** Complete
 
 **Goal**
 
@@ -1103,59 +1103,157 @@ Handle any app-facing compatibility migrations separately from visual redesign.
 - Stage 12-style app behavior tests available.
 - For purchase analytics, authoritative Worker identified first.
 
+**Audit summary**
+
+Stage 10 was performed as a read-only compatibility audit on July 13, 2026. No
+app-facing migration was performed, no replacement URLs were created, and no
+protected production resource was moved or modified.
+
+The audit found that current static app-facing URLs and schemas remain
+compatible for ScoreKeep team manifests, ScoreKeep message manifests, the
+protected privacy-policy URL, and the DebtScope help-video manifest. One
+DebtScope iPad media URL in the manifest contains a literal space:
+`https://media.komakode.com/DebtScope-Import- files-iPad.mp4`. Generic `curl`
+rejects that exact string as malformed, but Swift `URL(string:)` percent-encodes
+it to `https://media.komakode.com/DebtScope-Import-%20files-iPad.mp4`, and the
+encoded media URL responds successfully with `video/mp4`.
+
+The purchase analytics endpoint was not modified. The repository does not
+contain Worker source or Worker routing configuration, so the authoritative
+Worker cannot be identified from this repository alone.
+
+Manual released-app verification was completed after the read-only audit.
+ScoreKeep loaded messages, downloaded MLB team rosters, and imported downloaded
+rosters successfully. DebtScope loaded help-video categories and played help
+videos successfully on iPhone and iPad where applicable. No compatibility
+issues were observed, and no migration was required.
+
 **Tasks**
 
-- [ ] Treat this stage as separate from visual redesign.
-- [ ] Do not move protected resources merely for cleaner organization.
-- [ ] Preserve older released app behavior.
-- [ ] Use stable routing, redirects, duplicate compatibility files, or permanent legacy paths for any migration.
-- [ ] Test real ScoreKeep and DebtScope behavior where applicable.
+- [x] Treat this stage as separate from visual redesign.
+  **Result:** The audit was documentation-only and separate from Stages 1-9 visual redesign work.
+- [x] Do not move protected resources merely for cleaner organization.
+  **Result:** Protected resources were inspected but not moved.
+- [x] Preserve older released app behavior.
+  **Result:** Existing app-facing URLs and schemas were retained.
+- [x] Use stable routing, redirects, duplicate compatibility files, or permanent legacy paths for any migration.
+  **Result:** Not applicable. No app-facing migration was performed, so no redirects or compatibility copies were added.
+- [x] Test real ScoreKeep and DebtScope behavior where applicable.
+  **Result:** Manual released-app verification was completed successfully for ScoreKeep roster downloads/imports and DebtScope help-video playback.
 
 ## ScoreKeep Team Files
 
+**Repository inventory**
+
+- `Teams/index.json` remains at the repository path used by the public
+  `/Teams/index.json` endpoint.
+- `Teams/message.json` remains at the repository path used by the public
+  `/Teams/message.json` endpoint.
+- The repository contains 30 `.ScoreKeep_Players` files under `Teams/`.
+- The team manifest shape is unchanged: top-level `updated` and `divisions`;
+  each division has `name` and `teams`; each team has `name` and `url`.
+- The manifest contains 6 divisions and 30 team entries.
+- All `teams[].url` values point to `https://komakode.com/Teams/...`.
+- All `teams[].url` values preserve the `.ScoreKeep_Players` extension.
+- Recent Stage 7-9 website redesign commits did not alter `Teams/index.json`,
+  `Teams/message.json`, or `Teams/*.ScoreKeep_Players`.
+
 **Tasks**
 
-- [ ] Keep `Teams/index.json` manifest endpoint stable.
-- [ ] Keep `Teams/message.json` endpoint stable.
-- [ ] Deploy replacement team files before changing `teams[].url`.
-- [ ] Preserve `.ScoreKeep_Players`.
-- [ ] Preserve manifest schema fields.
-- [ ] Test website download.
-- [ ] Test in-app download.
-- [ ] Keep old team-file URLs redirected or duplicated where practical.
+- [x] Keep `Teams/index.json` manifest endpoint stable.
+  **Result:** `https://komakode.com/Teams/index.json` returned HTTP 200, `application/json`, no redirect, and parsed as JSON.
+- [x] Keep `Teams/message.json` endpoint stable.
+  **Result:** `https://komakode.com/Teams/message.json` returned HTTP 200, `application/json`, no redirect, and parsed as JSON.
+- [x] Deploy replacement team files before changing `teams[].url`.
+  **Result:** Not applicable. No team-file migration or manifest URL change was performed.
+- [x] Preserve `.ScoreKeep_Players`.
+  **Result:** All 30 manifest team URLs and local team files preserve the `.ScoreKeep_Players` extension.
+- [x] Preserve manifest schema fields.
+  **Result:** The current schema remains `updated`, `divisions[].name`, `divisions[].teams[]`, `teams[].name`, and `teams[].url`.
+- [x] Test website download.
+  **Result:** The manifest URL for Angels, `https://komakode.com/Teams/Angels.ScoreKeep_Players`, returned HTTP 200, `application/octet-stream`, no redirect, and retained the `.ScoreKeep_Players` filename contract.
+- [x] Test in-app download.
+  **Result:** Manual verification confirmed that released ScoreKeep successfully downloads MLB team rosters, imports downloaded teams, and continues using the existing compatibility endpoints without modification.
+- [x] Keep old team-file URLs redirected or duplicated where practical.
+  **Result:** Not applicable. No team-file migration or manifest URL change was performed.
 
 ## DebtScope Help Videos
 
+**Repository inventory**
+
+- `videos/DebtScope-help-videos.json` remains at the repository path used by the
+  public `/videos/DebtScope-help-videos.json` endpoint.
+- The manifest schema is unchanged: a top-level array of entries with `id`,
+  `title`, `subtitle`, and `urls`; each `urls` object has `iphone` and `ipad`.
+- The manifest contains 5 active help-video entries and 10 active media URLs.
+- All active media URLs use `https://media.komakode.com/...`.
+- Recent Stage 7-9 website redesign commits did not alter
+  `videos/DebtScope-help-videos.json`.
+
 **Tasks**
 
-- [ ] Keep `videos/DebtScope-help-videos.json` endpoint stable.
-- [ ] Keep manifest schema stable.
-- [ ] Deploy media before changing manifest URLs.
-- [ ] Preserve at least one playable URL per video.
-- [ ] Test iPhone video selection and playback.
-- [ ] Test iPad video selection and playback.
-- [ ] Keep current media URLs redirected or duplicated while active manifests or cached clients may reference them.
+- [x] Keep `videos/DebtScope-help-videos.json` endpoint stable.
+  **Result:** `https://komakode.com/videos/DebtScope-help-videos.json` returned HTTP 200, `application/json`, no redirect, and parsed as JSON.
+- [x] Keep manifest schema stable.
+  **Result:** The current manifest schema remains unchanged.
+- [x] Deploy media before changing manifest URLs.
+  **Result:** Not applicable. No help-video migration or manifest URL change was performed.
+- [x] Preserve at least one playable URL per video.
+  **Result:** All active help-video entries have media URLs that resolve to `video/mp4`; the manifest's one literal-space URL was also verified through Swift URL percent-encoding.
+- [x] Test iPhone video selection and playback.
+  **Result:** Manual verification confirmed that released DebtScope successfully loaded and played help videos on iPhone, with no compatibility problems observed.
+- [x] Test iPad video selection and playback.
+  **Result:** Manual verification confirmed that released DebtScope successfully loaded and played help videos on iPad where applicable, with no compatibility problems observed.
+- [x] Keep current media URLs redirected or duplicated while active manifests or cached clients may reference them.
+  **Result:** Not applicable. No help-video migration or manifest URL change was performed.
 
 ## Purchase Analytics API
 
+**Repository search results**
+
+- Site repository search found documentation references to
+  `/api/debtscope/purchase-events` in `docs/MigrationPlan.md`,
+  `docs/WebsiteArchitecture.md`, and this implementation plan.
+- `Privacy Policy.html` mentions purchase analytics sent to KomoKode
+  infrastructure at `komakode.com` and stored using Cloudflare D1.
+- `README.md` identifies the site as deployed with Cloudflare Pages.
+- This repository contains no Worker source, no `wrangler.toml`, no
+  `wrangler.jsonc`, and no Cloudflare route configuration for the endpoint.
+- `docs/MigrationPlan.md` records candidate Worker files from the separate
+  DebtScope repository:
+  `Cloudflare/PurchaseAnalytics/wrangler.toml`,
+  `Cloudflare/PurchaseAnalytics/src/index.js`,
+  `debtscope-purchase-analytics/wrangler.jsonc`, and
+  `debtscope-purchase-analytics/src/index.ts`.
+- Blocked: authoritative Worker cannot be identified from the repository alone.
+
 **Tasks**
 
-- [ ] Do not modify `/api/debtscope/purchase-events` until the authoritative Worker is identified.
-- [ ] Identify which purchase analytics Worker is authoritative.
-- [ ] Preserve POST behavior.
-- [ ] Preserve accepted payload fields.
-- [ ] Ensure backend ignores unknown fields.
-- [ ] Treat Worker investigation as a prerequisite to any backend change.
+- [x] Do not modify `/api/debtscope/purchase-events` until the authoritative Worker is identified.
+  **Result:** The endpoint and Worker configuration were not modified.
+- [ ] Blocked: Identify which purchase analytics Worker is authoritative.
+  **Result:** Authoritative Worker cannot be identified from this repository alone.
+- [ ] Blocked: Preserve POST behavior.
+  **Result:** Full POST compatibility requires an approved controlled test payload and authoritative Worker identification.
+- [ ] Blocked: Preserve accepted payload fields.
+  **Result:** Accepted payload fields cannot be verified from this repository alone.
+- [ ] Blocked: Ensure backend ignores unknown fields.
+  **Result:** Unknown-field tolerance cannot be verified from this repository alone.
+- [x] Treat Worker investigation as a prerequisite to any backend change.
+  **Result:** No backend, Worker, route, or endpoint change was made.
 
 **Files affected**
 
-- `Teams/index.json` only with explicit approval.
-- `Teams/message.json` only with explicit approval.
-- `Teams/*.ScoreKeep_Players` only with explicit approval.
-- `videos/DebtScope-help-videos.json` only with explicit approval.
-- Cloudflare Worker source and routing only after authoritative Worker is
-  identified.
-- Redirect/routing configuration only with approved compatibility method.
+- `docs/ImplementationPlan.md`
+
+Protected production resources were inspected but not modified:
+
+- `Teams/index.json`
+- `Teams/message.json`
+- `Teams/*.ScoreKeep_Players`
+- `videos/DebtScope-help-videos.json`
+- `Privacy Policy.html`
+- `/api/debtscope/purchase-events` Worker, routing, and endpoint behavior
 
 **Compatibility concerns**
 
@@ -1164,17 +1262,35 @@ Handle any app-facing compatibility migrations separately from visual redesign.
   `/api/debtscope/purchase-events` are protected permanent compatibility
   resources.
 - Older released apps must continue working without updates.
+- The manifest string `https://media.komakode.com/DebtScope-Import- files-iPad.mp4`
+  contains a literal space. Swift URL parsing percent-encodes it and the encoded
+  media resource responds successfully. Manual released-app playback was also
+  verified successfully.
 
 **Tests**
 
-- [ ] Fetch `https://komakode.com/Teams/index.json`.
-- [ ] Fetch `https://komakode.com/Teams/message.json`.
-- [ ] Download at least one team file through the website.
-- [ ] Download at least one team file inside ScoreKeep.
-- [ ] Fetch `https://komakode.com/videos/DebtScope-help-videos.json`.
-- [ ] Play each active DebtScope help-video category on iPhone where applicable.
-- [ ] Play each active DebtScope help-video category on iPad where applicable.
-- [ ] Verify `POST https://komakode.com/api/debtscope/purchase-events` remains available and compatible.
+- [x] Fetch `https://komakode.com/Teams/index.json`.
+  **Result:** HTTP 200; `application/json`; no redirect; JSON parse succeeded.
+- [x] Fetch `https://komakode.com/Teams/message.json`.
+  **Result:** HTTP 200; `application/json`; no redirect; JSON parse succeeded.
+- [x] Download at least one team file through the website.
+  **Result:** `https://komakode.com/Teams/Angels.ScoreKeep_Players` returned HTTP 200, `application/octet-stream`, no redirect.
+- [x] ScoreKeep released-app verification.
+  **Result:** Manual verification confirmed messages load correctly, MLB team downloads work correctly, and downloaded rosters import successfully.
+- [x] Fetch `https://komakode.com/videos/DebtScope-help-videos.json`.
+  **Result:** HTTP 200; `application/json`; no redirect; JSON parse succeeded.
+- [x] Check `https://komakode.com/Privacy%20Policy`.
+  **Result:** HTTP 200; `text/html; charset=utf-8`; no redirect.
+- [x] Check active DebtScope help-video media URLs.
+  **Result:** 9 of 10 exact manifest media strings returned HTTP 200 with `video/mp4` via `curl -I`; the remaining manifest string contains a literal space and was rejected by `curl` as malformed, while Swift `URL(string:)` percent-encoded it and the encoded URL returned HTTP 200 with `video/mp4`.
+- [x] DebtScope iPhone playback verification.
+  **Result:** Manual verification confirmed help-video categories load correctly and videos play correctly on iPhone.
+- [x] DebtScope iPad playback verification.
+  **Result:** Manual verification confirmed help-video categories load correctly and videos play correctly on iPad where applicable.
+- [ ] Blocked: Verify `POST https://komakode.com/api/debtscope/purchase-events` remains available and compatible.
+  **Result:** No production POST request was sent. Non-mutating checks returned HTTP 405 with `application/json` for both HEAD and GET, confirming only that non-POST methods are rejected.
+- [ ] Blocked: Identify the authoritative purchase analytics Worker.
+  **Result:** Authoritative Worker cannot be identified from this repository alone.
 
 **Completion criteria**
 
@@ -1182,19 +1298,33 @@ Handle any app-facing compatibility migrations separately from visual redesign.
   where applicable, and reversible.
 - Protected legacy paths remain available.
 
+**Completion results**
+
+**Result:** Repository audit completed.
+**Result:** Public endpoint verification completed.
+**Result:** Manual ScoreKeep verification completed successfully.
+**Result:** Manual DebtScope verification completed successfully.
+**Result:** Existing permanent paths, URLs, and schemas remain compatible.
+**Result:** No app-facing migration was required.
+**Result:** No Swift code change is required because existing app-facing URLs
+and schemas remain intact.
+**Result:** The purchase analytics endpoint must remain untouched until its
+authoritative Worker is identified.
+**Result:** Protected resources had no diff.
+**Result:** Purchase analytics Worker identity, accepted payload fields,
+unknown-field tolerance, and production POST behavior remain blocked.
+**Result:** Stage 11 remains Not started.
+**Result:** Stage 10 has not been committed or pushed.
+
 **Suggested commit message**
 
-Use one commit per compatibility change, such as:
-
-- `Preserve ScoreKeep team compatibility during resource migration`
-- `Preserve DebtScope help-video compatibility during media migration`
-- `Update DebtScope purchase analytics routing`
+`Audit app-facing compatibility`
 
 **Rollback approach**
 
-Revert the specific compatibility commit and restore previous manifests,
-resources, routes, or Worker deployment. If production app behavior fails, roll
-back promptly.
+Revert the Stage 10 documentation update. No protected resource, route, Worker,
+manifest, team file, media URL, privacy page, Swift source, HTML, CSS, or
+JavaScript rollback is required because none were modified.
 
 **Cost classification**
 
