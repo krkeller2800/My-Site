@@ -81,6 +81,28 @@
 
     a { color: var(--link); }
 
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      transform: translateY(-160%);
+      background: var(--text);
+      color: var(--background);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
     .updated {
       color: var(--muted);
       margin: 0;
@@ -165,7 +187,8 @@
   </style>
 </head>
 <body>
-<main>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content">
   <header>
     <h1>Privacy Policy</h1>
     <p class="updated"><strong>Last updated:</strong> July 12, 2026</p>
@@ -392,4 +415,3 @@
 </main>
 </body>
 </html>
-
