@@ -191,6 +191,12 @@ These are app identity and purchase contracts. They are not endpoints.
 
 # Phase 1 — Inventory and Verification
 
+Status: **Substantially complete.**
+
+All known production resources, compatibility contracts, and application consumers have been documented.
+
+Remaining work is limited to the unresolved investigation items listed near the end of this document.
+
 Document the exact current paths and consumers for:
 
 - Privacy policy
@@ -216,13 +222,64 @@ For each item, record:
 
 # Phase 2 — Documentation
 
-Status: **Completed**. Internal project documentation already resides in:
+Status: **Completed**
+
+Internal project documentation now resides under:
 
 ```text
 docs/
 ├── Architecture.md
 ├── CurrentState.md
 └── MigrationPlan.md
+```
+
+# Phase 3 — Website Architecture
+
+Status: **Not started**
+
+Purpose:
+
+Design the target KomoKode website before any production resources are moved.
+
+This phase should define:
+
+- target directory structure
+- public URL strategy
+- Cloudflare Pages routing
+- redirect strategy
+- permanent compatibility URLs
+- placement of website assets
+- placement of APIs
+- placement of downloadable resources
+- placement of media
+- deployment strategy
+
+The output of this phase will be:
+
+```text
+docs/WebsiteArchitecture.md
+```
+
+# Phase 4 — Implementation
+
+Status: **Not started**
+
+Purpose:
+
+Execute the approved website architecture one migration at a time.
+
+Implementation should:
+
+- follow the migration rules in this document
+- migrate one service at a time
+- verify compatibility after every migration
+- commit each completed migration separately
+- avoid mixing redesign work with compatibility work
+
+The output of this phase will be:
+
+```text
+docs/ImplementationPlan.md
 ```
 
 ---

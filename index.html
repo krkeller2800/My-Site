@@ -1,209 +1,237 @@
-<!DOCTYPE html>
-<!-- DEPLOY TEST 2026-02-21 10:45 -->
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Komakode</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KomoKode - Practical Software for Real Problems</title>
+    <meta name="description" content="KomoKode is an independent software developer creating practical software for Apple platforms, including DevDoctor, DebtScope, ScoreKeep, and PlateWise.">
+    <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="brand" href="/">KomoKode</a>
+            <nav class="primary-nav" aria-label="Primary navigation">
+                <a class="current" href="/" aria-current="page">Home</a>
+                <a href="/products/">Products</a>
+                <a href="/support/">Support</a>
+                <a href="/downloads/">Downloads</a>
+                <a href="/about/">About</a>
+            </nav>
+        </div>
+    </header>
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #fff;
-        color: #222;
-        margin: 0;
-        padding: 0;
-      }
-      .center {
-        text-align: center;
-        margin-top: 40px;
-      }
-      .headline {
-        font-size: 2.5em;
-        color: #3366ff;
-        font-style: italic;
-        margin-bottom: 0.2em;
-      }
-      .subtitle {
-        color: #999999;
-        font-size: 1.3em;
-        margin-bottom: 1em;
-      }
-      .app-title {
-        margin: 1.5em 0 0.5em 0;
-        font-size: 1.2em;
-      }
-      img {
-        margin: 1em 0;
-        max-width: 90vw;
-        height: auto;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      }
+    <main id="main-content" class="site-main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero__content">
+                <p class="eyebrow">Independent software development</p>
+                <h1 id="hero-title">Practical software for real problems.</h1>
+                <p class="lede">KomoKode builds focused software for Apple platforms with an emphasis on clarity, usefulness, and maintainability.</p>
+                <div class="hero__actions" aria-label="Primary actions">
+                    <a class="button" href="/products/">Explore products &rarr;</a>
+                    <a class="button button--secondary" href="/support/">Get support</a>
+                </div>
+            </div>
+        </section>
 
-      .download-header {
-        text-align: center;
-        font-size: 1.4em;
-        margin: 30px 0 10px 0;
-      }
-      .download-subheader {
-        text-align: center;
-        font-size: 1.1em;
-        margin: 4px 0 10px 0;
-      }
+        <section class="featured-product" aria-labelledby="devdoctor-title">
+            <div>
+                <p class="eyebrow">Featured upcoming product</p>
+                <h2 id="devdoctor-title">DevDoctor</h2>
+                <p class="status-label">In development</p>
+            </div>
+            <div class="featured-product__body">
+                <p>A native macOS diagnostic utility that helps developers understand and troubleshoot their development environment.</p>
+                <p>DevDoctor is intended for direct distribution, is not intended for the Mac App Store, and is planned as a future commercial desktop product.</p>
+                <a class="text-link" href="/products/devdoctor/">Learn about DevDoctor</a>
+            </div>
+        </section>
 
-      /* Significantly narrower table */
-      #divisionTable {
-        width: 320px;        /* cut roughly another 1/3 */
-        max-width: 90vw;
-        table-layout: fixed;
-      }
-      #divisionTable td {
-        width: 50%;
-        padding: 4px;
-      }
+        <section class="resource-section" aria-labelledby="products-title">
+            <div class="section-heading">
+                <p class="eyebrow">Product lineup</p>
+                <h2 id="products-title">Software from KomoKode</h2>
+            </div>
+            <div class="product-summary-grid">
+                <a class="card-link product-summary-card" href="/products/debtscope/">
+                    <h3>DebtScope</h3>
+                    <p>Debt payoff planning, statement import, payoff strategy comparison, and payment analysis for iPhone and iPad.</p>
+                </a>
+                <a class="card-link product-summary-card" href="/products/scorekeep/">
+                    <h3>ScoreKeep</h3>
+                    <p>A baseball scorekeeping application with roster and lineup data, documentation, and MLB team roster downloads.</p>
+                </a>
+                <a class="card-link product-summary-card" href="/products/platewise/">
+                    <h3>PlateWise</h3>
+                    <p>An AI-assisted recipe generation application.</p>
+                </a>
+            </div>
+        </section>
 
-      /* One team per line, prevent wrapping */
-      .team-list a {
-        display: block;
-        margin: 3px 0;
-        white-space: nowrap;     /* longest team stays on one line */
-        font-size: 0.95em;       /* slight reduction for fit */
-      }
+        <section class="resource-section" aria-labelledby="scorekeep-resources-title">
+            <div class="section-heading">
+                <p class="eyebrow">ScoreKeep resources</p>
+                <h2 id="scorekeep-resources-title">Manual and MLB team rosters</h2>
+                <p>Download the ScoreKeep manual or current MLB team roster files for import into ScoreKeep.</p>
+            </div>
+            <div class="resource-actions">
+                <a class="button button--secondary" href="/downloads/scorekeep/scorekeep-manual.pdf">Open the ScoreKeep manual</a>
+            </div>
 
-      .error {
-        text-align: center;
-        color: #b00020;
-        margin: 16px auto;
-        max-width: 720px;
-      }
-    </style>
-  </head>
+            <div id="scorekeep-team-downloads" class="anchor-target" aria-hidden="true"></div>
+            <div class="roster-downloads" aria-labelledby="team-downloads-title">
+                <div class="roster-downloads__header">
+                    <h3 id="team-downloads-title">Download MLB team rosters</h3>
+                    <p id="roster-update" class="roster-downloads__meta">Loading roster list...</p>
+                </div>
+                <p id="roster-status" class="status-message" role="status" aria-live="polite">Loading MLB team roster downloads.</p>
+                <div id="roster-grid" class="division-grid" aria-label="ScoreKeep MLB team roster downloads"></div>
+                <p class="status-message">MLB and team names are trademarks of their respective owners. ScoreKeep is not affiliated with or endorsed by Major League Baseball.</p>
+                <noscript>
+                    <p class="status-message">MLB team roster downloads require JavaScript so this page can read the current team manifest.</p>
+                </noscript>
+            </div>
+        </section>
 
-  <body>
-    <div class="center">
-      <div class="headline">Komakode Inc.</div>
-      <div class="subtitle">Creating iOS Mobile Applications</div>
+    </main>
 
-      <div><a href="Privacy%20Policy.html">Privacy Policy</a></div>
-
-      <div class="app-title">
-        Check out our latest app – <b><i>ScoreKeep - Baseball Scoring</i></b>
-      </div>
-
-      <img
-        src="ScoreKeep.png"
-        alt="Screenshot of ScoreKeep Baseball Scoring App"
-        width="533"
-        height="400"
-      />
-
-      <div style="margin: 1em 0">
-        <a href="Manual.pdf">Download the user manual</a>
-      </div>
-    </div>
-
-    <div class="download-header"><b>Download Teams</b></div>
-    <div class="download-subheader"><b>2026 26 Man Opening Day Rosters</b></div>
-
-    <!-- AL on left, NL on right -->
-    <table id="divisionTable" cellspacing="2" cellpadding="2" border="0" align="center">
-      <tbody>
-        <tr><td>Loading teams…</td></tr>
-      </tbody>
-    </table>
-
-    <div id="loadError" class="error" style="display: none"></div>
-
-    <br />
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p>&copy; 2026 KomoKode. All rights reserved.</p>
+            <nav class="site-footer__links" aria-label="Legal navigation">
+                <a href="/legal/">Legal</a>
+                <a href="/Privacy%20Policy.html">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
 
     <script>
-      function sortTeamsAlpha(teams) {
-        return (teams || []).slice().sort((a, b) =>
-          (a.name || "").localeCompare(b.name || "", undefined, { sensitivity: "base" })
-        );
-      }
-
-        function makeDivisionCell(div) {
-          const td = document.createElement("td");
-          td.vAlign = "top";
-
-          const title = document.createElement("div");
-          title.className = "center";
-          title.innerHTML = `<b><u>${div?.name ?? ""}</u></b>`;
-
-          td.appendChild(title);
-
-          if (div && Array.isArray(div.teams)) {
-            div.teams.forEach(team => {
-              const a = document.createElement("a");
-              a.href = team.url;
-              a.textContent = team.name;
-              a.style.display = "block";
-
-              // 🔑 Preserve the original file extension
-              try {
-                const url = new URL(team.url, window.location.href);
-                const filename = decodeURIComponent(
-                  url.pathname.split("/").pop()
-                );
-
-                if (filename && filename.includes(".")) {
-                  a.download = filename; // exact filename from URL
-                } else {
-                  a.download = `${team.name}.ScoreKeep_Players`;
-                }
-              } catch {
-                a.download = `${team.name}.ScoreKeep_Players`;
-              }
-
-              td.appendChild(a);
-            });
-          }
-
-          return td;
-        }
-
-      function showError(msg) {
-        const errDiv = document.getElementById("loadError");
-        errDiv.style.display = "block";
-        errDiv.textContent = msg;
-      }
-
-      fetch("Teams/index.json", { cache: "no-store" })
-        .then(r => {
-          if (!r.ok) throw new Error("Failed to load Teams/index.json");
-          return r.json();
-        })
-        .then(data => {
-          if (!data || !Array.isArray(data.divisions)) {
-            throw new Error("Invalid JSON format: missing 'divisions'");
-          }
-
-          const divByName = {};
-          data.divisions.forEach(d => {
-            if (d && d.name) divByName[d.name] = d;
-          });
-
-          const tbody = document.querySelector("#divisionTable tbody");
-          tbody.innerHTML = "";
-
-          [
+        const divisionPairs = [
             ["AL East", "NL East"],
             ["AL Central", "NL Central"],
             ["AL West", "NL West"]
-          ].forEach(([al, nl]) => {
-            const tr = document.createElement("tr");
-            tr.appendChild(makeDivisionCell(divByName[al]));
-            tr.appendChild(makeDivisionCell(divByName[nl]));
-            tbody.appendChild(tr);
-          });
-        })
-        .catch(err => {
-          console.error(err);
-          document.querySelector("#divisionTable tbody").innerHTML =
-            "<tr><td>Unable to load teams.</td></tr>";
-          showError("Unable to load team list. Please verify Teams/index.json exists and is valid.");
-        });
+        ];
+
+        function formatUpdatedDate(value) {
+            if (!value) return "";
+
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return "";
+
+            return new Intl.DateTimeFormat(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }).format(date);
+        }
+
+        function downloadNameForTeam(team) {
+            try {
+                const url = new URL(team.url, window.location.href);
+                const filename = decodeURIComponent(url.pathname.split("/").pop());
+
+                if (filename && filename.includes(".")) {
+                    return filename;
+                }
+            } catch {
+                return `${team.name}.ScoreKeep_Players`;
+            }
+
+            return `${team.name}.ScoreKeep_Players`;
+        }
+
+        function makeDivisionCard(division) {
+            const section = document.createElement("section");
+            section.className = "division-card";
+            section.setAttribute("aria-labelledby", `division-${division.name.toLowerCase().replace(/\s+/g, "-")}`);
+
+            const heading = document.createElement("h4");
+            heading.id = `division-${division.name.toLowerCase().replace(/\s+/g, "-")}`;
+            heading.textContent = division.name;
+
+            const list = document.createElement("ul");
+            list.className = "team-list";
+
+            if (Array.isArray(division.teams)) {
+                division.teams.forEach(team => {
+                    const item = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = team.url;
+                    link.textContent = team.name;
+                    link.download = downloadNameForTeam(team);
+                    item.appendChild(link);
+                    list.appendChild(item);
+                });
+            }
+
+            section.appendChild(heading);
+            section.appendChild(list);
+            return section;
+        }
+
+        function showRosterError(message) {
+            const status = document.getElementById("roster-status");
+            const update = document.getElementById("roster-update");
+
+            status.textContent = message;
+            status.classList.add("status-message--error");
+            update.textContent = "Roster list unavailable.";
+        }
+
+        function scrollRosterAnchorIntoView() {
+            if (window.location.hash !== "#scorekeep-team-downloads") {
+                return;
+            }
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    document.getElementById("scorekeep-team-downloads")?.scrollIntoView();
+                });
+            });
+        }
+
+        fetch("/Teams/index.json", { cache: "no-store" })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load Teams/index.json");
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                if (!data || !Array.isArray(data.divisions)) {
+                    throw new Error("Invalid JSON format: missing divisions");
+                }
+
+                const divisionsByName = {};
+                data.divisions.forEach(division => {
+                    if (division && division.name) {
+                        divisionsByName[division.name] = division;
+                    }
+                });
+
+                const rosterGrid = document.getElementById("roster-grid");
+                const status = document.getElementById("roster-status");
+                const update = document.getElementById("roster-update");
+                rosterGrid.textContent = "";
+
+                divisionPairs.flat().forEach(name => {
+                    if (divisionsByName[name]) {
+                        rosterGrid.appendChild(makeDivisionCard(divisionsByName[name]));
+                    }
+                });
+
+                const updatedDate = formatUpdatedDate(data.updated);
+                update.textContent = updatedDate ? `Roster manifest updated ${updatedDate}.` : "Roster manifest loaded.";
+                status.textContent = "MLB team roster downloads loaded.";
+                scrollRosterAnchorIntoView();
+            })
+            .catch(error => {
+                console.error(error);
+                showRosterError("Unable to load MLB team roster downloads. Please verify Teams/index.json is available and valid.");
+                scrollRosterAnchorIntoView();
+            });
     </script>
-  </body>
+</body>
 </html>
