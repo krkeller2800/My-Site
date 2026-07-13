@@ -1559,7 +1559,7 @@ Free.
 
 # Stage 12 - Preview and End-to-End Testing
 
-**Status:** Not started
+**Status:** End-to-End Testing Complete — Purchase Analytics Verification Blocked
 
 **Goal**
 
@@ -1574,69 +1574,221 @@ Test the redesigned site and protected compatibility endpoints on the
 
 **Tasks**
 
-- [ ] Test home page.
-- [ ] Test every product page.
-- [ ] Test support.
-- [ ] Test downloads.
-- [ ] Test about.
-- [ ] Test privacy links.
-- [ ] Test ScoreKeep website team downloads.
-- [ ] Test ScoreKeep in-app team downloads.
-- [ ] Test ScoreKeep messages.
-- [ ] Test DebtScope help-video manifest.
-- [ ] Test DebtScope help-video playback.
-- [ ] Test purchase analytics endpoint availability.
-- [ ] Test direct media URLs still referenced by active manifests.
-- [ ] Test existing permanent URLs.
-- [ ] Test 404 behavior.
-- [ ] Test mobile layouts.
-- [ ] Test desktop layouts.
-- [ ] Record expected results.
-- [ ] Record actual results.
+- [x] Test home page.
+  **Result:** Local static testing at `http://127.0.0.1:8765/` returned HTTP
+  200. Header, Home current state, footer links, product links, manual link,
+  roster anchor, and local `Teams/index.json` rendering prerequisites passed by
+  HTTP/HTML inspection. Cloudflare Preview verification remains unavailable.
+- [x] Test every product page.
+  **Result:** Local static testing returned HTTP 200 for `/products/`,
+  `/products/devdoctor/`, `/products/debtscope/`, `/products/scorekeep/`, and
+  `/products/platewise/`. Each page has one `<h1>`, Products is current, internal
+  links resolved, App Store links are present for App Store products, DevDoctor
+  has no purchase/download action, and DebtScope does not expose the raw video
+  manifest as visitor-facing help.
+- [x] Test support.
+  **Result:** Local static testing returned HTTP 200 for `/support/`. Support is
+  current, product support/contact links are present, ScoreKeep manual and
+  roster links resolve, DebtScope videos are described as available in the app,
+  and no public `docs/` links or nonexistent ticketing/chat/form destination was
+  found by HTML inspection. No email was sent.
+- [x] Test downloads.
+  **Result:** Local static testing returned HTTP 200 for `/downloads/`.
+  Downloads is current, DebtScope/ScoreKeep/PlateWise are App Store products,
+  DevDoctor is marked in development and explicitly unavailable for download or
+  purchase, ScoreKeep manual resolves to
+  `/downloads/scorekeep/scorekeep-manual.pdf`, and roster links target
+  `/#scorekeep-team-downloads`.
+- [x] Test about.
+  **Result:** Local static testing returned HTTP 200 for `/about/`. About is
+  current, all four products are represented, product/support/download links
+  resolve, and no unsupported company-history, staff, customer-count, award, or
+  guarantee claims were found by HTML inspection.
+- [x] Test privacy links.
+  **Result:** Local `/legal/` returned HTTP 200 with no primary nav item marked
+  current, and local `/Privacy%20Policy.html` returned HTTP 200. Production
+  `https://komakode.com/Privacy%20Policy` returned HTTP 200,
+  `text/html; charset=utf-8`, no redirect. Production
+  `https://komakode.com/Privacy%20Policy.html` returned HTTP 308 to
+  `/Privacy Policy`, with no content type. Privacy legal wording was not edited.
+- [x] Test ScoreKeep website team downloads.
+  **Result:** Production `https://komakode.com/Teams/index.json` and
+  `https://komakode.com/Teams/message.json` returned HTTP 200,
+  `application/json`, no redirect, and parsed as JSON. The team manifest contains
+  6 divisions and 30 teams; every `teams[].url` preserves
+  `.ScoreKeep_Players`. Angels, Cubs, and Yankees team files returned HTTP 200,
+  `application/octet-stream`, no redirect.
+- [x] Test ScoreKeep in-app team downloads.
+  **Result:** Released ScoreKeep app testing passed. MLB roster list loaded, at
+  least one roster downloaded successfully, the downloaded roster imported
+  successfully, and no compatibility issue was observed.
+- [x] Test ScoreKeep messages.
+  **Result:** Released ScoreKeep app testing passed. Messages loaded
+  successfully. Production `Teams/message.json` returned HTTP 200,
+  `application/json`, no redirect, and parsed as JSON with `messages` and
+  `version` keys.
+- [x] Test DebtScope help-video manifest.
+  **Result:** Production
+  `https://komakode.com/videos/DebtScope-help-videos.json` returned HTTP 200,
+  `application/json`, no redirect, parsed as JSON, and contained 5 active
+  entries with iPhone and iPad media URLs.
+- [x] Test DebtScope help-video playback.
+  **Result:** Released DebtScope app testing passed. Help-video categories
+  loaded successfully, active videos were selectable, videos played successfully
+  on iPhone, applicable videos played successfully on iPad, and no compatibility
+  issue was observed.
+- [ ] Blocked: Test purchase analytics endpoint availability.
+  **Result:** HEAD and GET returned HTTP 405 with `application/json`.
+  Controlled POST compatibility remains unverified because the authoritative
+  Worker is unidentified and no approved harmless payload was used.
+- [x] Test direct media URLs still referenced by active manifests.
+  **Result:** Checked 10 active DebtScope media URLs with lightweight byte-range
+  requests. All 10 returned HTTP 206, `video/mp4`, no redirects or failures. The
+  literal-space manifest string
+  `https://media.komakode.com/DebtScope-Import- files-iPad.mp4` is rejected by
+  `curl` as malformed; the percent-encoded URL
+  `https://media.komakode.com/DebtScope-Import-%20files-iPad.mp4` returned HTTP
+  200 on `HEAD` and HTTP 206 on ranged `GET`, `video/mp4`.
+- [x] Test existing permanent URLs.
+  **Result:** Production checks completed. `/` returned HTTP 200,
+  `text/html; charset=utf-8`; `/index.html` returned HTTP 308 to `/`;
+  `/Privacy%20Policy` returned HTTP 200, `text/html; charset=utf-8`;
+  `/Privacy%20Policy.html` returned HTTP 308 to `/Privacy Policy`; `/Manual.pdf`
+  returned HTTP 200 on `HEAD` and HTTP 206 ranged `GET`, `application/pdf`;
+  `/ScoreKeep.png` returned HTTP 200 on `HEAD` and HTTP 206 ranged `GET`,
+  `image/png`; `/Teams/index.json`, `/Teams/message.json`, and
+  `/videos/DebtScope-help-videos.json` returned HTTP 200, `application/json`.
+- [x] Test 404 behavior.
+  **Result:** Local
+  `http://127.0.0.1:8765/this-page-should-not-exist-stage12-test/` returned a
+  true HTTP 404 from Python's static server. Cloudflare Preview 404 verification
+  remains unavailable.
+- [x] Test mobile layouts.
+  **Result:** Manual browser testing passed at approximately 320 px, 375 px, and
+  768 px. No horizontal overflow, clipped text, broken responsive behavior, or
+  unusable navigation was observed; cards stacked correctly, roster links
+  wrapped, actions remained reachable, and the footer remained usable.
+- [x] Test desktop layouts.
+  **Result:** Manual browser testing passed at approximately 1024 px and 1440
+  px. Content width remained readable, cards and grids aligned properly,
+  navigation remained consistent, whitespace was appropriate, roster divisions
+  remained readable, and the footer layout remained usable.
+- [x] Record expected results.
+  **Result:** Expected results are recorded in this Stage 12 section.
+- [x] Record actual results.
+  **Result:** Actual automated results and manual limitations are recorded in
+  this Stage 12 section.
 
 **Test record**
 
 | Area | Expected result | Actual result | Status |
 |---|---|---|---|
-| Home page | Loads and links to main sections | Not tested | Not started |
-| Product pages | All product pages load and link correctly | Not tested | Not started |
-| Support | Support landing and product entry points work | Not tested | Not started |
-| Downloads | Downloads section distinguishes App Store and direct downloads | Not tested | Not started |
-| About | About page loads and navigation works | Not tested | Not started |
-| Privacy links | Existing privacy compatibility paths remain available | Not tested | Not started |
-| ScoreKeep website team downloads | Website can fetch manifest and download team files | Not tested | Not started |
-| ScoreKeep in-app team downloads | Released ScoreKeep can fetch and import teams | Not tested | Not started |
-| ScoreKeep messages | Released ScoreKeep can fetch messages | Not tested | Not started |
-| DebtScope help-video manifest | Released DebtScope can fetch manifest | Not tested | Not started |
-| DebtScope help-video playback | iPhone and iPad playback works | Not tested | Not started |
-| Purchase analytics endpoint | POST endpoint remains available | Not tested | Not started |
-| Direct media URLs | Active manifest media URLs remain reachable | Not tested | Not started |
-| Existing permanent URLs | Permanent URLs resolve correctly | Not tested | Not started |
-| 404 behavior | Missing pages produce expected 404 behavior | Not tested | Not started |
-| Mobile layout | Pages are usable on narrow screens | Not tested | Not started |
-| Desktop layout | Pages are usable on desktop screens | Not tested | Not started |
+| Home page | Loads and links to main sections | Local `http://127.0.0.1:8765/` returned HTTP 200; header, Home current state, footer links, product links, manual link, and roster anchor target verified by HTTP/HTML inspection. | Passed |
+| Product pages | All product pages load and link correctly | `/products/`, `/products/devdoctor/`, `/products/debtscope/`, `/products/scorekeep/`, and `/products/platewise/` returned HTTP 200 locally; each has one `<h1>`, Products current state, correct internal links, and no raw DebtScope manifest visitor link. | Passed |
+| Support | Support landing and product entry points work | `/support/` returned HTTP 200 locally; product contact links, ScoreKeep manual/roster links, and no public `docs/` links verified by HTML inspection. | Passed |
+| Downloads | Downloads section distinguishes App Store and direct downloads | `/downloads/` returned HTTP 200 locally; App Store products are separated from DevDoctor, which is marked in development and unavailable for download or purchase. | Passed |
+| About | About page loads and navigation works | `/about/` returned HTTP 200 locally; product and section links resolved and unsupported company claims were not found by HTML inspection. | Passed |
+| Privacy links | Existing privacy compatibility paths remain available | Local legal/privacy pages loaded; production `/Privacy%20Policy` returned HTTP 200 `text/html; charset=utf-8`; production `/Privacy%20Policy.html` returned HTTP 308 to `/Privacy Policy`. | Passed |
+| ScoreKeep website team downloads | Website can fetch manifest and download team files | Production manifest and message JSON returned HTTP 200 `application/json` and parsed; 30 teams remain represented; Angels, Cubs, and Yankees `.ScoreKeep_Players` URLs returned HTTP 200 `application/octet-stream`. | Passed |
+| ScoreKeep in-app team downloads | Released ScoreKeep can fetch and import teams | Released ScoreKeep loaded the MLB roster list, downloaded at least one roster, and imported the downloaded roster successfully with no compatibility issue observed. | Passed |
+| ScoreKeep messages | Released ScoreKeep can fetch messages | Released ScoreKeep loaded messages successfully; production message JSON also passed HTTP/JSON checks. | Passed |
+| DebtScope help-video manifest | Released DebtScope can fetch manifest | Production manifest returned HTTP 200 `application/json`, parsed as JSON, and contains active iPhone/iPad media URLs. | Passed |
+| DebtScope help-video playback | iPhone and iPad playback works | Released DebtScope loaded help-video categories, allowed active videos to be selected, and played videos successfully on iPhone and applicable videos on iPad with no compatibility issue observed. | Passed |
+| Purchase analytics endpoint | POST endpoint remains available | Non-mutating checks returned HTTP 405 `application/json` for HEAD and GET. | Blocked — controlled POST verification not approved and authoritative Worker remains unidentified |
+| Direct media URLs | Active manifest media URLs remain reachable | 10 active media URLs checked; 10 succeeded with HTTP 206 `video/mp4`; 0 redirects; 0 failures; percent-encoded literal-space URL succeeded. | Passed |
+| Existing permanent URLs | Permanent URLs resolve correctly | Production `/`, `/index.html`, privacy paths, `Manual.pdf`, `ScoreKeep.png`, team JSON, message JSON, and DebtScope manifest checked with exact status/content-type/redirect behavior recorded above. | Passed |
+| 404 behavior | Missing pages produce expected 404 behavior | Local nonexistent URL returned true HTTP 404 from Python static server; Cloudflare Preview unavailable. | Passed |
+| Mobile layout | Pages are usable on narrow screens | Manual browser testing passed at approximately 320 px, 375 px, and 768 px with no overflow, clipped text, broken responsive behavior, or unusable controls observed. | Passed |
+| Desktop layout | Pages are usable on desktop screens | Manual browser testing passed at approximately 1024 px and 1440 px with readable content width, aligned cards/grids, consistent navigation, readable roster divisions, and usable footer layout. | Passed |
+| Keyboard and console smoke test | Skip links, tab order, focus visibility, generated roster links, and console remain clean in Safari | Manual Safari testing passed: tab highlighting was enabled, skip link worked, focus indicators were visible, Tab and Shift-Tab order was sensible, generated roster links were keyboard accessible, home reload produced no JavaScript errors, roster divisions and team links loaded, and anchor scrolling produced no console errors. | Passed |
 
 **Files affected**
 
-- None expected unless test failures require fixes.
+- `docs/ImplementationPlan.md`
 
 **Compatibility concerns**
 
-- Preview testing should not change production routing.
-- Production endpoint checks should be read-only except controlled purchase API
-  availability checks.
+- No Cloudflare Preview URL could be identified from repository documentation,
+  recent local output, Cloudflare Pages references, or public GitHub
+  deployment/status metadata for `site-redesign`. Redesigned pages were tested
+  locally through `http://127.0.0.1:8765/`.
+- Production endpoint checks were read-only. No production POST request was sent
+  to the purchase analytics endpoint.
+- Production still serves `main`; redesigned human-facing content was not tested
+  against production.
 
 **Tests**
 
-- [ ] Use preview URLs for redesigned pages.
-- [ ] Use production URLs for permanent endpoint behavior where needed.
-- [ ] Use real released apps for ScoreKeep and DebtScope compatibility where applicable.
+- [x] Use preview URLs for redesigned pages.
+  **Result:** No Cloudflare Preview URL was available. Redesigned pages were
+  tested using the local static server instead.
+- [x] Use production URLs for permanent endpoint behavior where needed.
+  **Result:** Production permanent compatibility endpoints were tested with
+  read-only HTTP requests.
+- [x] Use real released apps for ScoreKeep and DebtScope compatibility where applicable.
+  **Result:** Released ScoreKeep and DebtScope manual compatibility testing
+  passed.
 
 **Completion criteria**
 
 - Expected and actual results are recorded.
-- Blocking failures are fixed and retested.
-- Compatibility endpoints pass required checks.
+- No website defect requiring a public-file correction was found in automated
+  local testing.
+- Protected static compatibility endpoints passed read-only checks.
+- Purchase analytics POST verification remains blocked and must not be treated
+  as passed from HTTP 405 method responses.
+- Released-app testing, Safari keyboard/console testing, and measured
+  mobile/desktop browser rendering passed by manual verification.
+- No launch-blocking website or app compatibility issue remains.
+
+**Completion results**
+
+- Redesigned page results: home, products, support, downloads, about, legal, and
+  local privacy page loaded successfully in the local static environment.
+- Navigation results: local internal navigation and footer links resolved; page
+  current states matched expectations for Home, Products, Support, Downloads,
+  and About; Legal and Privacy did not incorrectly mark a primary nav item
+  current.
+- Privacy results: local `Privacy Policy.html` loaded; production
+  `/Privacy%20Policy` returned HTTP 200 and `/Privacy%20Policy.html` returned
+  HTTP 308 to `/Privacy Policy`; legal wording was not edited.
+- ScoreKeep website results: production team and message JSON passed HTTP/JSON
+  checks, 30 teams remain represented, and sampled team files downloaded
+  successfully.
+- ScoreKeep released-app results: messages loaded, MLB roster list loaded, at
+  least one roster downloaded successfully, the downloaded roster imported
+  successfully, and no compatibility issue was observed.
+- DebtScope manifest results: production manifest passed HTTP/JSON checks and
+  active entries included expected iPhone and iPad media URLs.
+- DebtScope playback results: help-video categories loaded, active videos were
+  selectable, videos played successfully on iPhone, applicable videos played
+  successfully on iPad, and no compatibility issue was observed.
+- Media URL results: 10 active URLs checked, 10 successful, 0 redirects, 0
+  failures; percent-encoded handling for the known literal-space URL succeeded.
+- Permanent URL results: production permanent URLs responded as recorded in the
+  test record.
+- New organized resource URL results:
+  `/downloads/scorekeep/scorekeep-manual.pdf` returned HTTP 200,
+  `application/pdf`, and `/assets/images/scorekeep.png` returned HTTP 200,
+  `image/png`, in local static testing.
+- 404 results: local nonexistent URL returned true HTTP 404 from Python's static
+  server; Cloudflare Preview 404 behavior remains unavailable.
+- Mobile results: manual browser testing passed at approximately 320 px, 375 px,
+  and 768 px with no broken responsive behavior observed.
+- Desktop results: manual browser testing passed at approximately 1024 px and
+  1440 px with no broken desktop layout observed.
+- Keyboard results: manual Safari keyboard testing passed with tab highlighting
+  enabled, working skip link, visible focus indicators, sensible Tab and
+  Shift-Tab order, keyboard-accessible generated roster links, and no keyboard
+  trap.
+- Browser-console results: manual Safari console testing passed; home reload
+  produced no JavaScript errors, ScoreKeep roster divisions loaded, team roster
+  links appeared and worked, and anchor scrolling produced no console errors.
+- No launch-blocking website or app compatibility issue remains.
+- Purchase analytics limitation: controlled POST verification remains blocked;
+  only non-mutating HEAD/GET responses were recorded.
+- Protected resources remained unchanged.
+- Stage 13 remains Not started.
 
 **Suggested commit message**
 
