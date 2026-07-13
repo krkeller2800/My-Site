@@ -888,7 +888,7 @@ Free for expected usage.
 
 # Stage 8 - About and Legal Pages
 
-**Status:** Not started
+**Status:** Implementation Complete — Awaiting Review and Commit
 
 **Goal**
 
@@ -902,19 +902,32 @@ compatibility URLs.
 
 **Tasks**
 
-- [ ] Create About page.
-- [ ] Add footer legal links.
-- [ ] Plan future `/legal/privacy/` page if approved.
-- [ ] Preserve `https://komakode.com/Privacy%20Policy`.
-- [ ] Preserve current `.html` privacy path unless deliberately redirected.
-- [ ] Do not remove or rename the current privacy-policy resource during basic redesign work.
+- [x] Create About page.
+  **Result:** A public About page was created using the shared design and accurately describes KomoKode's products and independent development approach.
+- [x] Add footer legal links.
+  **Result:** Public footers link to `/legal/` and `/Privacy%20Policy.html`.
+- [x] Plan future `/legal/privacy/` page if approved.
+  **Result:** Resolved for Stage 8. No `/legal/privacy/` page was created, canonicalization remains deferred, and the current compatibility paths remain in use.
+- [x] Preserve `https://komakode.com/Privacy%20Policy`.
+  **Result:** The protected compatibility endpoint remains untouched.
+- [x] Preserve current `.html` privacy path unless deliberately redirected.
+  **Result:** `Privacy Policy.html` remains at the repository root and website navigation uses `/Privacy%20Policy.html`.
+- [x] Do not remove or rename the current privacy-policy resource during basic redesign work.
+  **Result:** The existing file was preserved.
 
 **Files affected**
 
 - `about/index.html`
-- `legal/index.html` if useful as a legal landing page
-- `Privacy Policy.html` should remain in place during basic redesign work
-- Future `legal/privacy/index.html` only after canonical URL approval
+- `legal/index.html`
+- `assets/css/site.css`
+- `index.html`
+- `products/index.html`
+- `products/devdoctor/index.html`
+- `products/debtscope/index.html`
+- `products/scorekeep/index.html`
+- `products/platewise/index.html`
+- `support/index.html`
+- `downloads/index.html`
 
 **Compatibility concerns**
 
@@ -924,15 +937,28 @@ compatibility URLs.
 
 **Tests**
 
-- [ ] Verify About page navigation.
-- [ ] Verify footer privacy link resolves.
-- [ ] Verify `/Privacy%20Policy` behavior is unchanged.
-- [ ] Verify `/Privacy%20Policy.html` behavior is unchanged unless an approved redirect exists.
+- [x] Verify About page navigation.
+  **Result:** About uses the shared shell and marks About current in the primary navigation.
+- [x] Verify footer privacy link resolves.
+  **Result:** Public footers include `/legal/` and `/Privacy%20Policy.html`.
+- [x] Verify `/Privacy%20Policy` behavior is unchanged.
+  **Result:** No redirect, route, Worker, or privacy-resource change was made; the protected compatibility endpoint remains untouched.
+- [x] Verify `/Privacy%20Policy.html` behavior is unchanged unless an approved redirect exists.
+  **Result:** `Privacy Policy.html` remains at the repository root and local navigation targets `/Privacy%20Policy.html`.
 
 **Completion criteria**
 
 - About and legal entry points exist.
 - Privacy compatibility paths remain available.
+
+**Completion results**
+
+**Result:** About and Legal entry points exist.
+**Result:** Footer legal navigation is consistent.
+**Result:** Both privacy compatibility paths remain supported.
+**Result:** No new privacy canonical path or redirect was introduced.
+**Result:** No invented legal documents were added.
+**Result:** Protected resources remained unchanged.
 
 **Suggested commit message**
 
