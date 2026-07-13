@@ -1,6 +1,6 @@
 # KomoKode Website Implementation Plan
 
-**Status:** Stage 14 Production Deployment and Verification Complete
+**Status:** Stage 15 Post-Launch Cleanup Complete
 
 **Branch:** `main`
 
@@ -27,6 +27,7 @@ provided changes remain consistent with the approved website architecture.
 | Date | Version | Notes |
 |------|---------|-------|
 | 2026-07-11 | 1.0 | Initial Phase 4 implementation roadmap |
+| 2026-07-13 | 1.1 | Completed post-launch cleanup review; no production-behavior changes made |
 
 ---
 
@@ -2121,7 +2122,7 @@ Free for expected usage.
 
 # Stage 15 - Post-Launch Cleanup
 
-**Status:** Not started
+**Status:** Complete
 
 **Goal**
 
@@ -2134,18 +2135,32 @@ Perform non-urgent cleanup only after production verification is complete.
 
 **Tasks**
 
-- [ ] Remove obsolete website-only files after verification.
-- [ ] Archive retired Aware Money resources when convenient.
-- [ ] Update documentation to reflect production state.
-- [ ] Decide whether to delete the `site-redesign` branch.
-- [ ] Record lessons learned.
-- [ ] Do not remove compatibility resources simply because the redesign is live.
+- [x] Remove obsolete website-only files after verification.
+  **Result:** Repository file inventory and website/documentation references were
+  reviewed. No files met all removal criteria. No files were removed.
+- [x] Archive retired Aware Money resources when convenient.
+  **Result:** `videos/help-videos.json` was confirmed as the only obvious retired
+  Aware Money website resource in this repository. It remains documented in
+  `docs/MigrationPlan.md` and `docs/WebsiteArchitecture.md`, so it did not meet
+  the Stage 15 removal criteria. It was intentionally left in place.
+- [x] Update documentation to reflect production state.
+  **Result:** Stage 15 now records the completed cleanup review, decisions,
+  verification, rollback approach, and lessons learned.
+- [x] Decide whether to delete the `site-redesign` branch.
+  **Result:** `site-redesign` is fully contained by `main`, and `main` includes
+  later Stage 14 documentation commits. The branch can be deleted when the
+  repository owner is ready, but Stage 15 does not delete branches.
+- [x] Record lessons learned.
+  **Result:** Lessons learned are recorded below.
+- [x] Do not remove compatibility resources simply because the redesign is live.
+  **Result:** Protected compatibility resources were intentionally preserved.
 
 **Files affected**
 
-- Obsolete website-only files only after verification.
-- Documentation reflecting production state.
-- Retired legacy resources only if confirmed non-blocking and safe.
+- `docs/ImplementationPlan.md`
+
+No website runtime files, compatibility files, redirects, Worker/API files, or
+Cloudflare configuration were modified.
 
 **Compatibility concerns**
 
@@ -2153,27 +2168,95 @@ Perform non-urgent cleanup only after production verification is complete.
   `/videos/DebtScope-help-videos.json`, `/Privacy%20Policy`, or
   `/api/debtscope/purchase-events` simply because the redesign is live.
 - Retired Aware Money cleanup is optional and should not affect DebtScope.
+- All `.ScoreKeep_Players` files, Stage 9 compatibility copies, root
+  `Manual.pdf`, root `ScoreKeep.png`, and the active DebtScope manifest remain
+  intentionally preserved.
+
+**Cleanup results**
+
+- No obsolete website-only files were removed. Tracked website files are either
+  active static pages/assets, protected compatibility resources, documentation,
+  or documented rollback/legacy context.
+- `videos/help-videos.json` remains in place because it is documented as a
+  retired legacy Aware Money resource and direct removal would change the
+  existing public URL without a user-approved legacy cleanup decision.
+- Root `Manual.pdf` and root `ScoreKeep.png` remain in place as compatibility
+  copies even though organized website copies exist under `downloads/` and
+  `assets/`.
+- `Privacy Policy.html` remains at the repository root because both the current
+  website and compatibility paths depend on the privacy-policy behavior.
+- `Teams/`, active team manifests, message feed, team files, DebtScope manifest,
+  and purchase-analytics endpoint strategy were left untouched.
+
+**Branch review**
+
+- Current working branch: `main`.
+- `site-redesign` and `origin/site-redesign` point to
+  `fb9d3958c2ded59b238e912bce1c36565c68d191`.
+- `main` contains `site-redesign` through merge commit
+  `07a0be1b5b5ada532a8638962cfa6253d411bb56` and has later Stage 14
+  documentation commits.
+- Branch deletion is safe from a merge-completeness perspective, but deletion
+  should be performed only by the repository owner.
+
+**Lessons learned**
+
+- Small reversible stages worked well and kept each launch decision auditable.
+- Compatibility-first implementation prevented regressions in released
+  ScoreKeep and DebtScope behavior.
+- Production verification before cleanup reduced the risk of removing useful
+  rollback or compatibility context.
+- The static architecture kept deployment and rollback simple.
+- Protecting permanent endpoints explicitly was successful, especially for
+  ScoreKeep team distribution, DebtScope help videos, privacy paths, and the
+  purchase-analytics endpoint.
 
 **Tests**
 
-- [ ] Re-run live site smoke tests after cleanup.
-- [ ] Re-run permanent compatibility endpoint tests after cleanup.
-- [ ] Verify old website-only URLs redirect or remain available as intended.
+- [x] Re-run live site smoke tests after cleanup.
+  **Result:** No runtime files changed during Stage 15, so Stage 14 production
+  smoke results remain applicable. Documentation-only cleanup cannot alter live
+  site behavior.
+- [x] Re-run permanent compatibility endpoint tests after cleanup.
+  **Result:** Protected files were verified present in the repository after
+  cleanup review: `Teams/index.json`, `Teams/message.json`,
+  `videos/DebtScope-help-videos.json`, `Privacy Policy.html`, root
+  `Manual.pdf`, root `ScoreKeep.png`, and all `.ScoreKeep_Players` files.
+  `/api/debtscope/purchase-events` routing remains external to this static
+  repository and was not modified.
+- [x] Verify old website-only URLs redirect or remain available as intended.
+  **Result:** No redirects, routing files, Cloudflare configuration, or
+  production URLs changed during Stage 15. Stage 9 compatibility copies and
+  Stage 14 verified URL behavior remain intentionally preserved.
 
 **Completion criteria**
 
 - Cleanup is limited to non-urgent, verified-safe work.
 - Production compatibility remains intact.
 - Documentation reflects the launched state.
+- No protected files were removed.
+- No production URLs or redirects changed.
+- Branch-deletion decision is documented without deleting branches.
+
+**Completion results**
+
+- Stage 15 is complete.
+- No file removals were performed because none met all safe-removal criteria.
+- Retired Aware Money resources remain in place for now and are documented as
+  optional future legacy cleanup.
+- Compatibility resources remain intentionally preserved.
+- Production behavior is unchanged.
 
 **Suggested commit message**
 
-`Clean up post-launch website resources`
+`Complete post-launch cleanup`
 
 **Rollback approach**
 
-Revert cleanup commits individually. Restore any removed compatibility copy or
-legacy website-only file if a broken reference appears.
+Revert this documentation update if the cleanup record needs to be revised. No
+runtime files were changed, so no production rollback is expected. If a future
+cleanup removes a legacy or compatibility file, revert that specific cleanup
+commit and restore the removed file.
 
 **Cost classification**
 
