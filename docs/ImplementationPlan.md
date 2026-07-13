@@ -978,7 +978,7 @@ Free.
 
 # Stage 9 - Website-Only Resource Reorganization
 
-**Status:** Not started
+**Status:** Implementation Complete — Awaiting Review and Commit
 
 **Goal**
 
@@ -993,31 +993,46 @@ resource migrations.
 
 **Tasks**
 
-- [ ] Decide final destination for `ScoreKeep.png`.
-- [ ] Decide final destination for `Manual.pdf`.
-- [ ] Identify any other root-level website images or downloads.
-- [ ] For each resource, record current path.
-- [ ] For each resource, record proposed destination.
-- [ ] For each resource, update references only after the new destination exists.
-- [ ] For each resource, decide whether the old URL should redirect or remain as a compatibility copy.
-- [ ] For each resource, define a test procedure.
-- [ ] For each resource, define a rollback procedure.
-- [ ] Keep this work separate from app-facing resource migrations.
+- [x] Decide final destination for `ScoreKeep.png`.
+  **Result:** The canonical website location is `/assets/images/scorekeep.png`.
+- [x] Decide final destination for `Manual.pdf`.
+  **Result:** The canonical website location is `/downloads/scorekeep/scorekeep-manual.pdf`.
+- [x] Identify any other root-level website images or downloads.
+  **Result:** No other root-level website-only images or downloads were identified. Root-level inventory found `index.html` as the site entry point, `README.md` and `.localized` as deferred candidates requiring a separate decision, and `Privacy Policy.html` as excluded from website-only classification by rule.
+- [x] For each resource, record current path.
+  **Result:** Recorded `ScoreKeep.png` and `Manual.pdf`.
+- [x] For each resource, record proposed destination.
+  **Result:** Recorded `ScoreKeep.png` → `assets/images/scorekeep.png` and `Manual.pdf` → `downloads/scorekeep/scorekeep-manual.pdf`.
+- [x] For each resource, update references only after the new destination exists.
+  **Result:** Copies were created and verified before public website manual links were updated. The redesigned website did not actively reference `ScoreKeep.png`, so no image reference update was needed.
+- [x] For each resource, decide whether the old URL should redirect or remain as a compatibility copy.
+  **Result:** Both old root files remain unchanged compatibility copies. No redirect or routing mechanism was introduced.
+- [x] For each resource, define a test procedure.
+  **Result:** Old and new URLs were tested locally, page links were inspected, and file contents were compared byte-for-byte.
+- [x] For each resource, define a rollback procedure.
+  **Result:** Rollback consists of restoring website references to the existing root files and removing only the new duplicate copies.
+- [x] Keep this work separate from app-facing resource migrations.
+  **Result:** No team manifest, team file, video manifest, API, Worker, or app-facing endpoint changed.
 
 **Resource migration table**
 
 | Resource | Current path | Proposed destination | References to update | Old URL handling | Test procedure | Rollback procedure |
 |---|---|---|---|---|---|---|
-| ScoreKeep image | `ScoreKeep.png` | Needs decision | Home and ScoreKeep product page | Redirect or compatibility copy, needs decision | Verify image loads at new and old paths | Restore old reference or copy |
-| ScoreKeep manual | `Manual.pdf` | Needs decision | Downloads, ScoreKeep product page, support | Redirect or compatibility copy, needs decision | Verify PDF opens/downloads at new and old paths | Restore old reference or copy |
-| Other website-only files | Needs inventory | Needs decision | Needs inventory | Needs decision | Verify direct URLs and page references | Restore previous file/reference |
+| ScoreKeep image | `ScoreKeep.png` | `assets/images/scorekeep.png` | Existing website image references, if any | Keep unchanged root compatibility copy | Compare files and verify old/new URLs | Restore old references and remove new copy |
+| ScoreKeep manual | `Manual.pdf` | `downloads/scorekeep/scorekeep-manual.pdf` | Home, ScoreKeep product, Support, and Downloads manual links where present | Keep unchanged root compatibility copy | Compare files, open both URLs, and verify page links | Restore `/Manual.pdf` references and remove new copy |
+| Other root-level public files | `index.html`; `README.md`; `.localized`; excluded: `Privacy Policy.html` | Deferred — requires separate decision | Deferred | No change | No change | No change |
 
 **Files affected**
 
-- `assets/images/` if image files move.
-- `downloads/` if download files move.
-- Product, support, downloads, and home pages that reference these resources.
-- Redirect or routing files only if an approved redirect mechanism exists.
+- `assets/images/scorekeep.png`
+- `downloads/scorekeep/scorekeep-manual.pdf`
+- `index.html`
+- `products/scorekeep/index.html`
+- `support/index.html`
+- `downloads/index.html`
+- `docs/ImplementationPlan.md`
+
+Root `ScoreKeep.png` and `Manual.pdf` remain intact as compatibility copies.
 
 **Compatibility concerns**
 
@@ -1028,15 +1043,32 @@ resource migrations.
 
 **Tests**
 
-- [ ] Verify each new resource URL.
-- [ ] Verify each old URL redirects or remains available as approved.
-- [ ] Verify every updated page reference loads.
-- [ ] Verify no app-facing endpoint changed.
+- [x] Verify each new resource URL.
+  **Result:** Local static server checks returned successful responses for `/assets/images/scorekeep.png` and `/downloads/scorekeep/scorekeep-manual.pdf`.
+- [x] Verify each old URL redirects or remains available as approved.
+  **Result:** Local static server checks returned successful responses for `/ScoreKeep.png` and `/Manual.pdf`; both remain root compatibility copies with no redirects.
+- [x] Verify every updated page reference loads.
+  **Result:** Local static server checks returned successful responses for `/`, `/products/scorekeep/`, `/support/`, and `/downloads/`; visitor-facing manual links now use `/downloads/scorekeep/scorekeep-manual.pdf`.
+- [x] Verify no app-facing endpoint changed.
+  **Result:** No `Teams/`, `videos/`, API, Worker, or app-facing resource was edited.
 
 **Completion criteria**
 
 - Website-only resource moves are documented, tested, and reversible.
 - Old URL handling is intentionally chosen for each resource.
+
+**Completion results**
+
+**Result:** New organized copies exist at `assets/images/scorekeep.png` and `downloads/scorekeep/scorekeep-manual.pdf`.
+**Result:** Old root URLs remain available through unchanged root files.
+**Result:** Public website manual references use `/downloads/scorekeep/scorekeep-manual.pdf`.
+**Result:** No active website reference to `ScoreKeep.png` was found; the organized image copy was still created.
+**Result:** Both new files were verified as byte-for-byte identical copies.
+**Result:** No redirect or routing mechanism was added.
+**Result:** No app-facing resource changed.
+**Result:** The migration is reversible by restoring old manual references and removing only the new duplicate copies.
+**Result:** Stage 10 remains Not started.
+**Result:** Stage 9 has not been committed or pushed.
 
 **Suggested commit message**
 
@@ -1044,9 +1076,10 @@ resource migrations.
 
 **Rollback approach**
 
-Revert the resource migration commit and restore old references. If redirects
-were added, remove or revert only those redirects associated with website-only
-resources.
+Restore website references to `ScoreKeep.png` and `/Manual.pdf` where applicable,
+then remove `assets/images/scorekeep.png` and
+`downloads/scorekeep/scorekeep-manual.pdf`. No redirect, routing, app-facing
+resource, or compatibility endpoint cleanup is required.
 
 **Cost classification**
 
