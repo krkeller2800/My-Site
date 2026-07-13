@@ -978,7 +978,7 @@ Free.
 
 # Stage 9 - Website-Only Resource Reorganization
 
-**Status:** Implementation Complete — Awaiting Review and Commit
+**Status:** Complete
 
 **Goal**
 
@@ -1073,6 +1073,8 @@ Root `ScoreKeep.png` and `Manual.pdf` remain intact as compatibility copies.
 **Suggested commit message**
 
 `Reorganize website-only resources`
+
+**Result:** Reviewed, committed, and pushed to the `site-redesign` branch with commit message `Reorganize website-only resources`.
 
 **Rollback approach**
 
