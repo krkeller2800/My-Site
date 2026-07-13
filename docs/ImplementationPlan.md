@@ -1,8 +1,8 @@
 # KomoKode Website Implementation Plan
 
-**Status:** Phase 4 Implementation In Progress
+**Status:** Stage 14 Production Deployment Complete - Not-Found and Browser Smoke Follow-up Required
 
-**Branch:** `site-redesign`
+**Branch:** `main`
 
 **Purpose**
 
@@ -1977,8 +1977,10 @@ No commit expected.
 
 **Rollback approach**
 
-Do not merge until explicit owner approval is given. If launch preparation
-finds a new issue, return to the relevant stage.
+Production launch approval was given and the approved redesign was merged into
+`main`. Follow-up remains for the live nonexistent-path fallback behavior and
+for rendered browser smoke testing that could not be performed from the current
+environment.
 
 **Cost classification**
 
@@ -1988,7 +1990,7 @@ Free.
 
 # Stage 14 - Merge and Production Verification
 
-**Status:** Not started
+**Status:** Production Deployment Complete - Not-Found and Browser Smoke Follow-up Required
 
 **Goal**
 
@@ -2003,23 +2005,34 @@ site and app-facing compatibility behavior.
 
 **Tasks**
 
-- [ ] Merge `site-redesign` into `main`.
-- [ ] Push `main`.
-- [ ] Monitor Cloudflare production deployment.
-- [ ] Verify the live site.
-- [ ] Re-run permanent compatibility endpoint tests.
-- [ ] Verify ScoreKeep against production.
-- [ ] Verify DebtScope against production.
-- [ ] Confirm no unexpected redirects.
-- [ ] Confirm no missing files.
-- [ ] Confirm no unexpected 404s.
-- [ ] Roll back promptly if a permanent endpoint fails.
+- [x] Merge `site-redesign` into `main`.
+  **Result:** Merged with normal merge commit `07a0be1b5b5ada532a8638962cfa6253d411bb56` using message `Merge redesigned website`. Pre-merge `main` was `0c8bc7be1c7913880dca3a898693a7543a68c6d8`; merged `site-redesign` was `fb9d3958c2ded59b238e912bce1c36565c68d191`.
+- [x] Push `main`.
+  **Result:** Pushed `main` to GitHub. Remote `main` was verified with `git ls-remote` at `07a0be1b5b5ada532a8638962cfa6253d411bb56`. The local `origin/main` tracking ref could not be refreshed by Git because the sandbox denied creating `.git/refs/remotes/origin/main.lock`.
+- [x] Monitor Cloudflare production deployment.
+  **Result:** Production served redesigned home content from `https://komakode.com/` after the push. No Cloudflare settings were changed.
+- [x] Verify the live site.
+  **Result:** Redesigned live pages loaded for home, Products, DevDoctor, DebtScope, ScoreKeep, PlateWise, Support, Downloads, About, Legal, and privacy paths. The harmless nonexistent URL `/this-page-should-not-exist-stage14-test/` returned the redesigned home page with HTTP 200 instead of a not-found response, so this follow-up remains open.
+- [x] Re-run permanent compatibility endpoint tests.
+  **Result:** Protected production endpoints passed read-only checks for `Teams/index.json`, `Teams/message.json`, sampled team files, the DebtScope help-video manifest, all active DebtScope media URLs, `Privacy%20Policy`, `Manual.pdf`, and `ScoreKeep.png`.
+- [x] Verify ScoreKeep against production.
+  **Result:** Owner reported released ScoreKeep production checks passed after deployment: messages load, MLB roster list loads, at least one roster downloads, and the downloaded roster imports successfully.
+- [x] Verify DebtScope against production.
+  **Result:** Owner reported released DebtScope production checks passed after deployment: help-video categories load, at least one active video plays on iPhone, and applicable iPad playback works.
+- [x] Confirm no unexpected redirects.
+  **Result:** No unexpected redirects were found in redesigned navigation or protected endpoint checks. `/Privacy%20Policy.html` redirects with HTTP 308 to `/Privacy Policy`, which then returns HTTP 200.
+- [x] Confirm no missing files.
+  **Result:** No missing protected files were found. Organized and legacy ScoreKeep manual and image resources were available.
+- [x] Confirm no unexpected 404s.
+  **Result:** No unexpected 404 occurred for redesigned navigation. The deliberate nonexistent URL did not return an appropriate not-found response; it returned the redesigned home page with HTTP 200.
+- [x] Roll back promptly if a permanent endpoint fails.
+  **Result:** No rollback was required because all protected permanent endpoint checks passed.
 
 **Files affected**
 
-- Production branch state changes after merge.
-- No additional file edits expected during this stage unless emergency rollback
-  or hotfix is required.
+- Production branch state changed after merge.
+- `docs/ImplementationPlan.md` was updated after launch to record the Stage 14
+  production result.
 
 **Compatibility concerns**
 
@@ -2028,22 +2041,66 @@ site and app-facing compatibility behavior.
 
 **Tests**
 
-- [ ] Live `https://komakode.com/` loads.
-- [ ] Live product, support, downloads, about, and privacy links load.
-- [ ] Live `/Teams/index.json` loads.
-- [ ] Live `/Teams/message.json` loads.
-- [ ] Live `/videos/DebtScope-help-videos.json` loads.
-- [ ] Live `/Privacy%20Policy` loads.
-- [ ] Live `/api/debtscope/purchase-events` remains available.
-- [ ] Released ScoreKeep works with production team downloads and messages.
-- [ ] Released DebtScope works with production help videos.
+- [x] Live `https://komakode.com/` loads.
+  **Result:** HTTP 200, `text/html; charset=utf-8`, final URL `https://komakode.com/`, redesigned content present. Source includes the roster anchor and `/Teams/index.json` loader.
+- [x] Live product pages load.
+  **Result:** `/products/`, `/products/devdoctor/`, `/products/debtscope/`, `/products/scorekeep/`, and `/products/platewise/` all returned HTTP 200 with `text/html; charset=utf-8` and expected redesigned product content.
+- [x] Live support loads.
+  **Result:** `/support/` returned HTTP 200 with `text/html; charset=utf-8` and expected redesigned support content.
+- [x] Live downloads loads.
+  **Result:** `/downloads/` returned HTTP 200 with `text/html; charset=utf-8`; ScoreKeep manual and roster-download links were present.
+- [x] Live about loads.
+  **Result:** `/about/` returned HTTP 200 with `text/html; charset=utf-8` and expected redesigned About content.
+- [x] Live legal loads.
+  **Result:** `/legal/` returned HTTP 200 with `text/html; charset=utf-8` and Privacy Policy links.
+- [x] Privacy paths load.
+  **Result:** `/Privacy%20Policy` returned HTTP 200 with `text/html; charset=utf-8`. `/Privacy%20Policy.html` returned HTTP 308 to `/Privacy Policy`; following the redirect returned HTTP 200 with `text/html; charset=utf-8`.
+- [x] Live `/Teams/index.json` loads.
+  **Result:** HTTP 200, `application/json`, valid JSON with 6 divisions and 30 roster links.
+- [x] Live `/Teams/message.json` loads.
+  **Result:** HTTP 200, `application/json`, valid JSON with expected message schema keys.
+- [x] Sampled team files load.
+  **Result:** Angels, Cubs, and Yankees `.ScoreKeep_Players` files returned HTTP 200 with `application/octet-stream`; file extension remained `.ScoreKeep_Players`.
+- [x] Live `/videos/DebtScope-help-videos.json` loads.
+  **Result:** HTTP 200, `application/json`, valid JSON list with 5 help-video categories.
+- [x] Active DebtScope media loads.
+  **Result:** All 10 active media URLs from the manifest returned HTTP 206 to byte-range requests with `video/mp4`, including the known literal-space URL when percent-encoded as `DebtScope-Import-%20files-iPad.mp4`.
+- [x] Legacy manual loads.
+  **Result:** `/Manual.pdf` returned HTTP 200 with `application/pdf`.
+- [x] Organized manual loads.
+  **Result:** `/downloads/scorekeep/scorekeep-manual.pdf` returned HTTP 200 with `application/pdf`.
+- [x] Legacy ScoreKeep image loads.
+  **Result:** `/ScoreKeep.png` returned HTTP 200 with `image/png`.
+- [x] Organized ScoreKeep image loads.
+  **Result:** `/assets/images/scorekeep.png` returned HTTP 200 with `image/png`.
+- [x] Live `/api/debtscope/purchase-events` remains available.
+  **Result:** Non-mutating checks only. HEAD returned HTTP 405 with `application/json`; GET returned HTTP 405 with `application/json` and `{"ok":false,"error":"method_not_allowed"}`. No POST was sent. Key behavior and analytics review remain deferred.
+- [x] Released ScoreKeep works with production team downloads and messages.
+  **Result:** Owner reported released ScoreKeep passed production checks after deployment.
+- [x] Released DebtScope works with production help videos.
+  **Result:** Owner reported released DebtScope passed production checks after deployment.
+- [x] Unexpected redirects checked.
+  **Result:** No unexpected redirects found. The privacy `.html` redirect to `/Privacy Policy` remained in place.
+- [x] Missing files checked.
+  **Result:** No missing protected or organized resource files found.
+- [x] 404 behavior checked.
+  **Result:** `/this-page-should-not-exist-stage14-test/` returned HTTP 200 with the redesigned home page instead of an appropriate not-found response. This is not a protected endpoint failure, but it remains a production follow-up.
+- [ ] Responsive and browser smoke testing.
+  **Result:** Not performed by Codex because Playwright, Selenium, Chrome, Chromium, and a command-line Safari browser were unavailable in the current environment. Owner browser smoke testing remains required for narrow/full-width rendering, keyboard navigation, focus indicators, Safari console checks, and rendered roster-anchor scrolling.
 
 **Completion criteria**
 
-- Production deployment succeeds.
-- Live redesigned site works.
-- Permanent compatibility endpoint tests pass.
-- ScoreKeep and DebtScope production checks pass.
+- Production deployment succeeded and production now serves the redesigned site.
+- Live redesigned pages work.
+- Permanent compatibility endpoint tests passed.
+- ScoreKeep and DebtScope production checks passed by owner report.
+- Purchase analytics remained untouched; controlled POST verification remains deferred.
+- Temporary public `docs/` exposure remains accepted for this launch.
+- No rollback was required.
+- `site-redesign` remains available.
+- No tag was created.
+- Stage 15 remains `Not started`.
+- Follow-up remains for nonexistent-path not-found behavior and rendered browser smoke testing.
 
 **Suggested commit message**
 
