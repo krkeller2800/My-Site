@@ -1,6 +1,6 @@
 # Website Assets
 
-This directory is reserved for public assets used by the redesigned KomoKode website.
+This directory is reserved for public assets used by the redesigned KomaKode website.
 
 - `assets/css/` will contain shared styles.
 - `assets/js/` will contain minimal shared JavaScript only when needed.

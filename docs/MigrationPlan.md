@@ -1,8 +1,8 @@
-# KomoKode Migration Plan
+# KomaKode Migration Plan
 
 **Status:** Planning
 
-This document controls the transition from the current KomoKode layout to the redesigned site.
+This document controls the transition from the current KomaKode layout to the redesigned site.
 
 No production file should be moved until its consumers and migration steps are documented here.
 
@@ -30,7 +30,7 @@ These are public HTTP(S) URLs used by released apps, website visitors, App Store
 
 #### `https://komakode.com/`
 
-- Purpose: primary public KomoKode website entry point.
+- Purpose: primary public KomaKode website entry point.
 - Consumers: website visitors, search engines, bookmarks, external links, App Store developer or marketing links, and future product pages.
 - Compatibility status: **Permanent public website URL**.
 - Migration rule: the content may be redesigned completely, but this root URL must continue to serve a valid public website.
@@ -239,7 +239,7 @@ Status: **Not started**
 
 Purpose:
 
-Design the target KomoKode website before any production resources are moved.
+Design the target KomaKode website before any production resources are moved.
 
 This phase should define:
 
@@ -378,12 +378,12 @@ No external CSS or JavaScript URLs were found in `index.html`.
 
 - Current repository path: `Manual.pdf`
 - Current public URL: `https://komakode.com/Manual.pdf`
-- Consumer(s): `index.html`; website visitors. ScoreKeep source-code inventory verified that the app uses its bundled `Reporting/Manual.pdf`, not the KomoKode-hosted PDF.
-- App-facing or website-only: Website-only for the KomoKode-hosted PDF based on repository references and ScoreKeep source-code inventory.
+- Consumer(s): `index.html`; website visitors. ScoreKeep source-code inventory verified that the app uses its bundled `Reporting/Manual.pdf`, not the KomaKode-hosted PDF.
+- App-facing or website-only: Website-only for the KomaKode-hosted PDF based on repository references and ScoreKeep source-code inventory.
 - Compatibility class: Website-only
 - Proposed migration destination: Needs Investigation
 - Files or applications requiring updates if moved: `index.html`
-- Compatibility concerns: **Verified: the KomoKode-hosted `Manual.pdf` has no released ScoreKeep runtime dependency.** Existing website download URL should remain available or redirect. PDF filename is simple and currently linked directly from the home page. Changing the bundled ScoreKeep manual requires an app update, but does not depend on this website file.
+- Compatibility concerns: **Verified: the KomaKode-hosted `Manual.pdf` has no released ScoreKeep runtime dependency.** Existing website download URL should remain available or redirect. PDF filename is simple and currently linked directly from the home page. Changing the bundled ScoreKeep manual requires an app update, but does not depend on this website file.
 - Recommended migration order: Migrate with website download links after app-facing endpoints are protected.
 
 ---
@@ -522,8 +522,8 @@ The ScoreKeep source-code inventory was completed from the app project and shoul
 
 - `Manual.pdf` is bundled locally inside ScoreKeep at `ScoreKeep/ScoreKeep/Reporting/Manual.pdf`.
 - ScoreKeep loads the bundled PDF through `Bundle.main.url(forResource: "Manual", withExtension: "pdf")`.
-- ScoreKeep does not download `Manual.pdf` from KomoKode.com.
-- **Verified: the KomoKode-hosted `Manual.pdf` has no released ScoreKeep runtime dependency.**
+- ScoreKeep does not download `Manual.pdf` from KomaKode.com.
+- **Verified: the KomaKode-hosted `Manual.pdf` has no released ScoreKeep runtime dependency.**
 - The website-hosted `https://komakode.com/Manual.pdf` is still a website-only download resource.
 
 ## Negative Findings
@@ -554,7 +554,7 @@ The DebtScope source-code URL inventory was completed on July 11, 2026 and shoul
 - DebtScope does not directly reference `media.komakode.com`.
 - DebtScope uses privacy-policy URL `https://komakode.com/Privacy%20Policy`.
 - DebtScope uses support email link `mailto:support@komakode.com?subject=Debt%20Scope%20support`.
-- DebtScope does not reference a KomoKode home page, web support page, or product page.
+- DebtScope does not reference a KomaKode home page, web support page, or product page.
 - No old Aware Money web URLs were found in DebtScope.
 - Legacy Aware Money identifiers remain in Xcode product/scheme metadata, bundle identifiers, and StoreKit product ID.
 - `Info.plist` contains document UTIs and file-extension handling, but no remote URLs, associated domains, or URL schemes. No tracked `.entitlements` or `.storekit` file was found.
@@ -629,7 +629,7 @@ The DebtScope source-code URL inventory was completed on July 11, 2026 and shoul
   - This manifest is **not** a permanent compatibility endpoint.
 - Migration rule:
   - Leave it in place during the redesign because there is no cost to doing so.
-  - It may be archived or removed as part of a future legacy cleanup without affecting the KomoKode redesign.
+  - It may be archived or removed as part of a future legacy cleanup without affecting the KomaKode redesign.
 
 ### Video Files Referenced by `videos/DebtScope-help-videos.json`
 
@@ -685,7 +685,7 @@ The DebtScope source-code URL inventory was completed on July 11, 2026 and shoul
   - `Cloudflare/PurchaseAnalytics/src/index.js:45-54`: worker router paths `/api/debtscope/purchase-events`, `/api/debtscope/purchase-summary`, and `/debtscope/purchase-analytics`
   - `debtscope-purchase-analytics/wrangler.jsonc:24-31`: alternate/duplicate route config for `komakode.com/api/debtscope/*` and `komakode.com/debtscope/purchase-analytics`
   - `debtscope-purchase-analytics/src/index.ts:56-72`: alternate/duplicate worker router paths
-- Compatibility concerns: Two purchase analytics worker directories overlap on similar KomoKode routes and schema but differ in implementation details. Which worker is authoritative is **Needs Investigation** before backend changes.
+- Compatibility concerns: Two purchase analytics worker directories overlap on similar KomaKode routes and schema but differ in implementation details. Which worker is authoritative is **Needs Investigation** before backend changes.
 - Recommended migration order: Do not change analytics routing until the authoritative worker is identified. Keep the app ingestion endpoint available for released versions.
 
 ---

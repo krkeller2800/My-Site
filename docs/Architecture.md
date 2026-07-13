@@ -1,4 +1,4 @@
-# KomoKode Developer Hub
+# KomaKode Developer Hub
 ## Architecture & Design Document
 
 **Status:** Living Document
@@ -9,7 +9,7 @@
 
 # Purpose
 
-This document defines the long-term architecture, goals, and design principles for KomoKode.com. It is intended to guide all future development decisions and provide a single source of truth for the website, supporting services, and related infrastructure.
+This document defines the long-term architecture, goals, and design principles for KomaKode.com. It is intended to guide all future development decisions and provide a single source of truth for the website, supporting services, and related infrastructure.
 
 The objective is to build a sustainable developer platform that remains inexpensive to operate while allowing future growth.
 
@@ -17,9 +17,9 @@ The objective is to build a sustainable developer platform that remains inexpens
 
 # Vision
 
-KomoKode is no longer simply a company website.
+KomaKode is no longer simply a company website.
 
-It is the central hub for all KomoKode software products and services.
+It is the central hub for all KomaKode software products and services.
 
 Its responsibilities include:
 
@@ -270,7 +270,7 @@ The following topics remain to be designed:
 
 # Guiding Philosophy
 
-KomoKode should be built as a sustainable developer platform.
+KomaKode should be built as a sustainable developer platform.
 
 Every decision should favor:
 
@@ -281,4 +281,4 @@ Every decision should favor:
 - Reusable content
 - Gradual growth
 
-The architecture should allow KomoKode to remain inexpensive if products are unsuccessful while scaling naturally if future products become successful.
+The architecture should allow KomaKode to remain inexpensive if products are unsuccessful while scaling naturally if future products become successful.

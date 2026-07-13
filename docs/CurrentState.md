@@ -4,7 +4,7 @@
 
 **Purpose**
 
-This document describes the production services currently provided by KomoKode.com.
+This document describes the production services currently provided by KomaKode.com.
 
 It documents how the existing system works before redesigning the website so that future changes do not unintentionally break released applications.
 
@@ -14,7 +14,7 @@ This document describes services, not implementation.
 
 # Public Website
 
-The public website provides information, documentation, downloads, and entry points into KomoKode software products.
+The public website provides information, documentation, downloads, and entry points into KomaKode software products.
 
 The website itself may be redesigned provided production services remain compatible.
 
@@ -24,7 +24,7 @@ The website itself may be redesigned provided production services remain compati
 
 ### Purpose
 
-Introduces KomoKode and its software products.
+Introduces KomaKode and its software products.
 
 ### Consumers
 
@@ -90,7 +90,7 @@ Distribute importable team files for ScoreKeep.
 
 This service supports two independent clients:
 
-1. KomoKode.com
+1. KomaKode.com
 2. ScoreKeep
 
 Both clients should present the same available teams.
@@ -169,7 +169,7 @@ Defines the complete list of downloadable teams.
 
 ### Consumers
 
-- KomoKode website
+- KomaKode website
 - ScoreKeep
 
 ### Responsibilities
@@ -217,7 +217,7 @@ Contain the actual team data imported into ScoreKeep.
 
 ### Consumers
 
-- Downloaded from KomoKode.com
+- Downloaded from KomaKode.com
 - Downloaded directly by ScoreKeep
 
 ### Status

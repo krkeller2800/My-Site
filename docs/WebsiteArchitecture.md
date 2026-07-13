@@ -1,10 +1,10 @@
-# KomoKode Website Architecture
+# KomaKode Website Architecture
 
 **Status:** Phase 3 Complete
 
 **Purpose**
 
-This document defines the target architecture for the redesigned KomoKode website.
+This document defines the target architecture for the redesigned KomaKode website.
 
 It is a planning document for the public website, product pages, documentation,
 downloads, app-facing data, media hosting, and future direct sales. It does not
@@ -77,7 +77,7 @@ support, or operational problem.
 
 # Architecture Areas
 
-The redesigned KomoKode web presence is divided into eight distinct areas:
+The redesigned KomaKode web presence is divided into eight distinct areas:
 
 1. Public website
 2. Product pages
@@ -404,7 +404,7 @@ videos/help-videos.json
 ```
 
 is a retired legacy resource and is not a migration blocker for the redesigned
-KomoKode website.
+KomaKode website.
 
 ## Purchase Analytics API
 
@@ -569,7 +569,7 @@ Cost classification:
 Responsibility:
 
 - Domain management for `komakode.com`
-- DNS records for public website, media, and other KomoKode services
+- DNS records for public website, media, and other KomaKode services
 
 Cost classification:
 

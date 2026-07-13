@@ -1,4 +1,4 @@
-# KomoKode Website Implementation Plan
+# KomaKode Website Implementation Plan
 
 **Status:** Stage 15 Post-Launch Cleanup Complete
 
@@ -6,7 +6,7 @@
 
 **Purpose**
 
-This document controls the implementation of the redesigned KomoKode website. It
+This document controls the implementation of the redesigned KomaKode website. It
 is intended to be used as a working checklist for Phase 4 work performed on the
 `site-redesign` branch.
 
@@ -418,8 +418,8 @@ Replace the human-facing home page content while preserving the root URL at
 - [x] Implement the redesigned root `index.html`.
   **Result:** The root home page was redesigned using the shared Stage 3 foundation.
 
-- [x] Introduce KomoKode as an independent developer hub.
-  **Result:** KomoKode is introduced as an independent software developer.
+- [x] Introduce KomaKode as an independent developer hub.
+  **Result:** KomaKode is introduced as an independent software developer.
 
 - [x] Feature DevDoctor prominently.
   **Result:** DevDoctor is featured as an upcoming macOS product.
@@ -479,7 +479,7 @@ Replace the human-facing home page content while preserving the root URL at
 
 **Completion criteria**
 
-- Home page presents KomoKode and all current products accurately.
+- Home page presents KomaKode and all current products accurately.
 - Root URL remains the canonical entry point.
 - No compatibility endpoint is moved or removed.
 
@@ -904,7 +904,7 @@ compatibility URLs.
 **Tasks**
 
 - [x] Create About page.
-  **Result:** A public About page was created using the shared design and accurately describes KomoKode's products and independent development approach.
+  **Result:** A public About page was created using the shared design and accurately describes KomaKode's products and independent development approach.
 - [x] Add footer legal links.
   **Result:** Public footers link to `/legal/` and `/Privacy%20Policy.html`.
 - [x] Plan future `/legal/privacy/` page if approved.
@@ -1215,7 +1215,7 @@ issues were observed, and no migration was required.
 - Site repository search found documentation references to
   `/api/debtscope/purchase-events` in `docs/MigrationPlan.md`,
   `docs/WebsiteArchitecture.md`, and this implementation plan.
-- `Privacy Policy.html` mentions purchase analytics sent to KomoKode
+- `Privacy Policy.html` mentions purchase analytics sent to KomaKode
   infrastructure at `komakode.com` and stored using Cloudflare D1.
 - `README.md` identifies the site as deployed with Cloudflare Pages.
 - This repository contains no Worker source, no `wrangler.toml`, no
@@ -1411,7 +1411,7 @@ before preview or launch testing.
   descriptions against the Stage 11 product-accuracy requirements. Replaced
   Products landing placeholder copy with accurate product summaries.
 - [x] Check branding consistency.
-  **Result:** Verified KomoKode, DevDoctor, DebtScope, ScoreKeep, PlateWise,
+  **Result:** Verified KomaKode, DevDoctor, DebtScope, ScoreKeep, PlateWise,
   and Independent Software Development usage. Corrected visible `Plate Wise`
   brand references. Preserved mailto subjects and addresses where they reflect
   existing app workflows.
