@@ -1,6 +1,6 @@
 # KomoKode Website Implementation Plan
 
-**Status:** Stage 14 Production Deployment Complete - Not-Found and Browser Smoke Follow-up Required
+**Status:** Stage 14 Production Deployment and Verification Complete
 
 **Branch:** `main`
 
@@ -1978,9 +1978,8 @@ No commit expected.
 **Rollback approach**
 
 Production launch approval was given and the approved redesign was merged into
-`main`. Follow-up remains for the live nonexistent-path fallback behavior and
-for rendered browser smoke testing that could not be performed from the current
-environment.
+`main`. Final owner-confirmed production verification passed, including browser
+smoke testing and accepted legacy nonexistent-path fallback behavior.
 
 **Cost classification**
 
@@ -1990,7 +1989,7 @@ Free.
 
 # Stage 14 - Merge and Production Verification
 
-**Status:** Production Deployment Complete - Not-Found and Browser Smoke Follow-up Required
+**Status:** Complete
 
 **Goal**
 
@@ -2008,11 +2007,11 @@ site and app-facing compatibility behavior.
 - [x] Merge `site-redesign` into `main`.
   **Result:** Merged with normal merge commit `07a0be1b5b5ada532a8638962cfa6253d411bb56` using message `Merge redesigned website`. Pre-merge `main` was `0c8bc7be1c7913880dca3a898693a7543a68c6d8`; merged `site-redesign` was `fb9d3958c2ded59b238e912bce1c36565c68d191`.
 - [x] Push `main`.
-  **Result:** Pushed `main` to GitHub. Remote `main` was verified with `git ls-remote` at `07a0be1b5b5ada532a8638962cfa6253d411bb56`. The local `origin/main` tracking ref could not be refreshed by Git because the sandbox denied creating `.git/refs/remotes/origin/main.lock`.
+  **Result:** Pushed `main` to GitHub. The merge push advanced `main` to `07a0be1b5b5ada532a8638962cfa6253d411bb56`; the Stage 14 documentation commit later advanced `main` to `bdbdf568dad9dab93db65206ce1cedba2d82a2e4`. An earlier stale local `origin/main` reference was caused by the Codex sandbox being unable to create `.git/refs/remotes/origin/main.lock`. The owner subsequently ran `git fetch origin`, `git status`, `git branch -vv`, and `git rev-list --left-right --count main...origin/main`; local `origin/main` advanced from `0c8bc7b` to `bdbdf56`, `main` is up to date with `origin/main`, the working tree is clean, and `main...origin/main` is `0 0`.
 - [x] Monitor Cloudflare production deployment.
   **Result:** Production served redesigned home content from `https://komakode.com/` after the push. No Cloudflare settings were changed.
 - [x] Verify the live site.
-  **Result:** Redesigned live pages loaded for home, Products, DevDoctor, DebtScope, ScoreKeep, PlateWise, Support, Downloads, About, Legal, and privacy paths. The harmless nonexistent URL `/this-page-should-not-exist-stage14-test/` returned the redesigned home page with HTTP 200 instead of a not-found response, so this follow-up remains open.
+  **Result:** Redesigned live pages loaded for home, Products, DevDoctor, DebtScope, ScoreKeep, PlateWise, Support, Downloads, About, Legal, and privacy paths. The harmless nonexistent URL `/this-page-should-not-exist-stage14-test/` returned the redesigned home page with HTTP 200, matching the old site's established fallback behavior. The owner accepts and intends to retain this behavior; it is not a launch defect, rollback condition, or outstanding Stage 14 follow-up.
 - [x] Re-run permanent compatibility endpoint tests.
   **Result:** Protected production endpoints passed read-only checks for `Teams/index.json`, `Teams/message.json`, sampled team files, the DebtScope help-video manifest, all active DebtScope media URLs, `Privacy%20Policy`, `Manual.pdf`, and `ScoreKeep.png`.
 - [x] Verify ScoreKeep against production.
@@ -2024,7 +2023,7 @@ site and app-facing compatibility behavior.
 - [x] Confirm no missing files.
   **Result:** No missing protected files were found. Organized and legacy ScoreKeep manual and image resources were available.
 - [x] Confirm no unexpected 404s.
-  **Result:** No unexpected 404 occurred for redesigned navigation. The deliberate nonexistent URL did not return an appropriate not-found response; it returned the redesigned home page with HTTP 200.
+  **Result:** No unexpected 404 occurred for redesigned navigation. The deliberate nonexistent URL returned the redesigned home page with HTTP 200, matching accepted intentional legacy fallback behavior.
 - [x] Roll back promptly if a permanent endpoint fails.
   **Result:** No rollback was required because all protected permanent endpoint checks passed.
 
@@ -2084,9 +2083,9 @@ site and app-facing compatibility behavior.
 - [x] Missing files checked.
   **Result:** No missing protected or organized resource files found.
 - [x] 404 behavior checked.
-  **Result:** `/this-page-should-not-exist-stage14-test/` returned HTTP 200 with the redesigned home page instead of an appropriate not-found response. This is not a protected endpoint failure, but it remains a production follow-up.
-- [ ] Responsive and browser smoke testing.
-  **Result:** Not performed by Codex because Playwright, Selenium, Chrome, Chromium, and a command-line Safari browser were unavailable in the current environment. Owner browser smoke testing remains required for narrow/full-width rendering, keyboard navigation, focus indicators, Safari console checks, and rendered roster-anchor scrolling.
+  **Result:** `/this-page-should-not-exist-stage14-test/` returned HTTP 200 with the redesigned home page. This matches the old site's established fallback behavior. The owner accepts and intends to retain it; it is not considered a launch defect, rollback condition, or outstanding Stage 14 follow-up.
+- [x] Responsive and browser smoke testing.
+  **Result:** Owner completed the production browser smoke test successfully in Safari at narrow and full-width browser sizes. The redesigned home page loaded correctly; Products, Support, Downloads, About, Legal, and Privacy navigation worked; product pages loaded correctly; the ScoreKeep roster section loaded and rendered divisions and team links; the ScoreKeep roster anchor scrolled to the expected visible section; the ScoreKeep manual link worked; skip links worked; keyboard focus was visible; Tab and Shift-Tab followed a sensible order; generated ScoreKeep roster links were keyboard accessible; no keyboard trap was observed; no horizontal overflow or clipped content was observed; Safari's JavaScript Console remained free of errors while the home page and ScoreKeep rosters loaded; no browser-smoke defect was found.
 
 **Completion criteria**
 
@@ -2094,13 +2093,16 @@ site and app-facing compatibility behavior.
 - Live redesigned pages work.
 - Permanent compatibility endpoint tests passed.
 - ScoreKeep and DebtScope production checks passed by owner report.
+- Production browser smoke testing passed by owner report.
+- The nonexistent-path homepage fallback is accepted intentional legacy behavior.
+- The local/remote Git tracking state is synchronized.
 - Purchase analytics remained untouched; controlled POST verification remains deferred.
 - Temporary public `docs/` exposure remains accepted for this launch.
 - No rollback was required.
 - `site-redesign` remains available.
 - No tag was created.
 - Stage 15 remains `Not started`.
-- Follow-up remains for nonexistent-path not-found behavior and rendered browser smoke testing.
+- Stage 14 is complete.
 
 **Suggested commit message**
 
