@@ -1578,7 +1578,8 @@ Test the redesigned site and protected compatibility endpoints on the
   **Result:** Local static testing at `http://127.0.0.1:8765/` returned HTTP
   200. Header, Home current state, footer links, product links, manual link,
   roster anchor, and local `Teams/index.json` rendering prerequisites passed by
-  HTTP/HTML inspection. Cloudflare Preview verification remains unavailable.
+  HTTP/HTML inspection. Cloudflare preview deployment availability was later
+  confirmed manually through the Cloudflare dashboard.
 - [x] Test every product page.
   **Result:** Local static testing returned HTTP 200 for `/products/`,
   `/products/devdoctor/`, `/products/debtscope/`, `/products/scorekeep/`, and
@@ -1708,10 +1709,10 @@ Test the redesigned site and protected compatibility endpoints on the
 
 **Compatibility concerns**
 
-- No Cloudflare Preview URL could be identified from repository documentation,
-  recent local output, Cloudflare Pages references, or public GitHub
-  deployment/status metadata for `site-redesign`. Redesigned pages were tested
-  locally through `http://127.0.0.1:8765/`.
+- Cloudflare preview deployment availability for `site-redesign` was confirmed
+  manually through the Cloudflare dashboard after the detailed Stage 12 checks.
+  No preview URL is recorded here. Redesigned pages were tested locally through
+  `http://127.0.0.1:8765/`.
 - Production endpoint checks were read-only. No production POST request was sent
   to the purchase analytics endpoint.
 - Production still serves `main`; redesigned human-facing content was not tested
@@ -1720,8 +1721,10 @@ Test the redesigned site and protected compatibility endpoints on the
 **Tests**
 
 - [x] Use preview URLs for redesigned pages.
-  **Result:** No Cloudflare Preview URL was available. Redesigned pages were
-  tested using the local static server instead.
+  **Result:** Cloudflare preview deployment availability for `site-redesign`
+  was confirmed manually through the Cloudflare dashboard. The detailed
+  redesigned page checks recorded in Stage 12 were performed using the local
+  static server.
 - [x] Use production URLs for permanent endpoint behavior where needed.
   **Result:** Production permanent compatibility endpoints were tested with
   read-only HTTP requests.
@@ -1807,7 +1810,7 @@ Free for expected usage.
 
 # Stage 13 - Launch Preparation
 
-**Status:** Not started
+**Status:** Ready for Explicit Launch Approval
 
 **Goal**
 
@@ -1816,19 +1819,54 @@ Prepare for final merge without changing production before explicit approval.
 **Prerequisites**
 
 - Stage 12 completed.
-- All blocking issues resolved.
+- All technical launch blockers resolved or explicitly accepted as deferred
+  owner-approved work.
 
 **Tasks**
 
-- [ ] Confirm all implementation-plan items intended for launch are complete.
-- [ ] Confirm working tree is clean.
-- [ ] Confirm all `site-redesign` commits are pushed.
-- [ ] Review differences between `main` and `site-redesign`.
-- [ ] Create a backup or release tag if appropriate.
-- [ ] Confirm Cloudflare production branch remains `main`.
-- [ ] Prepare rollback instructions.
-- [ ] Decide the launch commit or merge message.
-- [ ] Do not merge until explicit approval.
+- [x] Confirm all implementation-plan items intended for launch are complete.
+  **Result:** Stages 1 through 12 are complete for the static website launch.
+  The unresolved DebtScope purchase-analytics Worker identity and controlled
+  POST verification are accepted as deferred work. They do not block the static
+  website redesign because this launch includes no API, Worker, routing, or
+  application-source changes. `/api/debtscope/purchase-events` will remain
+  untouched during the merge.
+- [x] Confirm working tree is clean.
+  **Result:** Before this Stage 13 synchronization edit, `git status` showed
+  only the existing `docs/ImplementationPlan.md` documentation modification and
+  no unrelated working-tree changes.
+- [x] Confirm all `site-redesign` commits are pushed.
+  **Result:** After `git fetch origin`, `git rev-list --left-right --count
+  HEAD...@{u}` returned `0 0`. Local `site-redesign` and
+  `origin/site-redesign` both point to
+  `9b3f479ca73631885d4417d5e2661a14ea6daf83`.
+- [x] Review differences between `main` and `site-redesign`.
+  **Result:** The branch diff changes the redesigned website pages, adds static
+  site directories, adds organized website-only copies of the ScoreKeep image
+  and manual, renames `docs/DesignDoc.md` to `docs/Architecture.md`, and updates
+  planning documentation. `Teams/`, `videos/`, Worker/API files, root
+  `Manual.pdf`, and root `ScoreKeep.png` have no diff. `Privacy Policy.html`
+  changed during the redesign and quality review while preserving the
+  compatibility file at the root.
+- [x] Create a backup or release tag if appropriate.
+  **Result:** A pre-launch tag is optional. Recommended tag name remains
+  `pre-site-redesign-2026-07-13`, pointing at current `main` commit
+  `0c8bc7be1c7913880dca3a898693a7543a68c6d8`. The tag was not created.
+- [x] Confirm Cloudflare production branch remains `main`.
+  **Result:** Manually verified by the owner in the Cloudflare Pages dashboard.
+  The screenshot confirmed the production source branch is `main`, production
+  deployment is active, automatic deployments are enabled, `site-redesign`
+  preview deployments are being created successfully, and the latest Stage 12
+  commit has a successful preview deployment.
+- [x] Prepare rollback instructions.
+  **Result:** Rollback procedure recorded below.
+- [x] Decide the launch commit or merge message.
+  **Result:** Merge message is `Merge redesigned website`. A normal merge
+  commit preserving stage history is preferred.
+- [x] Do not merge until explicit approval.
+  **Result:** No merge was performed. `main` remains at
+  `0c8bc7be1c7913880dca3a898693a7543a68c6d8`; `origin/main` points to the same
+  commit.
 
 **Files affected**
 
@@ -1838,19 +1876,100 @@ Prepare for final merge without changing production before explicit approval.
 **Compatibility concerns**
 
 - `main` remains deployable and unchanged until launch.
-- Do not merge if permanent endpoint tests are incomplete.
+- The unresolved DebtScope purchase-analytics Worker identity, controlled
+  production POST verification, accepted payload fields, and unknown-field
+  tolerance are accepted as deferred work. They do not block the static website
+  redesign because this launch includes no API, Worker, routing, or
+  application-source changes. `/api/debtscope/purchase-events` must remain
+  untouched during Stage 14. Purchase analytics will be reviewed separately
+  after the redesign launches.
+- Temporary public access to `docs/` is accepted for this launch. Production
+  exclusion remains deferred and will be handled separately after launch. The
+  eventual exclusion must keep `docs/` in the repository while preventing it
+  from being served publicly. No deployment exclusion or routing change is being
+  implemented in Stage 13.
 
 **Tests**
 
-- [ ] `git status` shows clean working tree.
-- [ ] Branch comparison reviewed.
-- [ ] Preview deployment still passes Stage 12 checks.
-- [ ] Rollback instructions are written and usable.
+- [x] `git status` shows clean working tree.
+  **Result:** Before this synchronization edit, no staged changes or unrelated
+  working-tree changes were present. The only modified file was
+  `docs/ImplementationPlan.md`.
+- [x] Current branch verified.
+  **Result:** `git branch --show-current` returned `site-redesign`.
+- [x] Branch comparison reviewed.
+  **Result:** Local and remote `site-redesign` match. `main` and `origin/main`
+  match. The complete `main...site-redesign` diff was reviewed by name, status,
+  summary, and stat output.
+- [x] Push status verified.
+  **Result:** `site-redesign` is even with `origin/site-redesign` after fetch.
+- [x] Preview deployment still passes Stage 12 checks.
+  **Result:** Cloudflare dashboard manually confirmed successful
+  `site-redesign` preview deployments, including a successful preview deployment
+  for the latest Stage 12 commit. Stage 12 local, production compatibility,
+  manual app, browser, keyboard, and console checks remain the authoritative
+  detailed test record.
+- [x] Rollback instructions are written and usable.
+  **Result:** Rollback procedure recorded below.
 
 **Completion criteria**
 
 - Launch package is ready.
-- Explicit approval is the only remaining step before merge.
+  **Result:** Met.
+- No technical or owner-decision blocker remains.
+  **Result:** Met. Purchase analytics and temporary public `docs/` exposure are
+  accepted as deferred/non-blocking launch decisions.
+- Explicit approval to merge `site-redesign` into `main` is the only remaining
+  step before Stage 14.
+  **Result:** Met.
+
+**Completion results**
+
+- Repository state: current branch is `site-redesign`; before this
+  synchronization edit, the only working-tree modification was
+  `docs/ImplementationPlan.md` and no unrelated changes were present.
+- Remote state: `site-redesign` and `origin/site-redesign` match after
+  `git fetch origin`; no local commits remain unpushed.
+- Production branch state: local `main` and `origin/main` match at
+  `0c8bc7be1c7913880dca3a898693a7543a68c6d8`. No merge was performed.
+- Cloudflare production branch: owner manually verified in the Cloudflare Pages
+  dashboard that the production source branch is `main`, production deployment
+  is active, automatic deployments are enabled, `site-redesign` preview
+  deployments are successful, and the latest Stage 12 commit has a successful
+  preview deployment.
+- Diff summary: changed pages include the root home page, privacy policy,
+  product pages, support, downloads, about, and legal. New directories include
+  `about/`, `assets/`, `downloads/`, `legal/`, `products/`, and `support/`.
+  Website-only resource copies were added at `assets/images/scorekeep.png` and
+  `downloads/scorekeep/scorekeep-manual.pdf`. Compatibility resources left
+  untouched include `Teams/`, `videos/`, root `Manual.pdf`, root
+  `ScoreKeep.png`, and Worker/API files. No unexpected launch files were found.
+- Purchase analytics decision: authoritative Worker identification, controlled
+  production POST verification, accepted payload fields, and unknown-field
+  tolerance remain deferred. These do not block launch because no API, Worker,
+  routing, or application-source changes are included. `/api/debtscope/purchase-events`
+  remains untouched.
+- Internal docs decision: temporary public access to `docs/` is accepted for
+  this launch. Production exclusion remains deferred and must later keep
+  `docs/` in the repository while preventing public serving.
+- Protected resources remain unchanged.
+- Release tagging: recommended optional pre-launch tag is
+  `pre-site-redesign-2026-07-13` on current `main`. No tag was created.
+- Merge strategy: use a normal merge commit preserving stage history.
+- Merge message: `Merge redesigned website`.
+- Rollback procedure: if launch fails after merge, revert the merge with
+  `git revert -m 1 <merge-commit>` and push `main`, or restore the previous
+  Cloudflare production deployment for commit
+  `0c8bc7be1c7913880dca3a898693a7543a68c6d8` if immediate deployment rollback
+  is required. After rollback, verify `/Teams/index.json`,
+  `/Teams/message.json`, `/videos/DebtScope-help-videos.json`,
+  `/Privacy%20Policy`, `/Manual.pdf`, `/ScoreKeep.png`, and the purchase
+  analytics endpoint behavior.
+- No merge, push, tag, production deployment, or Cloudflare setting change was
+  performed.
+- Stage 14 remains `Not started`.
+- Explicit owner approval to merge `site-redesign` into `main` is the only
+  remaining action.
 
 **Suggested commit message**
 
@@ -1858,7 +1977,8 @@ No commit expected.
 
 **Rollback approach**
 
-Do not merge. If launch preparation finds issues, return to the relevant stage.
+Do not merge until explicit owner approval is given. If launch preparation
+finds a new issue, return to the relevant stage.
 
 **Cost classification**
 
