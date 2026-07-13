@@ -888,7 +888,7 @@ Free for expected usage.
 
 # Stage 8 - About and Legal Pages
 
-**Status:** Implementation Complete — Awaiting Review and Commit
+**Status:** Complete
 
 **Goal**
 
@@ -963,6 +963,8 @@ compatibility URLs.
 **Suggested commit message**
 
 `Add about and legal pages`
+
+**Result:** Reviewed, committed, and pushed to the `site-redesign` branch with commit message `Add about and legal pages`.
 
 **Rollback approach**
 
