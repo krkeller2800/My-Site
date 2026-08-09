@@ -2332,6 +2332,31 @@ link when no public invitation URL is configured.
 - Production behavior remains unchanged while no beta URL is configured.
 - Existing ScoreKeep App Store, manual, roster download, support, and Products
   links were not changed.
+- The ScoreKeep TestFlight public beta link was enabled on August 9, 2026 by
+  setting `scoreKeepTestFlightURL` to
+  `https://testflight.apple.com/join/KgKDrgFh`. No section layout, wording,
+  styling, or behavior was changed.
+
+**Configuration update verification**
+
+- [x] Verify the TestFlight section is visible when configured.
+  **Result:** A Node DOM harness executed the page script with the production
+  configuration and confirmed `data-testflight-section` is visible.
+- [x] Verify the beta button opens the configured invitation.
+  **Result:** The beta button `href` resolved exactly to
+  `https://testflight.apple.com/join/KgKDrgFh`.
+- [x] Verify the App Store download remains unchanged.
+  **Result:** Static checks confirmed the ScoreKeep App Store URL remains
+  `https://apps.apple.com/us/app/scorekeep-baseball-scoring/id6748364014` with
+  the existing two occurrences.
+- [x] Verify desktop, tablet, and mobile rendering rules remain in place.
+  **Result:** CSS checks confirmed the existing desktop `beta-panel` grid,
+  tablet single-column breakpoint at `48rem`, and mobile full-width beta button
+  rule at `34rem` remain present.
+- [x] Serve the site locally and verify the ScoreKeep product page returns HTTP
+  200.
+  **Result:** `http://localhost:4173/products/scorekeep/` returned HTTP 200
+  from the local static server.
 
 **Suggested commit message**
 
