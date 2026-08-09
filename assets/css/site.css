@@ -360,6 +360,37 @@ p {
     margin-top: 0;
 }
 
+.beta-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-5);
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-left: 4px solid #b7cce3;
+    border-radius: var(--radius-md);
+    background: #fbfcfe;
+    padding: var(--space-5);
+}
+
+.beta-panel[hidden] {
+    display: none;
+}
+
+.beta-panel__content p:last-child {
+    color: var(--color-muted);
+}
+
+.beta-panel__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: flex-end;
+}
+
+.beta-panel__actions .button {
+    margin-top: 0;
+}
+
 .support-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -726,6 +757,14 @@ p {
         justify-content: flex-start;
     }
 
+    .beta-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .beta-panel__actions {
+        justify-content: flex-start;
+    }
+
     .feature-grid,
     .downloads-grid,
     .resource-list,
@@ -755,6 +794,7 @@ p {
 
     .hero__actions .button,
     .product-actions .button,
+    .beta-panel__actions .button,
     .support-actions .button,
     .download-card__actions .button,
     .resource-actions .button,

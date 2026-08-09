@@ -2261,3 +2261,89 @@ commit and restore the removed file.
 **Cost classification**
 
 Free.
+
+# Stage 16 - ScoreKeep TestFlight Beta Call-to-Action
+
+**Status:** Complete
+
+**Goal**
+
+Add an optional TestFlight beta call-to-action to the ScoreKeep product page
+without changing the primary App Store download path or showing a broken beta
+link when no public invitation URL is configured.
+
+**Tasks**
+
+- [x] Add a ScoreKeep beta section below the normal download/resources area.
+  **Result:** `products/scorekeep/index.html` now includes a compact "Help
+  Shape ScoreKeep" section after the ScoreKeep Resources section.
+- [x] Keep the App Store download as the primary call-to-action.
+  **Result:** The existing ScoreKeep App Store links and labels remain
+  unchanged.
+- [x] Add a single configurable TestFlight invitation value.
+  **Result:** The page uses one `scoreKeepTestFlightURL` value. It is currently
+  empty, so the beta section remains hidden until a valid HTTPS TestFlight
+  invitation URL is configured.
+- [x] Avoid displaying broken or empty beta links.
+  **Result:** The TestFlight section is hidden by default and is only revealed
+  after the configured URL parses as HTTPS.
+- [x] Structure the section for future beta/program links.
+  **Result:** The section uses dedicated `beta-panel` content and action areas,
+  allowing later additions such as What's New, Release Notes, Known Issues,
+  Report a Bug, or Suggest a Feature without redesigning the surrounding
+  product page.
+
+**Files affected**
+
+- `products/scorekeep/index.html`
+- `assets/css/site.css`
+- `docs/ImplementationPlan.md`
+
+**Verification**
+
+- [x] Verify App Store download remains unchanged.
+  **Result:** Static checks confirmed the ScoreKeep App Store URL remains
+  `https://apps.apple.com/us/app/scorekeep-baseball-scoring/id6748364014` with
+  two occurrences, matching the prior hero and Resources links.
+- [x] Verify TestFlight button appears only when configured.
+  **Result:** The default empty `scoreKeepTestFlightURL` leaves the
+  `data-testflight-section` hidden. A Node DOM harness using the page's own
+  script with `https://testflight.apple.com/join/example123` revealed the
+  section.
+- [x] Verify the button opens the configured invitation.
+  **Result:** The same harness confirmed the button `href` is set to the exact
+  configured HTTPS TestFlight URL.
+- [x] Verify invalid or unsafe configuration does not expose a broken link.
+  **Result:** Harness checks for `not a url` and an `http://` TestFlight value
+  kept the section hidden and left the placeholder link undisplayed.
+- [x] Verify responsive layout rules.
+  **Result:** Shared CSS defines a two-column desktop `beta-panel`, switches it
+  to one column at `48rem`, and makes the beta button full width with other
+  product action buttons at `34rem`.
+- [x] Verify the served ScoreKeep page.
+  **Result:** Local static server check returned HTTP 200 for
+  `http://localhost:4173/products/scorekeep/`; the beta section appears after
+  the Resources section in source order and remains hidden while unconfigured.
+
+**Completion results**
+
+- The ScoreKeep page now has a professional optional beta area ready for a
+  public TestFlight invitation URL.
+- Production behavior remains unchanged while no beta URL is configured.
+- Existing ScoreKeep App Store, manual, roster download, support, and Products
+  links were not changed.
+
+**Suggested commit message**
+
+`Add optional ScoreKeep TestFlight beta CTA`
+
+**Rollback approach**
+
+Revert the Stage 16 commit to remove the beta section, styles, and
+documentation update. Since the beta URL is empty by default, production can
+also disable the visible beta call-to-action by clearing `scoreKeepTestFlightURL`
+without reverting code.
+
+**Cost classification**
+
+Free.
