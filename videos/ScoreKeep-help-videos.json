@@ -1,12 +1,39 @@
 
 [
-    {
-        "id": "getting-started",
-        "title": "ScoreKeep Overview",
-        "subtitle": "A quick tour of scoring, scorecards, statistics, and reports.",
-        "urls": {
-            "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-App-Preview-iPhone.mp4",
-            "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-App-Preview-iPad.mp4"
-        }
+  {
+    "id": "overview",
+    "title": "ScoreKeep Overview",
+    "subtitle": "A quick tour of scoring, scorecards, statistics, and reports.",
+    "urls": {
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-App-Preview-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-App-Preview-iPad.mp4"
     }
+  },
+  {
+    "id": "mlb",
+    "title": "Score an MLB Game",
+    "subtitle": "Download MLB teams, set the game lineup, choose pitchers, and score the game.",
+    "urls": {
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-MLB-Game-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-MLB-Game-iPad.mp4"
+    }
+  },
+  {
+    "id": "youth",
+    "title": "Score a Little League / Youth Game",
+    "subtitle": "Set up flexible rosters, everyone-hits lineups, and the less-structured flow of youth baseball.",
+    "urls": {
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Youth-Game-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Youth-Game-iPad.mp4"
+    }
+  },
+  {
+    "id": "organized-league",
+    "title": "Score an Organized League Game",
+    "subtitle": "Softball, high school, American Legion, travel ball, and other structured leagues.",
+    "urls": {
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Organized-League-Game-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Organized-League-Game-iPad.mp4"
+    }
+  }
 ]
