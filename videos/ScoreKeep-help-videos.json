@@ -1,39 +1,65 @@
-
 [
   {
-    "id": "overview",
-    "title": "ScoreKeep Overview",
-    "subtitle": "A quick tour of scoring, scorecards, statistics, and reports.",
+    "id": "mlb-setup",
+    "title": "Set Up an MLB Game",
+    "subtitle": "Download MLB teams, create the game, and get ready to score.",
     "urls": {
-      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-App-Preview-iPhone.mp4",
-      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-App-Preview-iPad.mp4"
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-MLB-Setup-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-MLB-Setup-iPad.mp4"
     }
   },
   {
-    "id": "mlb",
-    "title": "Score an MLB Game",
-    "subtitle": "Download MLB teams, set the game lineup, choose pitchers, and score the game.",
+    "id": "teams-players",
+    "title": "Teams & Players",
+    "subtitle": "Create teams, add individual players, or paste a complete roster.",
     "urls": {
-      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-MLB-Game-iPhone.mp4",
-      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-MLB-Game-iPad.mp4"
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Teams-Players-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Teams-Players-iPad.mp4"
     }
   },
   {
-    "id": "youth",
-    "title": "Score a Little League / Youth Game",
-    "subtitle": "Set up flexible rosters, everyone-hits lineups, and the less-structured flow of youth baseball.",
+    "id": "game-setup",
+    "title": "Create a Game & Set the Lineup",
+    "subtitle": "Choose teams, set game options, select the starting pitcher, and review the batting order.",
     "urls": {
-      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Youth-Game-iPhone.mp4",
-      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Youth-Game-iPad.mp4"
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Game-Setup-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Game-Setup-iPad.mp4"
     }
   },
   {
-    "id": "organized-league",
-    "title": "Score an Organized League Game",
-    "subtitle": "Softball, high school, American Legion, travel ball, and other structured leagues.",
+    "id": "scoring",
+    "title": "Score Plays & Navigate the Scorecard",
+    "subtitle": "Enter plays, follow the batting order through long innings, and understand ScoreKeep’s scoring safeguards.",
     "urls": {
-      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Organized-League-Game-iPhone.mp4",
-      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Organized-League-Game-iPad.mp4"
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Scoring-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Scoring-iPad.mp4"
+    }
+  },
+  {
+    "id": "lineup-changes",
+    "title": "Lineup Changes & Pitching Changes",
+    "subtitle": "Correct a starting lineup, substitute players, and make pitching changes during the game.",
+    "urls": {
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Lineup-Changes-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Lineup-Changes-iPad.mp4"
+    }
+  },
+  {
+    "id": "scorecard-reports",
+    "title": "Scorecards, Statistics & Reports",
+    "subtitle": "Review the completed scorecard, hitting and pitching statistics, and PDF reports.",
+    "urls": {
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Reports-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Reports-iPad.mp4"
+    }
+  },
+  {
+    "id": "data-access",
+    "title": "Sharing, Data & Season Pass",
+    "subtitle": "Import and export ScoreKeep data, share files, and understand free use and Season Pass features.",
+    "urls": {
+      "iphone": "https://media.komakode.com/scorekeep/ScoreKeep-Data-Access-iPhone.mp4",
+      "ipad": "https://media.komakode.com/scorekeep/ScoreKeep-Data-Access-iPad.mp4"
     }
   }
 ]
