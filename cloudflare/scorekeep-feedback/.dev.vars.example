@@ -1,0 +1,2 @@
+# Copy to .dev.vars for local development. Never commit .dev.vars.
+TURNSTILE_SECRET_KEY="use-a-Cloudflare-Turnstile-test-secret-locally"

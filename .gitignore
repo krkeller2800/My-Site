@@ -7,3 +7,11 @@ xcuserdata/
 
 # Local Xcode workspace
 *.xcworkspace
+
+# Local Cloudflare development secrets
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.dev.vars.example
+node_modules/

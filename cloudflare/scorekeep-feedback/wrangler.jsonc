@@ -1,0 +1,10 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "scorekeep-feedback",
+    "main": "src/index.js",
+    "compatibility_date": "2026-09-24",
+    "workers_dev": false,
+    "secrets": { "required": ["TURNSTILE_SECRET_KEY"] },
+    "routes": [{ "pattern": "komakode.com/api/scorekeep/feedback*", "zone_name": "komakode.com" }],
+    "send_email": [{ "name": "FEEDBACK_EMAIL", "destination_address": "karlkomakode@gmail.com" }]
+}

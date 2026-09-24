@@ -82,6 +82,39 @@ Future website redesigns should preserve compatibility whenever practical.
 
 ---
 
+# ScoreKeep Feedback Service
+
+## Purpose
+
+Allow a visitor to submit a ScoreKeep support request, comment, or suggestion
+without opening an email composer.
+
+## Public and API URLs
+
+- Form: `https://komakode.com/scorekeep/feedback/`
+- Submission endpoint: `POST https://komakode.com/api/scorekeep/feedback`
+
+## Architecture
+
+The static form is hosted by Cloudflare Pages. A dedicated, narrowly routed
+Cloudflare Worker validates the request and its Turnstile token, then uses a
+`send_email` binding restricted to the existing verified Gmail destination.
+The sender is fixed as `comment@komakode.com`; an optional validated visitor
+address is used only as `Reply-To`.
+
+The service has no database, persistent submission storage, analytics, login,
+or account. Existing Email Routing rules and the `comment@komakode.com`
+compatibility address remain unchanged.
+
+## Security and Privacy
+
+The Worker accepts only the three documented feedback types, enforces field and
+request-size limits, verifies Turnstile success, hostname, and action, and
+constructs all destination, sender, and subject headers from server-owned
+constants. Submitted content and Turnstile tokens must not be logged.
+
+---
+
 # ScoreKeep Team Distribution Service
 
 ## Purpose

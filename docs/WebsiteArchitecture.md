@@ -23,6 +23,7 @@ decisions.
 |------|---------|-------|
 | 2026-07-11 | 1.0 | Initial Phase 3 architecture |
 | 2026-07-11 | 1.1 | Finalized Phase 3 architecture with accessibility, performance, security, and decision-process guidance |
+| 2026-09-24 | 1.2 | Added the minimal ScoreKeep web feedback architecture |
 
 ---
 
@@ -592,6 +593,7 @@ Cost classification:
 Responsibility:
 
 - Existing purchase analytics API
+- ScoreKeep feedback submission at `/api/scorekeep/feedback`
 - Future dynamic functions only when required
 - Compatibility routing only when static routing cannot solve the problem
 
@@ -599,6 +601,12 @@ Cost classification:
 
 - Free for expected usage for current small workloads, but use only where
   required
+
+The ScoreKeep feedback Worker is separate from Pages Functions because the
+required `send_email` binding is a Worker binding. Its route must be limited to
+the feedback endpoint and must not overlap existing DebtScope routes. It sends
+only to one binding-restricted, verified destination address, validates
+Turnstile server-side, and does not persist submissions.
 
 ## Cloudflare Redirects and Routing
 

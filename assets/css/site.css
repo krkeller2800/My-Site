@@ -706,6 +706,109 @@ p {
     gap: var(--space-3);
 }
 
+.feedback-main {
+    max-width: 48rem;
+}
+
+.feedback-intro {
+    padding-bottom: var(--space-5);
+}
+
+.feedback-panel h2 {
+    margin-bottom: var(--space-2);
+}
+
+.feedback-form {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+}
+
+.form-field {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.form-field label {
+    font-weight: 750;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    min-height: 2.75rem;
+    border: 1px solid #aebdca;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.65rem 0.75rem;
+    font: inherit;
+}
+
+.form-field textarea {
+    min-height: 9rem;
+    resize: vertical;
+}
+
+.form-help,
+.form-optional {
+    color: var(--color-muted);
+    font-size: 0.92rem;
+}
+
+.form-help {
+    margin: 0;
+}
+
+.form-status {
+    margin-top: var(--space-4);
+    border-left: 4px solid;
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+}
+
+.form-status--error {
+    border-color: #9f1239;
+    background: #fff1f2;
+    color: #881337;
+}
+
+.form-status--success {
+    border-color: #15803d;
+    background: #f0fdf4;
+    color: #14532d;
+}
+
+.feedback-submit {
+    width: fit-content;
+    margin-top: 0;
+    cursor: pointer;
+}
+
+.feedback-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.feedback-fallback {
+    margin-top: var(--space-5);
+}
+
+.turnstile-container {
+    max-width: 100%;
+    min-height: 65px;
+}
+
+.honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
 @media (max-width: 48rem) {
     .site-header__inner {
         align-items: flex-start;
@@ -723,6 +826,10 @@ p {
 
     .site-main {
         padding-block: var(--space-6);
+    }
+
+    .feedback-panel {
+        padding: var(--space-4);
     }
 
     h1 {
@@ -777,6 +884,25 @@ p {
     .download-feature {
         grid-template-columns: 1fr;
         padding: var(--space-5);
+    }
+}
+
+@media (max-height: 30rem) and (orientation: landscape) {
+    .feedback-main {
+        padding-block: var(--space-4);
+    }
+
+    .feedback-intro {
+        padding-block: 0 var(--space-3);
+    }
+
+    .feedback-form {
+        gap: var(--space-4);
+        margin-top: var(--space-4);
+    }
+
+    .form-field textarea {
+        min-height: 7rem;
     }
 }
 

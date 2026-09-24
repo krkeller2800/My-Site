@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ScoreKeep Feedback - KomaKode</title>
+    <meta name="description" content="Send a ScoreKeep support request, comment, or suggestion to KomaKode.">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+    <script src="/assets/js/scorekeep-feedback-config.js" defer></script>
+    <script src="/assets/js/scorekeep-feedback.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a class="brand" href="/">KomaKode</a>
+            <nav class="primary-nav" aria-label="Primary navigation">
+                <a href="/">Home</a>
+                <a href="/products/">Products</a>
+                <a class="current" href="/support/" aria-current="page">Support</a>
+                <a href="/downloads/">Downloads</a>
+                <a href="/about/">About</a>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content" class="site-main feedback-main">
+        <section class="page-intro feedback-intro" aria-labelledby="page-title">
+            <p class="eyebrow">ScoreKeep</p>
+            <h1 id="page-title">Send feedback</h1>
+            <p class="lede">Ask for support, leave a comment, or suggest an improvement.</p>
+        </section>
+
+        <section class="panel feedback-panel" aria-labelledby="feedback-form-title">
+            <h2 id="feedback-form-title">ScoreKeep feedback</h2>
+            <p>Message is required. Add your email address only if you would like a reply.</p>
+
+            <div class="form-status form-status--error" data-error-summary role="alert" tabindex="-1" hidden></div>
+            <div class="form-status form-status--success" data-success-status role="status" tabindex="-1" hidden></div>
+
+            <form class="feedback-form" data-feedback-form novalidate>
+                <div class="form-field">
+                    <label for="feedback-type">Feedback type</label>
+                    <select id="feedback-type" name="type" required>
+                        <option value="support">Support Request</option>
+                        <option value="comment">Comment</option>
+                        <option value="suggestion">Suggestion</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="feedback-message">Message</label>
+                    <textarea id="feedback-message" name="message" rows="8" maxlength="5000" required aria-describedby="message-help"></textarea>
+                    <p class="form-help" id="message-help">Please do not include passwords or other sensitive information. Maximum 5,000 characters.</p>
+                </div>
+
+                <div class="form-field">
+                    <label for="reply-email">Email address <span class="form-optional">(optional)</span></label>
+                    <input id="reply-email" name="replyEmail" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-describedby="email-help">
+                    <p class="form-help" id="email-help">Used only as the reply address for this message. Leave it blank if you do not need a reply.</p>
+                </div>
+
+                <div class="honeypot" aria-hidden="true">
+                    <label for="feedback-website">Website</label>
+                    <input id="feedback-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="turnstile-container" data-turnstile-container aria-label="Security verification"></div>
+                <p class="form-help" data-turnstile-help>Complete the security verification before sending.</p>
+
+                <button class="button feedback-submit" type="submit" data-submit-button>Send feedback</button>
+            </form>
+
+            <noscript>
+                <p class="support-note">JavaScript is required to use this form. You can still email <a href="mailto:comment@komakode.com?subject=ScoreKeep%20Feedback">comment@komakode.com</a>.</p>
+            </noscript>
+
+            <p class="feedback-fallback">Prefer email? <a href="mailto:comment@komakode.com?subject=ScoreKeep%20Feedback">Email comment@komakode.com</a>.</p>
+            <p class="form-help">Submitting this form sends your message and optional reply address to KomaKode. See the <a href="/Privacy%20Policy.html">Privacy Policy</a>.</p>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p>&copy; 2026 KomaKode. All rights reserved.</p>
+            <nav class="site-footer__links" aria-label="Legal navigation">
+                <a href="/legal/">Legal</a>
+                <a href="/Privacy%20Policy.html">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
