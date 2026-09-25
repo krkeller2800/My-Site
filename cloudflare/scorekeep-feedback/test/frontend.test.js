@@ -11,6 +11,7 @@ test("feedback type uses one native radio group with the existing API values", a
     const typeInputs = [...html.matchAll(/<input\s+([^>]*\bname="type"[^>]*)>/gu)].map((match) => match[1]);
 
     assert.equal(typeInputs.length, 3);
+    assert.equal(typeInputs.filter((input) => /\bclass="feedback-type-input"/u.test(input)).length, 3);
     assert.deepEqual(typeInputs.map((input) => input.match(/\bvalue="([^"]+)"/u)?.[1]), ["support", "comment", "suggestion"]);
     assert.equal(typeInputs.filter((input) => /\bchecked\b/u.test(input)).length, 1);
     assert.match(typeInputs[0], /\bchecked\b/u);
@@ -33,10 +34,24 @@ test("each feedback type radio has a visible label and the draft contract remain
     assert.match(script, /form\.elements\.type\.value\s*=\s*draft\.type/u);
 });
 
-test("segmented control retains visible focus, touch height, and a narrow-width fallback", async () => {
-    const css = await readFile(stylePath, "utf8");
+test("segmented control is a cache-safe, horizontal, equal-width 44px control", async () => {
+    const [html, css] = await Promise.all([readFile(formPath, "utf8"), readFile(stylePath, "utf8")]);
+    const controlRule = css.match(/\.feedback-type-control \{([^}]*)\}/u)?.[1] || "";
+    const labelRule = css.match(/\.feedback-type-control label \{([^}]*)\}/u)?.[1] || "";
+    const inputRule = css.match(/\.feedback-type-control \.feedback-type-input \{([^}]*)\}/u)?.[1] || "";
+    const columnDeclarations = [...css.matchAll(/\.feedback-type-control \{[^}]*grid-template-columns:\s*([^;]+);/gu)];
 
     assert.match(css, /\.feedback-type-control input:focus-visible \+ label/u);
-    assert.match(css, /\.feedback-type-control label \{[^}]*min-height:\s*2\.75rem;/su);
-    assert.match(css, /@media \(max-width:\s*18rem\)[\s\S]*?\.feedback-type-control \{[^}]*grid-template-columns:\s*1fr;/u);
+    assert.match(html, /\/assets\/css\/site\.css\?v=[^"]+/u);
+    assert.match(controlRule, /grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/u);
+    assert.match(controlRule, /width:\s*100%/u);
+    assert.match(controlRule, /height:\s*44px/u);
+    assert.match(controlRule, /border-radius:\s*6px/u);
+    assert.match(labelRule, /height:\s*44px/u);
+    assert.match(labelRule, /place-items:\s*center/u);
+    assert.match(labelRule, /font-size:\s*16px/u);
+    assert.match(inputRule, /position:\s*absolute\s*!important/u);
+    assert.match(inputRule, /clip:\s*rect\(0 0 0 0\)\s*!important/u);
+    assert.match(inputRule, /clip-path:\s*inset\(50%\)\s*!important/u);
+    assert.equal(columnDeclarations.length, 1);
 });

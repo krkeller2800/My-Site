@@ -747,6 +747,8 @@ p {
 }
 
 .feedback-type-field {
+    display: block;
+    width: 100%;
     min-width: 0;
     margin: 0;
     border: 0;
@@ -754,47 +756,52 @@ p {
 }
 
 .feedback-type-field legend {
+    display: block;
     margin-bottom: var(--space-2);
 }
 
 .feedback-type-control {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    height: 44px;
     overflow: hidden;
     border: 1px solid #aebdca;
-    border-radius: var(--radius-sm);
+    border-radius: 6px;
     background: var(--color-surface);
 }
 
-.feedback-type-control input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    min-height: 0;
-    margin: -1px;
-    border: 0;
-    border-radius: 0;
-    padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+.feedback-type-control .feedback-type-input {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    min-height: 0 !important;
+    margin: -1px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
 }
 
 .feedback-type-control label {
     display: grid;
     min-width: 0;
-    min-height: 2.75rem;
+    height: 44px;
     place-items: center;
-    padding: 0.65rem 0.75rem;
+    padding: 0 0.25rem;
     color: var(--color-text);
-    font-weight: 700;
-    line-height: 1.25;
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1;
     text-align: center;
-    overflow-wrap: anywhere;
+    white-space: nowrap;
     cursor: pointer;
 }
 
-.feedback-type-control label + input + label {
+.feedback-type-control label:not(:first-of-type) {
     border-left: 1px solid #aebdca;
 }
 
@@ -1002,17 +1009,6 @@ p {
 
     .roster-downloads {
         padding: var(--space-4);
-    }
-}
-
-@media (max-width: 18rem) {
-    .feedback-type-control {
-        grid-template-columns: 1fr;
-    }
-
-    .feedback-type-control label + input + label {
-        border-top: 1px solid #aebdca;
-        border-left: 0;
     }
 }
 

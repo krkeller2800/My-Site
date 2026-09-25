@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ScoreKeep Feedback - KomaKode</title>
     <meta name="description" content="Send a ScoreKeep support request, comment, or suggestion to KomaKode.">
-    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/site.css?v=20260925-segmented-control">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
     <script src="/assets/js/scorekeep-feedback-config.js" defer></script>
     <script src="/assets/js/scorekeep-feedback.js" defer></script>
@@ -42,11 +42,11 @@
                 <fieldset class="form-field feedback-type-field">
                     <legend>Feedback type</legend>
                     <div class="feedback-type-control">
-                        <input id="feedback-type-support" name="type" type="radio" value="support" checked required>
+                        <input class="feedback-type-input" id="feedback-type-support" name="type" type="radio" value="support" checked required>
                         <label for="feedback-type-support">Support</label>
-                        <input id="feedback-type-comment" name="type" type="radio" value="comment">
+                        <input class="feedback-type-input" id="feedback-type-comment" name="type" type="radio" value="comment">
                         <label for="feedback-type-comment">Comment</label>
-                        <input id="feedback-type-suggestion" name="type" type="radio" value="suggestion">
+                        <input class="feedback-type-input" id="feedback-type-suggestion" name="type" type="radio" value="suggestion">
                         <label for="feedback-type-suggestion">Suggestion</label>
                     </div>
                 </fieldset>
