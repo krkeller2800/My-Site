@@ -729,12 +729,12 @@ p {
     gap: var(--space-2);
 }
 
-.form-field label {
+.form-field > label,
+.form-field legend {
     font-weight: 750;
 }
 
 .form-field input,
-.form-field select,
 .form-field textarea {
     width: 100%;
     min-height: 2.75rem;
@@ -744,6 +744,78 @@ p {
     color: var(--color-text);
     padding: 0.65rem 0.75rem;
     font: inherit;
+}
+
+.feedback-type-field {
+    min-width: 0;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+.feedback-type-field legend {
+    margin-bottom: var(--space-2);
+}
+
+.feedback-type-control {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid #aebdca;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+}
+
+.feedback-type-control input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    min-height: 0;
+    margin: -1px;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.feedback-type-control label {
+    display: grid;
+    min-width: 0;
+    min-height: 2.75rem;
+    place-items: center;
+    padding: 0.65rem 0.75rem;
+    color: var(--color-text);
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+
+.feedback-type-control label + input + label {
+    border-left: 1px solid #aebdca;
+}
+
+.feedback-type-control input:checked + label {
+    background: var(--color-accent);
+    color: #ffffff;
+}
+
+.feedback-type-control input:focus-visible + label {
+    position: relative;
+    z-index: 1;
+    outline: 3px solid var(--color-focus);
+    outline-offset: -3px;
+}
+
+.feedback-type-control label:hover {
+    background: #edf4fb;
+}
+
+.feedback-type-control input:checked + label:hover {
+    background: var(--color-accent-hover);
 }
 
 .form-field textarea {
@@ -930,6 +1002,17 @@ p {
 
     .roster-downloads {
         padding: var(--space-4);
+    }
+}
+
+@media (max-width: 18rem) {
+    .feedback-type-control {
+        grid-template-columns: 1fr;
+    }
+
+    .feedback-type-control label + input + label {
+        border-top: 1px solid #aebdca;
+        border-left: 0;
     }
 }
 

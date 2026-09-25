@@ -68,3 +68,10 @@ Live verification completed successfully on September 25, 2026:
 
 The collapsed Gmail header did not independently expose the actual From address. The implementation and deployed binding configuration establish `comment@komakode.com` as the fixed sender, but this production test did not visually confirm that address in Gmail's expanded message headers.
 
+## Feedback Type Control Refinement
+
+On September 25, 2026, the feedback-type dropdown was replaced with a segmented-control-style native radio group showing **Support**, **Comment**, and **Suggestion** together. The existing `support`, `comment`, and `suggestion` submission values, default selection, draft recovery, and Worker contract remain unchanged.
+
+The control uses `fieldset`, `legend`, radio inputs, and associated labels so it retains native single-selection semantics, arrow-key navigation, visible keyboard focus, and screen-reader names and state. Each segment meets the existing 44-point-equivalent minimum height, permits text wrapping without clipping, and changes to a vertical segmented layout only at extremely constrained widths.
+
+Frontend contract tests verify the three unchanged API values, the default and required selection, visible label associations, unchanged draft-value access, focus styling, touch height, and narrow-width fallback. The complete test suite passed 24 tests with zero failures, JavaScript syntax validation passed, and `git diff --check` passed. No Worker or Cloudflare configuration changed.

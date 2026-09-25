@@ -39,14 +39,17 @@
             <div class="form-status form-status--success" data-success-status role="status" tabindex="-1" hidden></div>
 
             <form class="feedback-form" data-feedback-form novalidate>
-                <div class="form-field">
-                    <label for="feedback-type">Feedback type</label>
-                    <select id="feedback-type" name="type" required>
-                        <option value="support">Support Request</option>
-                        <option value="comment">Comment</option>
-                        <option value="suggestion">Suggestion</option>
-                    </select>
-                </div>
+                <fieldset class="form-field feedback-type-field">
+                    <legend>Feedback type</legend>
+                    <div class="feedback-type-control">
+                        <input id="feedback-type-support" name="type" type="radio" value="support" checked required>
+                        <label for="feedback-type-support">Support</label>
+                        <input id="feedback-type-comment" name="type" type="radio" value="comment">
+                        <label for="feedback-type-comment">Comment</label>
+                        <input id="feedback-type-suggestion" name="type" type="radio" value="suggestion">
+                        <label for="feedback-type-suggestion">Suggestion</label>
+                    </div>
+                </fieldset>
 
                 <div class="form-field">
                     <label for="feedback-message">Message</label>
