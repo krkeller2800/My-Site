@@ -2,9 +2,9 @@
 
 ## ScoreKeep Feedback Recovery
 
-**Date:** September 24, 2026
+**Date:** September 25, 2026
 
-**Status:** Repository-side implementation complete; live Cloudflare configuration and verification remain manual.
+**Status:** Implementation and full production delivery path verified successfully.
 
 ## Recovery Outcome
 
@@ -51,41 +51,20 @@ Additional repository-side checks passed:
 - `git diff --check`.
 - Secret audit: only the intentional public-site-key placeholder, local example value, mock test values, and secret variable references were found.
 
-## Live Checks Still Required
+## Production Verification
 
-The following cannot be verified without the user-controlled Cloudflare configuration:
+Live verification completed successfully on September 25, 2026:
 
-- Real Turnstile verification for `komakode.com`.
-- The production Turnstile widget's hostname configuration.
-- The production `TURNSTILE_SECRET_KEY`.
-- Worker route precedence and conflicts in the Cloudflare account.
-- Sender/domain authorization for `comment@komakode.com`.
-- Delivery to the verified Gmail destination.
-- Preservation of the optional `Reply-To` by Cloudflare and Gmail.
-- The deployed Pages assets and Worker route operating together.
-- Spam-folder placement and end-to-end delivery latency.
+- `https://komakode.com/scorekeep/feedback/` deployed and rendered correctly.
+- Turnstile completed successfully on `komakode.com`.
+- A live **Support Request** submission displayed “Thanks — your ScoreKeep feedback was sent.”
+- Exactly one email was delivered immediately to `karlkomakode@gmail.com`.
+- The subject was `[ScoreKeep Support] New support request`.
+- The feedback type and exact submitted message were preserved.
+- The optional reply email was preserved as `Reply-To`.
+- The complete production path is verified: site → Turnstile → Worker → Cloudflare email → Gmail.
 
-## Manual Cloudflare Configuration
+## Remaining Verification Limitation
 
-1. Open the existing **ScoreKeep Feedback** Turnstile widget and confirm `komakode.com` is an allowed hostname.
-2. Copy its public site key and replace `REPLACE_WITH_SCOREKEEP_FEEDBACK_SITE_KEY` in `assets/js/scorekeep-feedback-config.js`.
-3. Confirm `karlkomakode@gmail.com` is a verified Cloudflare Email Service destination.
-4. Confirm `komakode.com` is authorized for email sending and `comment@komakode.com` is accepted as a sender. Do not alter existing Email Routing rules.
-5. Review existing Worker routes for `komakode.com` and confirm none overlaps `komakode.com/api/scorekeep/feedback*`, particularly any DebtScope routes.
-6. From `cloudflare/scorekeep-feedback`, run `npx wrangler secret put TURNSTILE_SECRET_KEY` and enter the real widget secret only at Wrangler's prompt.
-7. Deploy the dedicated Worker with `npx wrangler deploy`.
-8. Confirm the deployed Worker has `workers.dev` disabled, the narrow feedback route, the `TURNSTILE_SECRET_KEY` secret, and the `FEEDBACK_EMAIL` binding restricted to `karlkomakode@gmail.com`.
-9. Deploy the static website through the existing Cloudflare Pages workflow. Do not add a Pages Function for this endpoint.
-
-## First Live Test
-
-1. Open `https://komakode.com/scorekeep/feedback/` in a private browser window.
-2. Select **Support Request**.
-3. Enter a unique message such as `ScoreKeep live feedback test 2026-09-24`.
-4. Enter an email address you control as the optional reply address.
-5. Complete Turnstile and submit once.
-6. Confirm the success message appears and the POST request returns HTTP 200 with `{"success":true}`.
-7. Confirm exactly one email reaches `karlkomakode@gmail.com` from `comment@komakode.com` with the expected support subject and plain-text body.
-8. Confirm the message's Reply-To is the submitted optional address by invoking Reply and inspecting the recipient. The reply can then be discarded.
-9. If the API succeeds but the message is absent, inspect the spam folder and Cloudflare email-send logs.
+The collapsed Gmail header did not independently expose the actual From address. The implementation and deployed binding configuration establish `comment@komakode.com` as the fixed sender, but this production test did not visually confirm that address in Gmail's expanded message headers.
 
